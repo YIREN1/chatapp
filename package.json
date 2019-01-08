@@ -8,14 +8,18 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "*",
-    "mongoose": "*",
+    "@angular/core": "^7.2.0",
+    "@angular/forms": "^7.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "bcryptjs": "*",
-    "cors": "*",
-    "jsonwebtoken": "*",
     "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
     "passport": "*",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "rxjs": "^6.3.3"
   },
   "author": "yren",
   "license": "ISC"
