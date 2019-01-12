@@ -5,4 +5,4 @@ Inspired by [Traversy Media](https://www.youtube.com/watch?v=uONz0lEWft0&list=PL
 
 registration/authentication/logout/routesGuard/
 
-[heroku deployment](https://lit-shelf-77615.herokuapp.com/)
+[Demo: heroku](https://lit-shelf-77615.herokuapp.com/)
