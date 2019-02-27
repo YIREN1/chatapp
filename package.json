@@ -1,0 +1,25 @@
+{
+  "name": "authapp",
+  "version": "1.0.0",
+  "description": "node",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "@angular/core": "^7.2.0",
+    "@angular/forms": "^7.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.0.1",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "rxjs": "^6.3.3"
+  },
+  "author": "yren",
+  "license": "ISC"
+}
