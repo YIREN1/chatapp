@@ -7,4 +7,4 @@ registration/authentication/logout/routesGuard/
 
 TODO: profile, mobile, dashboard, email, verification, 
 
-[Demo: heroku](https://lit-shelf-77615.herokuapp.com/)
+[Demo: heroku](https://authappp.herokuapp.com/)
