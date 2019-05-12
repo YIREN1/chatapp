@@ -9,11 +9,9 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { RegisterComponent } from './components/register/register.component';
 import { SigninSignupComponent } from './components/signin-signup/signin-signup.component';
 
 import { ValidateService } from './services/validate.service';
@@ -33,11 +31,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent,
     HomeComponent,
     DashboardComponent,
     ProfileComponent,
-    RegisterComponent,
     SigninSignupComponent,
   ],
   imports: [
