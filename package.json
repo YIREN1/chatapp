@@ -4,7 +4,7 @@
   "description": "node",
   "main": "app.js",
   "scripts": {
-    "start": "node app"
+    "start": "nodemon app"
   },
   "dependencies": {
     "@angular/core": "^7.2.0",
@@ -13,13 +13,18 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "cors": "*",
+    "dotenv": "^8.0.0",
     "express": "*",
     "jsonwebtoken": "*",
     "mongoose": "*",
+    "nodemailer": "^6.3.0",
     "passport": "*",
     "passport-jwt": "*",
     "rxjs": "^6.3.3"
   },
   "author": "yren",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "angular-cli-ghpages": "^0.5.3"
+  }
 }

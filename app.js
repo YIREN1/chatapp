@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
@@ -38,7 +37,8 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 // bodyParser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', users);
 
@@ -53,5 +53,5 @@ app.get('*', (req, res) => {
 
 // Start Server
 app.listen(port, () => {
-  console.log('Server started on port ' + port);
+  console.log(`Server started on port ${port}`);
 });  

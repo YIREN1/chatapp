@@ -22,15 +22,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  confirmations: {
-    tos: {
-      type: Boolean,
-      required: true
-    },
-    email: {
-      type: Boolean,
-      required: true
-    }
+  confirmed: {
+    type: Boolean,
+    defaultValue: false,
   }
 });
 
@@ -53,6 +47,16 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 }
 
 module.exports.addUser = (newUser, callback) => {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      newUser.save(callback);
+    });
+  });
+}
+
+module.exports.updateUser = (newUser, callback) => {
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if (err) throw err;
