@@ -38,7 +38,7 @@ export class SigninSignupComponent implements OnInit {
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.success) {
         this.authService.storeUserData(data.token, data.user);
-        alert('successfully logged in');
+        // alert('successfully logged in');
         this.router.navigate(['dashboard']);
         this.activeModal.close();
         return true;
@@ -54,10 +54,7 @@ export class SigninSignupComponent implements OnInit {
       email: this.email,
       profileName: this.profileName,
       password: this.password,
-      confirmations: {
-        tos: true,
-        email: true
-      }
+      
     }
     // required fields
     if (!this.validateService.validateSignUp(user)) {

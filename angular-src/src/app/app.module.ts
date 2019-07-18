@@ -18,13 +18,14 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 
 import { AuthGuard } from './guards/auth.guard';
+import { Page404Component } from './page404/page404.component';
 
 
 const appRoutes: Routes = [
   {path:'', component:HomeComponent}, //canActivate:[AnonAuthGuard]},
   {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile/:profilename', component:ProfileComponent},
-  {path:'**', redirectTo: 'dashboard', pathMatch: 'full', canActivate:[AuthGuard]} // All unmatched routes
+  {path:'**', component: Page404Component, pathMatch: 'full'} // All unmatched routes
 ];
 
 @NgModule({
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     SigninSignupComponent,
+    Page404Component,
   ],
   imports: [
     BrowserModule,
