@@ -2,10 +2,21 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
+const mongoose = require('mongoose');
+const config = require('./config/database');
 
-require('./services/mongoService.js');
+// Connect To Database
+mongoose.connect(config.database, { useNewUrlParser: true });
 
-// require('./broker/SMSService.js');
+// On Connection
+mongoose.connection.on('connected', () => {
+  console.log('Connected to database');
+});
+
+// On Error
+mongoose.connection.on('error', (err) => {
+  console.log('Database error: ' + err);
+});
 
 const app = express();
 
@@ -31,12 +42,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', users);
 
-
-
-// // Index Route
-// app.get('/', (req, res) => {
-//   res.send('Invalid Endpoint');
-// });
+// Index Route
+app.get('/', (req, res) => {
+  res.send('Invalid Endpoint');
+});
 
 app.get('*', (req, res) => {
   res.sendFile(__dirname, 'public/index.html');

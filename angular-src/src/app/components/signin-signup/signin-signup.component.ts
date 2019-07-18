@@ -54,7 +54,10 @@ export class SigninSignupComponent implements OnInit {
       email: this.email,
       profileName: this.profileName,
       password: this.password,
-      
+      confirmations: {
+        tos: true,
+        email: true
+      }
     }
     // required fields
     if (!this.validateService.validateSignUp(user)) {
