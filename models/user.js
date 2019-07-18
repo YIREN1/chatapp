@@ -25,6 +25,9 @@ const UserSchema = mongoose.Schema({
   confirmed: {
     type: Boolean,
     defaultValue: false,
+  },
+  phone: {
+    type: String,
   }
 });
 
@@ -32,6 +35,11 @@ const User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.getUserById = (id, callback) => {
   User.findById(id, callback);
+}
+
+module.exports.getUserByPhone = (phone, callback) => {
+  const query = {email}
+  User.findOne(query, callback);
 }
 
 module.exports.getUserByEmail = function(email, callback){
@@ -57,11 +65,5 @@ module.exports.addUser = (newUser, callback) => {
 }
 // TODO
 module.exports.updateUser = (newUser, callback) => {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      newUser.save(callback);
-    });
-  });
+  newUser.save(callback);
 }

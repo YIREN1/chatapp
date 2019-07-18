@@ -16,11 +16,12 @@
     "dotenv": "^8.0.0",
     "express": "*",
     "jsonwebtoken": "*",
-    "mongoose": "*",
+    "mongoose": "^5.6.4",
     "nodemailer": "^6.3.0",
     "passport": "*",
     "passport-jwt": "*",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "twilio": "^3.33.1"
   },
   "author": "yren",
   "license": "ISC",

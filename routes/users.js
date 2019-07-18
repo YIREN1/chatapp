@@ -8,6 +8,7 @@ const User = require('../models/user');
 const config = require('../config/database');
 const EmailSecret = require('../config/confirmation.js').secret;
 const EmailService = require('../broker/EmailService.js');
+const sms = require('../broker/SMSService.js');
 
 router.get('/confirmation/:token', async (req, res) => {
     try {
@@ -104,7 +105,7 @@ router.post('/authenticate', (req, res, next) => {
                 const token = jwt.sign(user.toJSON(), config.secret, {
                     expiresIn: 604800 // 1 week in seconds
                 });
-
+                // req.flash('successfully logged in');
                 res.json({
                     success: true,
                     token: 'JWT ' + token,
@@ -120,6 +121,14 @@ router.post('/authenticate', (req, res, next) => {
             }
         });
     });
+});
+
+router.get('/2fa', (req, res, next) => {
+
+});
+
+router.get('/2fa', (req, res, next) => {
+
 });
 
 // Profile
