@@ -1,0 +1,6 @@
+- [] image upload
+- [] 2fa
+- [] twilio
+- [] google authentication
+- [x] email confirmation
+- [] 
