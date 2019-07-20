@@ -7,7 +7,7 @@ router.use((req, res, next) => {
   if (!req.body.token) {
     return res.json({
       success: false,
-      msg: 'The request is invalid or malformed. Please select captcha'
+      msg: 'The request is invalid or malformed. Please select captcha',
     });
   }
   return next();
