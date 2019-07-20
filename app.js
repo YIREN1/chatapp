@@ -32,7 +32,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/users', users);
 app.use('/reCaptcha', reCaptcha);
 
-
 // // Index Route
 // app.get('/', (req, res) => {
 //   res.send('Invalid Endpoint');
@@ -45,4 +44,4 @@ app.get('*', (req, res) => {
 // Start Server
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
-});  
+});

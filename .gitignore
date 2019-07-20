@@ -2,3 +2,5 @@ node_modules/
 public/
 package-lock.json
 *.env*
+.eslintrc.json
+.prettierrc

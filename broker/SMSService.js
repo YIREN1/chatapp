@@ -23,7 +23,7 @@ const verificationCheck = async (to, code) => {
   client.verify.services(serviceSid)
     .verificationChecks
     .create({ to, code })
-    .then(verification_check => console.log(verification_check.status));
+    .then(verificationCheckResult => console.log(verificationCheckResult.status));
 }
 
 // sendVerification();
@@ -36,6 +36,7 @@ async function send(msg, number) {
       from: process.env.PHONE,
       body: msg
     });
+    // console.log(msgId);
   } catch (err) {
     console.log(`error occured ${err}`)
   }
