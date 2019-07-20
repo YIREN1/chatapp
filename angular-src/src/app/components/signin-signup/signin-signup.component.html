@@ -1,3 +1,4 @@
+
 <div class="login-wrap">
   <div class="login-html">
     <input id="tab-1" type="radio" name="tab" class="sign-in"><label for="tab-1" class="tab">Sign In</label>
@@ -13,11 +14,15 @@
             <input [(ngModel)]="password" id="signin-password" type="password" class="input" data-type="password">
           </div>
           <div class="group">
+              <div id="example3"></div>
+          </div>
+          <div class="group">
             <input (click)="onSignIn()" type="submit" class="button" value="Sign In">
           </div>
+          
           <div class="hr"></div>
           <div class="foot-lnk">
-            <a href="#forgot">Forgot Password?</a>
+            <a href="#forgot">Forgot Password?</a> <br>
             <a href="#forgot">Sign in with phone</a>
           </div>
       </div>

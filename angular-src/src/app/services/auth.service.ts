@@ -16,15 +16,22 @@ export class AuthService {
 
   signUpUser(user) {
     let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.post('users/register', user, {headers: headers})
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('users/register', user, { headers: headers })
       .pipe(map(res => res.json()));
   }
 
   authenticateUser(user) {
     let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.post('users/authenticate', user, {headers: headers})
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('users/authenticate', user, { headers: headers })
+      .pipe(map(res => res.json()));
+  }
+
+  VerifyReCaptcha(token, route) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers: headers })
       .pipe(map(res => res.json()));
   }
 
@@ -45,18 +52,18 @@ export class AuthService {
     let headers = new Headers();
     this.getToken();
     headers.append('Authorization', this.authToken);
-    headers.append('Content-Type','application/json');
-    return this.http.get('users/profile', {headers: headers})
+    headers.append('Content-Type', 'application/json');
+    return this.http.get('users/profile', { headers: headers })
       .pipe(map(res => res.json()));
   }
-  
+
   getToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
-  loggedIn(){
-    if (localStorage.id_token == undefined ){
+  loggedIn() {
+    if (localStorage.id_token == undefined) {
       return false
     } else {
       const helper = new JwtHelperService();

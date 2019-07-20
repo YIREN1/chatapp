@@ -4,12 +4,12 @@ const cors = require('cors');
 const passport = require('passport');
 require('dotenv').config();
 require('./services/mongoService.js');
-
 // require('./broker/SMSService.js');
 
 const app = express();
 
 const users = require('./routes/users');
+const reCaptcha = require('./routes/reCaptcha');
 
 // Port Number
 const port = process.env.PORT || 8080;
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', users);
-
+app.use('/reCaptcha', reCaptcha);
 
 
 // // Index Route

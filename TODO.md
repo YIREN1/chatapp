@@ -3,4 +3,7 @@
 - [] twilio
 - [] google authentication
 - [x] email confirmation
-- [] 
+- [] recaptcha fails and 2fa
+- [] reset Password
+- [] email reset password
+- [] 'please confirm email and then send email'

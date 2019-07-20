@@ -20,6 +20,7 @@
     "nodemailer": "^6.3.0",
     "passport": "*",
     "passport-jwt": "*",
+    "request": "^2.88.0",
     "rxjs": "^6.3.3",
     "twilio": "^3.33.1"
   },
