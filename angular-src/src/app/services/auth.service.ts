@@ -24,8 +24,19 @@ export class AuthService {
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/authenticate', user, { headers: headers })
+    return this.http.post('users/authenticate', user, { headers })
       .pipe(map(res => res.json()));
+  }
+
+  googleOauth(access_token) {
+    let headers = new Headers();
+    console.log('oooooo')
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('users/oauth/google', { access_token }, { headers })
+      .pipe(map(res => {
+        console.log(res);
+        res.json();
+      }));
   }
 
   VerifyReCaptcha(token, route) {
