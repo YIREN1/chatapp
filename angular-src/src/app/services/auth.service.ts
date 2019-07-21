@@ -15,22 +15,22 @@ export class AuthService {
   ) { }
 
   signUpUser(user) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/register', user, { headers: headers })
       .pipe(map(res => res.json()));
   }
 
   authenticateUser(user) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/authenticate', user, { headers })
       .pipe(map(res => res.json()));
   }
 
   googleOauth(access_token) {
-    let headers = new Headers();
-    console.log('oooooo')
+    const headers = new Headers();
+    console.log('oooooo');
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/oauth/google', { access_token }, { headers })
       .pipe(map(res => {
@@ -40,15 +40,15 @@ export class AuthService {
   }
 
   VerifyReCaptcha(token, route) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers: headers })
+    return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers })
       .pipe(map(res => res.json()));
   }
 
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
   }
@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   getProfile() {
-    let headers = new Headers();
+    const headers = new Headers();
     this.getToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
@@ -74,8 +74,8 @@ export class AuthService {
   }
 
   loggedIn() {
-    if (localStorage.id_token == undefined) {
-      return false
+    if (!localStorage.id_token) {
+      return false;
     } else {
       const helper = new JwtHelperService();
       return !helper.isTokenExpired(localStorage.id_token);

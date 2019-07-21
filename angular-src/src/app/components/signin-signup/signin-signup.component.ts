@@ -58,14 +58,14 @@ export class SigninSignupComponent implements OnInit {
     gapi.signin2.render('gSignIn', {
       'theme': 'dark',
       'onsuccess': this.onSignWithGoogle,
-      'onerror': function (err) {
-        console.log('Google signIn2.render button err: ' + err)
+      'onerror': (err) => {
+        console.log(`Google signIn2.render button err: ${err}`);
       }
-    })
+    });
   }
 
   signOutGoogle = () => {
-    var auth2 = gapi.auth2.getAuthInstance();
+    const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut();
   }
 
@@ -77,10 +77,10 @@ export class SigninSignupComponent implements OnInit {
     // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     console.log(googleUser.Zi.access_token);
     const access_token = googleUser.Zi.access_token;
+
     // The ID token you need to pass to your backend:
-    const id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-    ;
+    // const id_token = googleUser.getAuthResponse().id_token;
+    // console.log("ID Token: " + id_token);
 
     const signoutElement = document.getElementById('signout');
     signoutElement.innerHTML =
@@ -91,7 +91,7 @@ export class SigninSignupComponent implements OnInit {
   }
 
   addScript() {
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     const lang = this.lang ? '&hl=' + this.lang : '';
     script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`;
     script.async = true;
@@ -171,7 +171,7 @@ export class SigninSignupComponent implements OnInit {
       profileName: this.profileName,
       password: this.password,
 
-    }
+    };
     // required fields
     if (!this.validateService.validateSignUp(user)) {
       alert('Please fill out all required fields!');
@@ -192,7 +192,7 @@ export class SigninSignupComponent implements OnInit {
 
 
 
-    this.authService.signUpUser(user).subscribe(data => {
+    return this.authService.signUpUser(user).subscribe(data => {
       if (data.success) {
         alert('success');
         this.router.navigate(['dashboard']);
@@ -202,9 +202,6 @@ export class SigninSignupComponent implements OnInit {
         alert('Internal Server Error.');
         return false;
       }
-    })
-
-
-
+    });
   }
 }

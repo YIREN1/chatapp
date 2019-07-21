@@ -14,10 +14,10 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    public authService:AuthService,
+    public authService: AuthService,
     private modalService: NgbModal,
-    private router:Router,
-    ) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
