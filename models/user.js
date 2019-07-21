@@ -4,23 +4,25 @@ const bcrypt = require('bcryptjs');
 
 // User Schema
 const UserSchema = mongoose.Schema({
+  method: {
+    type: String,
+    // eslint-disable-next-line comma-dangle
+    enum: ['local', 'google', 'facebook'],
+    required: true,
+  },
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
     unique: true,
-    required: true,
   },
   profileName: {
     type: String,
     unique: true,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   confirmed: {
     type: Boolean,
@@ -28,6 +30,24 @@ const UserSchema = mongoose.Schema({
   },
   phone: {
     type: String,
+  },
+  google: {
+    id: {
+      type: String,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+    },
+  },
+  facebook: {
+    id: {
+      type: String,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+    },
   },
 });
 

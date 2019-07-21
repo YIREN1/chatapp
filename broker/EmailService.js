@@ -1,5 +1,9 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
+const _ = require('lodash');
+
+const EmailSecret = require('../config/confirmation.js').secret;
 
 const transporter = nodemailer.createTransport({
   pool: true,
@@ -38,7 +42,7 @@ const sendPlainEmail = (recipient, data, url = 'google.com') => {
     }
   });
 };
-module.exports.sendEmail = async (recipient, url) => {
+const sendEmail = async (recipient, url) => {
   const path = `${__dirname}/../public/assets/template.html`;
 
   fs.readFile(path, 'utf8', (err, data) => {
@@ -50,4 +54,24 @@ module.exports.sendEmail = async (recipient, url) => {
       console.error(error);
     }
   });
+};
+
+const sendConfirmEmail = user => {
+  jwt.sign(
+    {
+      user: _.pick(user, 'id'),
+    },
+    EmailSecret,
+    {
+      expiresIn: '1d',
+    },
+    (error, emailToken) => {
+      const url = `${process.env.BASE_URL}/users/confirmation/${emailToken}`;
+      sendEmail(user, url);
+    },
+  );
+};
+
+module.exports = {
+  sendConfirmEmail,
 };

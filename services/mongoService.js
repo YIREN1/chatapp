@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const config = require('../config/database');
 
 mongoose.set('useCreateIndex', true);

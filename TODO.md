@@ -6,4 +6,6 @@
 - [] recaptcha fails and 2fa
 - [] reset Password
 - [] email reset password
-- [] 'please confirm email and then send email'
+- [x] 'please confirm email and then send email'
+- [] email template
+- [] duplicate signup
