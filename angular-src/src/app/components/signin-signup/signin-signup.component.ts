@@ -7,11 +7,12 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 
 declare const grecaptcha: any;
+declare const gapi: any;
 
 declare global {
   interface Window {
+    gapi: any;
     grecaptcha: any;
-    reCaptchaLoad: () => void
   }
 }
 @Component({
@@ -37,12 +38,51 @@ export class SigninSignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.rendergreCaptch();
+    this.renderGapi();
+  }
+
+  rendergreCaptch = () => {
     grecaptcha.render('example3', {
       'sitekey': '6LcgnK4UAAAAAMIzYQ241H4rT0RJUSZ_XFB9JcpA',
       'theme': 'dark',
       'error-callback': this.reCaptchaErrorCB,
       'callback': this.reCaptchaCB,
     });
+  }
+
+  renderGapi = () => {
+    if (!gapi) {
+      return;
+    }
+    gapi.signin2.render('gSignIn', {
+      'theme': 'dark',
+      'onsuccess': this.onSignWithGoogle,
+      'onerror': function (err) {
+        console.log('Google signIn2.render button err: ' + err)
+      }
+    })
+  }
+
+  signOutGoogle = () => {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
+  }
+
+  onSignWithGoogle(googleUser) {
+    const profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+
+    const signoutElement = document.getElementById('signout');
+    signoutElement.innerHTML =
+      'Sign out ' + googleUser.getBasicProfile().getName();
   }
 
   addScript() {
@@ -117,6 +157,8 @@ export class SigninSignupComponent implements OnInit {
       }
     });
   }
+
+
   onSignUp() {
     const user = {
       name: this.name,
