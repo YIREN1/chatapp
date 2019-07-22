@@ -12,6 +12,7 @@ const app = express();
 const users = require('./routes/users');
 const reCaptcha = require('./routes/reCaptcha');
 const email = require('./routes/email');
+const uploads = require('./routes/uploads');
 
 // Port Number
 const port = process.env.PORT || 8080;
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/users', users);
 app.use('/reCaptcha', reCaptcha);
 app.use('/email', email);
+app.use('/uploads', uploads);
 
 // // Index Route
 // app.get('/', (req, res) => {

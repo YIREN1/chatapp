@@ -87,6 +87,17 @@ export class SigninSignupComponent implements OnInit {
       'Sign out ' + googleUser.getBasicProfile().getName();
     return this.authService.googleOauth(access_token).subscribe(data => {
       console.log(data);
+      if (data.token) {
+        this.authService.storeUserData(data.token, data.user);
+        alert('successfully logged in');
+        this.router.navigate(['dashboard']);
+        this.activeModal.close();
+        return true;
+
+      } else {
+        alert('failed on google oauth');
+        return false;
+      }
     });
   }
 

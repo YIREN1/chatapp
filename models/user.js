@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 // User Schema
 const UserSchema = mongoose.Schema({
   method: {
-    type: String,
+    type: [String],
     // eslint-disable-next-line comma-dangle
     enum: ['local', 'google', 'facebook'],
     required: true,

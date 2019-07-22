@@ -6,23 +6,19 @@ const router = express.Router();
 
 const User = require('../models/user');
 const config = require('../config/database');
+
 const EmailSecret = require('../config/confirmation.js').secret;
 const EmailService = require('../broker/EmailService.js');
+const UsersController = require('../controllers/users');
+
+const passportJWT = passport.authenticate('jwt', { session: false });
+const passportGoogle = passport.authenticate('googleToken', { session: false });
 // const sms = require('../broker/SMSService.js');
 
 const signToken = user => {
   return jwt.sign(user.toJSON(), config.secret, {
     expiresIn: 604800, // 1 week in seconds
   });
-  // return jwt.sign(
-  //   {
-  //     iss: 'CodeWorkr',
-  //     sub: user.id,
-  //     iat: new Date().getTime(), // current time
-  //     exp: new Date().setDate(new Date().getDate() + 1), // current time + 1 day ahead
-  //   },
-  //   config.secret,
-  // );
 };
 
 router.get('/confirmation/:token', async (req, res) => {
@@ -136,14 +132,10 @@ router.post('/authenticate', (req, res) => {
   });
 });
 
-router.post(
-  '/oauth/google',
-  passport.authenticate('googleToken', { session: false }),
-  (req, res) => {
-    const token = signToken(req.user);
-    res.status(200).json({ token });
-  },
-);
+router.post('/oauth/google', passportGoogle, (req, res) => {
+  const token = signToken(req.user);
+  res.status(200).json({ token });
+});
 
 // router.get('/2fa', (req, res, next) => {
 
@@ -152,12 +144,8 @@ router.post(
 // router.post('/2fa:token', (req, res, next) => { });
 
 // Profile
-router.get(
-  '/profile',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    return res.json({ user: req.user });
-  },
-);
+router.get('/profile', passportJWT, (req, res) => {
+  return res.json({ user: req.user });
+});
 
 module.exports = router;

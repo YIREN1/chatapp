@@ -6,3 +6,4 @@ package-lock.json
 .prettierrc
 .vscode
 .DS_Store
+client/public/uploads

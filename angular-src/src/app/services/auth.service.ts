@@ -30,17 +30,14 @@ export class AuthService {
 
   googleOauth(access_token) {
     const headers = new Headers();
-    console.log('oooooo');
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/oauth/google', { access_token }, { headers })
-      .pipe(map(res => {
-        console.log(res);
-        res.json();
-      }));
+      .pipe(map(res => res.json()));
   }
 
   VerifyReCaptcha(token, route) {
     const headers = new Headers();
+    this.authToken = token;
     headers.append('Content-Type', 'application/json');
     return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers })
       .pipe(map(res => res.json()));

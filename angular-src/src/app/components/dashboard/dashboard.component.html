@@ -1,2 +1,16 @@
 <br /><br /><br /><br /><br /><br /><br /><br />
 <p>dashboard works</p>
+<form [(ngModel)]="imageUpload" (ngSubmit)="imageUploadSubmitted()">
+  <input
+    type="file"
+    formControlName="imageInput"
+    required
+    #imageInput
+    id="imageInput"
+    name="image"
+    (change)="imageChange($event)"
+    accept=".png, .jpg, .jpeg, .gif"
+  />
+  <input type="text" formControlName="imageName" required />
+  <button type="submit">Submit</button>
+</form>
