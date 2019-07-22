@@ -11,18 +11,29 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular-devkit/core": "^7.3.9",
+=======
+    "@angular-devkit/core": "^7.1.4",
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     "@angular/animations": "^8.1.2",
     "@angular/cdk": "^8.1.1",
     "@angular/common": "~8.1.2",
     "@angular/compiler": "~8.1.2",
+<<<<<<< HEAD
     "@angular/core": "*",
     "@angular/forms": "~8.1.2",
     "@angular/http": "*",
+=======
+    "@angular/core": "^8.1.2",
+    "@angular/forms": "~8.1.2",
+    "@angular/http": "^7.2.15",
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     "@angular/material": "^8.1.1",
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+<<<<<<< HEAD
     "@auth0/angular-jwt": "^2.1.2",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "core-js": "^2.6.9",
@@ -30,6 +41,14 @@
     "inquirer": "^6.5.0",
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",
+=======
+    "@auth0/angular-jwt": "^2.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.0",
+    "core-js": "^2.5.4",
+    "inquirer": "^6.2.1",
+    "rxjs": "~6.5.2",
+    "tslib": "^1.9.0",
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -37,7 +56,11 @@
     "@angular/cli": "~8.1.2",
     "@angular/compiler-cli": "^8.1.2",
     "@angular/language-service": "~8.1.2",
+<<<<<<< HEAD
     "@types/jasmine": "^2.8.16",
+=======
+    "@types/jasmine": "~2.8.8",
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "angular-cli-ghpages": "^0.5.3",

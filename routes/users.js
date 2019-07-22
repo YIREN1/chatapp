@@ -19,6 +19,18 @@ const signToken = user => {
   return jwt.sign(user.toJSON(), config.secret, {
     expiresIn: 604800, // 1 week in seconds
   });
+<<<<<<< HEAD
+=======
+  // return jwt.sign(
+  //   {
+  //     iss: 'CodeWorkr',
+  //     sub: user.id,
+  //     iat: new Date().getTime(), // current time
+  //     exp: new Date().setDate(new Date().getDate() + 1), // current time + 1 day ahead
+  //   },
+  //   config.secret,
+  // );
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
 };
 
 router.get('/confirmation/:token', async (req, res) => {
@@ -132,10 +144,21 @@ router.post('/authenticate', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 router.post('/oauth/google', passportGoogle, (req, res) => {
   const token = signToken(req.user);
   res.status(200).json({ token });
 });
+=======
+router.post(
+  '/oauth/google',
+  passport.authenticate('googleToken', { session: false }),
+  (req, res) => {
+    const token = signToken(req.user);
+    res.status(200).json({ token });
+  },
+);
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
 
 // router.get('/2fa', (req, res, next) => {
 
@@ -144,8 +167,18 @@ router.post('/oauth/google', passportGoogle, (req, res) => {
 // router.post('/2fa:token', (req, res, next) => { });
 
 // Profile
+<<<<<<< HEAD
 router.get('/profile', passportJWT, (req, res) => {
   return res.json({ user: req.user });
 });
+=======
+router.get(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    return res.json({ user: req.user });
+  },
+);
+>>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
 
 module.exports = router;
