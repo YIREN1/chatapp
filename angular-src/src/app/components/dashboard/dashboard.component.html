@@ -1,16 +1,24 @@
-<br /><br /><br /><br /><br /><br /><br /><br />
-<p>dashboard works</p>
-<form [(ngModel)]="imageUpload" (ngSubmit)="imageUploadSubmitted()">
-  <input
-    type="file"
-    formControlName="imageInput"
-    required
-    #imageInput
-    id="imageInput"
-    name="image"
-    (change)="imageChange($event)"
-    accept=".png, .jpg, .jpeg, .gif"
-  />
-  <input type="text" formControlName="imageName" required />
-  <button type="submit">Submit</button>
-</form>
+<br /><br /><br /><br /><br /><br />
+<h1>
+  <!-- here we echo the title from the component -->
+  {{ title }}
+</h1>
+
+<!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
+<input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+<!-- button to trigger the file upload when submitted -->
+<button
+  type="button"
+  class="btn btn-success btn-s"
+  (click)="uploader.uploadAll()"
+  [disabled]="!uploader.getNotUploadedItems().length"
+>
+  Upload with ng-2 file uploader
+</button>
+
+<!-- File input for upload without using the plugin. -->
+<input id="photo" type="file" />
+<!-- button to trigger the file upload when submitted -->
+<button type="button" class="btn btn-success btn-s" (click)="upload()">
+  Upload with method 2
+</button>

@@ -16,8 +16,12 @@ router.post('/image', (req, res) => {
       console.error(err);
       return res.status(500).send(err);
     }
+    console.log('upload success');
 
-    return res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    return res.json({
+      fileName: file.name,
+      filePath: `/uploads/${file.name}`,
+    });
   });
 });
 

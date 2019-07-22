@@ -75,7 +75,7 @@ export class SigninSignupComponent implements OnInit {
     // console.log('Name: ' + profile.getName());
     // console.log('Image URL: ' + profile.getImageUrl());
     // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    console.log(googleUser.Zi.access_token);
+    // console.log(googleUser.Zi.access_token);
     const access_token = googleUser.Zi.access_token;
 
     // The ID token you need to pass to your backend:
@@ -86,7 +86,7 @@ export class SigninSignupComponent implements OnInit {
     signoutElement.innerHTML =
       'Sign out ' + googleUser.getBasicProfile().getName();
     return this.authService.googleOauth(access_token).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       if (data.token) {
         this.authService.storeUserData(data.token, data.user);
         alert('successfully logged in');
