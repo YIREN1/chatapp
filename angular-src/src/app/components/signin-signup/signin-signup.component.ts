@@ -87,7 +87,6 @@ export class SigninSignupComponent implements OnInit {
       'Sign out ' + googleUser.getBasicProfile().getName();
     return this.authService.googleOauth(access_token).subscribe(data => {
       console.log(data);
-<<<<<<< HEAD
       if (data.token) {
         this.authService.storeUserData(data.token, data.user);
         alert('successfully logged in');
@@ -99,8 +98,6 @@ export class SigninSignupComponent implements OnInit {
         alert('failed on google oauth');
         return false;
       }
-=======
->>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     });
   }
 

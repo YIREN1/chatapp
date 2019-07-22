@@ -7,7 +7,6 @@ import { UploadService } from '../../services/upload.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-<<<<<<< HEAD
   constructor(
     private uploadService: UploadService
   ) { }
@@ -30,12 +29,4 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-=======
-  constructor() {
-
-  }
-
-  ngOnInit() { }
-
->>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
 }

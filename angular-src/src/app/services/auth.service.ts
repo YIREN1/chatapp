@@ -25,7 +25,6 @@ export class AuthService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/authenticate', user, { headers })
-<<<<<<< HEAD
       .pipe(map(res => res.json()));
   }
 
@@ -33,28 +32,12 @@ export class AuthService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('users/oauth/google', { access_token }, { headers })
-=======
->>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
       .pipe(map(res => res.json()));
-  }
-
-  googleOauth(access_token) {
-    const headers = new Headers();
-    console.log('oooooo');
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('users/oauth/google', { access_token }, { headers })
-      .pipe(map(res => {
-        console.log(res);
-        res.json();
-      }));
   }
 
   VerifyReCaptcha(token, route) {
     const headers = new Headers();
-<<<<<<< HEAD
     this.authToken = token;
-=======
->>>>>>> 7825383329690fd6ecc44ba7ac74c38dc22f49c0
     headers.append('Content-Type', 'application/json');
     return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers })
       .pipe(map(res => res.json()));
