@@ -1,7 +1,6 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const _ = require('lodash');
 
 const router = express.Router();
 
@@ -11,11 +10,27 @@ const EmailSecret = require('../config/confirmation.js').secret;
 const EmailService = require('../broker/EmailService.js');
 // const sms = require('../broker/SMSService.js');
 
+const signToken = user => {
+  return jwt.sign(user.toJSON(), config.secret, {
+    expiresIn: 604800, // 1 week in seconds
+  });
+  // return jwt.sign(
+  //   {
+  //     iss: 'CodeWorkr',
+  //     sub: user.id,
+  //     iat: new Date().getTime(), // current time
+  //     exp: new Date().setDate(new Date().getDate() + 1), // current time + 1 day ahead
+  //   },
+  //   config.secret,
+  // );
+};
+
 router.get('/confirmation/:token', async (req, res) => {
   try {
     const {
       user: { id },
     } = jwt.verify(req.params.token, EmailSecret);
+
     return User.getUserById(id, (err, user) => {
       if (err) throw err;
       if (!user) {
@@ -46,12 +61,15 @@ router.get('/confirmation/:token', async (req, res) => {
 
 // Resigter
 router.post('/register', (req, res) => {
+  const { name, email, profileName, password, phone } = req.body;
   const newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    profileName: req.body.profileName,
-    password: req.body.password,
+    method: 'local',
+    name,
+    email,
+    profileName,
+    password,
     confirmed: false,
+    phone,
     // confirmations: {
     // 	tos: req.body.confirmations.tos,
     // 	email: req.body.confirmations.email
@@ -63,19 +81,7 @@ router.post('/register', (req, res) => {
       res.json({ success: false, msg: 'Error: failed to register' });
     } else {
       try {
-        jwt.sign(
-          {
-            user: _.pick(user, 'id'),
-          },
-          EmailSecret,
-          {
-            expiresIn: '1d',
-          },
-          (error, emailToken) => {
-            const url = `${process.env.BASE_URL}/users/confirmation/${emailToken}`;
-            EmailService.sendEmail(user, url);
-          },
-        );
+        EmailService.sendConfirmEmail(user);
       } catch (error) {
         console.error(error);
       }
@@ -98,18 +104,21 @@ router.post('/authenticate', (req, res) => {
     }
 
     if (!user.confirmed) {
+      try {
+        EmailService.sendConfirmEmail(user);
+      } catch (error) {
+        console.error(error);
+      }
       return res.json({
         success: false,
-        msg: 'Please confirm your email to login',
+        msg: 'Please confirm your email to login, resending email',
       });
     }
 
     return User.comparePassword(password, user.password, (error, isMatch) => {
       if (error) throw err;
       if (isMatch) {
-        const token = jwt.sign(user.toJSON(), config.secret, {
-          expiresIn: 604800, // 1 week in seconds
-        });
+        const token = signToken(user);
         // req.flash('successfully logged in');
         return res.json({
           success: true,
@@ -127,6 +136,15 @@ router.post('/authenticate', (req, res) => {
   });
 });
 
+router.post(
+  '/oauth/google',
+  passport.authenticate('googleToken', { session: false }),
+  (req, res) => {
+    const token = signToken(req.user);
+    res.status(200).json({ token });
+  },
+);
+
 // router.get('/2fa', (req, res, next) => {
 
 // });
@@ -138,7 +156,7 @@ router.get(
   '/profile',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    res.json({ user: req.user });
+    return res.json({ user: req.user });
   },
 );
 

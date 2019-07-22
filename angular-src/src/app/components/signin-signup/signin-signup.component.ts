@@ -7,11 +7,12 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 
 declare const grecaptcha: any;
+declare const gapi: any;
 
 declare global {
   interface Window {
+    gapi: any;
     grecaptcha: any;
-    reCaptchaLoad: () => void
   }
 }
 @Component({
@@ -37,6 +38,11 @@ export class SigninSignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.rendergreCaptch();
+    this.renderGapi();
+  }
+
+  rendergreCaptch = () => {
     grecaptcha.render('example3', {
       'sitekey': '6LcgnK4UAAAAAMIzYQ241H4rT0RJUSZ_XFB9JcpA',
       'theme': 'dark',
@@ -45,8 +51,47 @@ export class SigninSignupComponent implements OnInit {
     });
   }
 
+  renderGapi = () => {
+    if (!gapi) {
+      return;
+    }
+    gapi.signin2.render('gSignIn', {
+      'theme': 'dark',
+      'onsuccess': this.onSignWithGoogle,
+      'onerror': (err) => {
+        console.log(`Google signIn2.render button err: ${err}`);
+      }
+    });
+  }
+
+  signOutGoogle = () => {
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
+  }
+
+  onSignWithGoogle = (googleUser) => {
+    const profile = googleUser.getBasicProfile();
+    // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    // console.log('Name: ' + profile.getName());
+    // console.log('Image URL: ' + profile.getImageUrl());
+    // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    console.log(googleUser.Zi.access_token);
+    const access_token = googleUser.Zi.access_token;
+
+    // The ID token you need to pass to your backend:
+    // const id_token = googleUser.getAuthResponse().id_token;
+    // console.log("ID Token: " + id_token);
+
+    const signoutElement = document.getElementById('signout');
+    signoutElement.innerHTML =
+      'Sign out ' + googleUser.getBasicProfile().getName();
+    return this.authService.googleOauth(access_token).subscribe(data => {
+      console.log(data);
+    });
+  }
+
   addScript() {
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     const lang = this.lang ? '&hl=' + this.lang : '';
     script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`;
     script.async = true;
@@ -117,6 +162,8 @@ export class SigninSignupComponent implements OnInit {
       }
     });
   }
+
+
   onSignUp() {
     const user = {
       name: this.name,
@@ -124,7 +171,7 @@ export class SigninSignupComponent implements OnInit {
       profileName: this.profileName,
       password: this.password,
 
-    }
+    };
     // required fields
     if (!this.validateService.validateSignUp(user)) {
       alert('Please fill out all required fields!');
@@ -145,7 +192,7 @@ export class SigninSignupComponent implements OnInit {
 
 
 
-    this.authService.signUpUser(user).subscribe(data => {
+    return this.authService.signUpUser(user).subscribe(data => {
       if (data.success) {
         alert('success');
         this.router.navigate(['dashboard']);
@@ -155,9 +202,6 @@ export class SigninSignupComponent implements OnInit {
         alert('Internal Server Error.');
         return false;
       }
-    })
-
-
-
+    });
   }
 }

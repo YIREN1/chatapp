@@ -22,10 +22,10 @@ import { Page404Component } from './page404/page404.component';
 
 
 const appRoutes: Routes = [
-  {path:'', component:HomeComponent}, //canActivate:[AnonAuthGuard]},
-  {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile/:profilename', component:ProfileComponent},
-  {path:'**', component: Page404Component, pathMatch: 'full'} // All unmatched routes
+  { path: '', component: HomeComponent }, // canActivate:[AnonAuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:profilename', component: ProfileComponent },
+  { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
 @NgModule({
