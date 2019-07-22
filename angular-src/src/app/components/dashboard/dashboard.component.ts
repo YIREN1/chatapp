@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { Alert } from 'selenium-webdriver';
 const URL = 'http://localhost:4200/uploads/image';
 
 @Component({
@@ -45,7 +46,7 @@ export class DashboardComponent implements OnInit {
         },
         (error) => console.log(error)
       );
-
     }
+    alert('All upload success!');
   }
 }
