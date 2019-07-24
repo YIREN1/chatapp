@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-
 import { Http, Headers } from '@angular/http';
-
 import { map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
 
   constructor(
-    private http: Http
+    private http: Http,
+    private authService: AuthService,
   ) { }
 
   uploadImage(data) {
     const headers = new Headers();
+    this.authService.getToken();
+    headers.append('Authorization', this.authService.authToken);
     headers.append('Content-Type', 'multipart/form-data');
-    // headers.append('Authorization', this.user_token);
-    return this.http.post('http://localhost:3000/cms/upload/image', data, { headers: headers }).pipe(map(res => res.json()));
+    return this.http.get('uploads/image', { headers })
+      .pipe(map(res => res.json()));
   }
 }

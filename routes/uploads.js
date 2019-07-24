@@ -10,6 +10,7 @@ router.post('/image', (req, res) => {
     return res.status(400).json({ msg: 'No file uploaded' });
   }
   const { file } = req.files;
+  console.log(req.files);
 
   return file.mv(`${__dirname}/../client/public/uploads/${file.name}`, err => {
     if (err) {

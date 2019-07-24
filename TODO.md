@@ -27,3 +27,4 @@
 - [] refactor
 - [] error catcher(crash server)
 - [] concurency? serve angular and node at the same time
+- [] /api
