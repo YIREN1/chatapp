@@ -5,8 +5,7 @@ Inspired by [Traversy Media](https://www.youtube.com/watch?v=uONz0lEWft0&list=PL
 
 registration/authentication/logout/routesGuard/
 
-TODO: profile, mobile, dashboard, email, verification, 
-internal server error when sign up with a registered email
+[TODO](https://github.com/YIREN1/authapp/blob/master/TODO.md)
 
 
 [Demo: heroku](https://authappp.herokuapp.com/)
