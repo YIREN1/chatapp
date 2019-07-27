@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const User = require('../models/user');
-const config = require('../config/database');
+const jwtSecret = process.env.JWT_SECRET;
 
-const EmailSecret = require('../config/confirmation.js').secret;
+const EmailSecret = process.env.EMAIL_CONFIRM_SECRET;
 const EmailService = require('../broker/EmailService.js');
 const UsersController = require('../controllers/users');
 
@@ -16,7 +16,7 @@ const passportGoogle = passport.authenticate('googleToken', { session: false });
 // const sms = require('../broker/SMSService.js');
 
 const signToken = user => {
-  return jwt.sign(user.toJSON(), config.secret, {
+  return jwt.sign(user.toJSON(), jwtSecret, {
     expiresIn: 604800, // 1 week in seconds
   });
 };

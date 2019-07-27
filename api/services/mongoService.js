@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const config = require('../config/database');
+const dbConfig = require('../config/database');
 
 mongoose.set('useCreateIndex', true);
 // Connect To Database
-mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connect(dbConfig.database, { useNewUrlParser: true });
 
 // On Connection
 mongoose.connection.on('connected', () => {

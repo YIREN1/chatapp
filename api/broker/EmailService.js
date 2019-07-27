@@ -3,7 +3,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
-const EmailSecret = require('../config/confirmation.js').secret;
+const EmailSecret = process.env.EMAIL_CONFIRM_SECRET;
 
 const transporter = nodemailer.createTransport({
   pool: true,

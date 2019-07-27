@@ -2,14 +2,14 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 
-const User = require('../models/user');
-const config = require('../config/database');
+const User = require('./models/user');
+const jwtSecret = process.env.JWT_SECRET;
 
 module.exports = passport => {
   // JWT
   const opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-  opts.secretOrKey = config.secret;
+  opts.secretOrKey = jwtSecret;
   // console.log(opts.jwtFromRequest());
   passport.use(
     new JwtStrategy(opts, async (jwtPayload, done) => {
