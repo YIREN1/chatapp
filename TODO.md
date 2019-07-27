@@ -15,12 +15,12 @@
 - [] go to dashboard when loggedin
 - [] link google
 - [] google sign in find user
-- [] upload files per user
+- [x] upload files per user
 - [] lazy image
 - [x] get 2 failed image
 - [x] api folder
 - [] app.js/index.js
-- [] passport to another folder(policy)
+- [x] passport to another folder(policy)
 - [] refreshTokens
 - [] Save JWT in cookies instead of localStorage
 - [x] Update everything to latest versions
@@ -38,3 +38,7 @@
 - [] streaming
 - [] bucket ? folder ? per user
 - [] send file from server to client
+- [] internal server error when sign up with a registered email
+- [] profile
+- [] dashboard
+-
