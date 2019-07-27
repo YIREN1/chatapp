@@ -11,14 +11,14 @@
 - [] duplicate signup
 - [] upload method 2
 - [] ALert
-- [] google storage buckets
+- [x] google storage buckets
 - [] go to dashboard when loggedin
 - [] link google
 - [] google sign in find user
 - [] upload files per user
 - [] lazy image
-- [] get 2 failed image
-- [] server folder
+- [x] get 2 failed image
+- [x] api folder
 - [] app.js/index.js
 - [] passport to another folder(policy)
 - [] refreshTokens
@@ -34,4 +34,7 @@
 - [] redis/kafka messages
 - [] download files
 - [] fileslist
-- []
+- [] same file name / rename ?
+- [] streaming
+- [] bucket ? folder ? per user
+- [] send file from server to client

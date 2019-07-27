@@ -3,8 +3,8 @@ import { UploadService } from '../../services/upload.service';
 import { AuthService } from '../../services/auth.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Alert } from 'selenium-webdriver';
-const URL = 'http://localhost:4200/uploads/image';
-// !
+const BASE_URL = 'http://localhost:4200';
+const URL = `${BASE_URL}/uploads/image`;
 
 @Component({
   selector: 'app-dashboard',
