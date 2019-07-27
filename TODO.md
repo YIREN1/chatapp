@@ -23,11 +23,11 @@
 - [] passport to another folder(policy)
 - [] refreshTokens
 - [] Save JWT in cookies instead of localStorage
-- [] Update everything to latest versions
-- [] refactor
+- [x] Update everything to latest versions
+- [x] refactor
 - [] error catcher(crash server)
 - [] concurency? serve angular and node at the same time
-- [] /api
+- [x] /api (will be part of nginx)
 - [] dockerize
 - [] kubernetify
 - [] nginx
