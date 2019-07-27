@@ -28,3 +28,10 @@
 - [] error catcher(crash server)
 - [] concurency? serve angular and node at the same time
 - [] /api
+- [] dockerize
+- [] kubernetify
+- [] nginx
+- [] redis/kafka messages
+- [] download files
+- [] fileslist
+- []
