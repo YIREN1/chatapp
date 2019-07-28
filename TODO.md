@@ -26,11 +26,11 @@
 - [x] Update everything to latest versions
 - [x] refactor
 - [] error catcher(crash server)
-- [] concurency? serve angular and node at the same time
+- [x] concurency? serve angular and node at the same time
 - [x] /api (will be part of nginx)
-- [] dockerize
+- [x] dockerize
 - [] kubernetify
-- [] nginx
+- [x] nginx
 - [] redis/kafka messages
 - [] download files
 - [] fileslist
@@ -41,4 +41,4 @@
 - [] internal server error when sign up with a registered email
 - [] profile
 - [] dashboard
--
+- [] scripts
