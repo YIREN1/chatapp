@@ -3,8 +3,7 @@ import { UploadService } from '../../services/upload.service';
 import { AuthService } from '../../services/auth.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Alert } from 'selenium-webdriver';
-const BASE_URL = 'http://localhost:4200';
-const URL = `${BASE_URL}/uploads/image`;
+const URL = `${location.origin}/api/uploads/image`;
 
 @Component({
   selector: 'app-dashboard',
@@ -24,8 +23,9 @@ export class DashboardComponent implements OnInit {
     itemAlias: 'file',
     authToken: this.authService.authToken,
   });
+
   // This is the default title property created by the angular cli. Its responsible for the app works
-  title = 'app works!';
+  title = 'app works in docker!';
 
   ngOnInit() {
     // override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.

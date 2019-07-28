@@ -11,12 +11,14 @@ services:
   client:
     build:
       dockerfile: Dockerfile.dev
-      context: ./client
+      context: ./angular-src
     volumes:
-      - '.:/app'
-      - '/app/node_modules'
-    ports:
-      - '4201:4200'
+      - ./angular-src:/app
+      - /app/node_modules
+    # ports: 
+    #   - '4200:4200' 
+    # environment: 
+    #   - CHOKIDAR_USEPOLLING=true   
   nginx:
     image: 'nginx:latest'
     restart: always
@@ -24,4 +26,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - '3499:80'
+      - '3050:80'
+    depends_on:
+        - api
+        - client

@@ -46,6 +46,10 @@ app.get('*', (req, res) => {
   res.sendFile(__dirname, 'public/index.html');
 });
 
+app.get('/status', (req, res) => {
+  res.send('GOOD');
+});
+
 // Start Server
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

@@ -17,21 +17,21 @@ export class AuthService {
   signUpUser(user) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/register', user, { headers: headers })
+    return this.http.post('api/users/register', user, { headers: headers })
       .pipe(map(res => res.json()));
   }
 
   authenticateUser(user) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/authenticate', user, { headers })
+    return this.http.post('api/users/authenticate', user, { headers })
       .pipe(map(res => res.json()));
   }
 
   googleOauth(access_token) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/oauth/google', { access_token }, { headers })
+    return this.http.post('api/users/oauth/google', { access_token }, { headers })
       .pipe(map(res => res.json()));
   }
 
@@ -39,7 +39,7 @@ export class AuthService {
     const headers = new Headers();
     this.authToken = token;
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`reCaptcha/${route}/subscribe`, { token }, { headers })
+    return this.http.post(`api/reCaptcha/${route}/subscribe`, { token }, { headers })
       .pipe(map(res => res.json()));
   }
 
@@ -61,7 +61,7 @@ export class AuthService {
     this.getToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('users/profile', { headers })
+    return this.http.get('api/users/profile', { headers })
       .pipe(map(res => res.json()));
   }
 

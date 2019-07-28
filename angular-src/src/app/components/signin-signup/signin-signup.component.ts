@@ -128,8 +128,6 @@ export class SigninSignupComponent implements OnInit {
   }
   reCaptchaCB(data) {
     console.log('captcha checked');
-    this.isCaptchaSuccess = true;
-    console.log(this.isCaptchaSuccess, 'ssssss');
   }
 
 
@@ -137,13 +135,12 @@ export class SigninSignupComponent implements OnInit {
     const token = grecaptcha.getResponse();
     console.log(token, 'V2');
     return this.authService.VerifyReCaptcha(token, 'v2').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       if (!data.success) {
         alert(data.msg);
         grecaptcha.reset();
         return false;
       }
-
       return true;
     });
   }
@@ -155,7 +152,7 @@ export class SigninSignupComponent implements OnInit {
     //   console.log('stop login');
     //   return false;
     // }
-    console.log('continue');
+    // console.log('continue');
     const user = {
       email: this.email,
       password: this.password
