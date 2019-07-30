@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
     private router: Router,
   ) { }
   canActivate() {
-    if (this.authService.loggedIn()) { return true; }
+    if (this.authService.loggedIn) { return true; }
 
     // Store the attempted URL for redirecting later
     // this.authService.redirectUrl = state.url;

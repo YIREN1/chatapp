@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Navbar</a><br />
-  <a class="navbar-brand" href="dashboard">Dashboard</a>
+  <a class="navbar-brand" href="#">Home</a><br />
+  <a class="navbar-brand" href="/dashboard">Dashboard</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -47,7 +47,7 @@
     <ul class="navbar-nav mr-auto ml-auto">
       <li class="nav-item">
         <a
-          *ngIf="!authService.loggedIn()"
+          *ngIf="!authService.loggedIn"
           class="nav-link"
           href="#"
           (click)="openSignUpModal()"
@@ -58,7 +58,7 @@
       </li>
       <li class="nav-item">
         <a
-          *ngIf="authService.loggedIn()"
+          *ngIf="authService.loggedIn"
           class="nav-link"
           href="#"
           (click)="onLogoutClick()"

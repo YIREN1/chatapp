@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 require('./services/mongoService.js');
@@ -14,14 +15,18 @@ const reCaptcha = require('./routes/reCaptcha');
 const email = require('./routes/email');
 const uploads = require('./routes/uploads');
 
-// Port Number
-const port = process.env.PORT || 8080;
-
 // CORS Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.BASE_URL,
+    credentials: true,
+  }),
+);
+
+app.use(cookieParser());
 
 // Set static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -41,14 +46,16 @@ app.use('/uploads', uploads);
 // app.get('/', (req, res) => {
 //   res.send('Invalid Endpoint');
 // });
-
-app.get('*', (req, res) => {
-  res.sendFile(__dirname, 'public/index.html');
-});
-
-app.get('/status', (req, res) => {
+app.get('/status/health', (req, res) => {
   res.send('GOOD');
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(__dirname, '../public/index.html');
+});
+
+// Port Number
+const port = process.env.PORT || 8080;
 
 // Start Server
 app.listen(port, () => {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
+import { TwoFaComponent } from '../two-fa/two-fa.component';
 
 declare const grecaptcha: any;
 declare const gapi: any;
@@ -35,11 +36,16 @@ export class SigninSignupComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private validateService: ValidateService,
     private router: Router,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
     this.rendergreCaptch();
     this.renderGapi();
+  }
+
+  open2faModal() {
+    this.modalService.open(TwoFaComponent);
   }
 
   rendergreCaptch = () => {
@@ -87,8 +93,8 @@ export class SigninSignupComponent implements OnInit {
       'Sign out ' + googleUser.getBasicProfile().getName();
     return this.authService.googleOauth(access_token).subscribe(data => {
       // console.log(data);
-      if (data.token) {
-        this.authService.storeUserData(data.token, data.user);
+      if (data.success) {
+        this.authService.loggedIn = true;
         alert('successfully logged in');
         this.router.navigate(['dashboard']);
         this.activeModal.close();
@@ -101,14 +107,14 @@ export class SigninSignupComponent implements OnInit {
     });
   }
 
-  addScript() {
-    const script = document.createElement('script');
-    const lang = this.lang ? '&hl=' + this.lang : '';
-    script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }
+  // addScript() {
+  //   const script = document.createElement('script');
+  //   const lang = this.lang ? '&hl=' + this.lang : '';
+  //   script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`;
+  //   script.async = true;
+  //   script.defer = true;
+  //   document.body.appendChild(script);
+  // }
 
   verifyCaptchaV3() {
     grecaptcha.ready(() => {
@@ -161,6 +167,7 @@ export class SigninSignupComponent implements OnInit {
       if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         alert('successfully logged in');
+        this.authService.loggedIn = true;
         this.router.navigate(['dashboard']);
         this.activeModal.close();
         return true;
