@@ -1,19 +1,10 @@
-# authapp
-
-
-
-
-registration/authentication/logout/routesGuard/
-
-[TODO](https://github.com/YIREN1/authapp/blob/master/TODO.md)
-
-[Demo: heroku(0.0.1)](https://authappp.herokuapp.com/)
-
 # Authapp
 
 MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach, functionalities: register, login, email confirmation, google OAuth login, link google accounts, reCaptcha, 2fa with twillio, upload files to google cloud storage, token based authentication(also implmented cookie based)
 
 Development: fully dockerized (aiming to kubernetefy), using nginx to control request to send to frontend or backend.
+
+[Demo: heroku(0.0.1)](https://authappp.herokuapp.com/)
 
 ## Getting Started
 
@@ -79,6 +70,9 @@ deployment using docker would be easiest, but there are still some things needs 
 ## Built With
 
 * MEAN(Mongodb, Express.js, Angular, Node.js)
+
+## TODO
+[TODO](https://github.com/YIREN1/authapp/blob/master/TODO.md)
 
 ## Contributing
 
