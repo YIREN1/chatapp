@@ -34,13 +34,10 @@ const register = async (req, res) => {
     };
     foundUser = Object.assign(foundUser, localSettings);
     await foundUser.save();
-    // Generate the token
-    const token = signToken(foundUser);
-    // Respond with token
-    res.cookie('access_token', token, {
-      httpOnly: true,
-    });
-    return res.status(200).json({ success: true });
+
+    return res
+      .status(200)
+      .json({ success: true, msg: 'Registration complete' });
   }
 
   const newUser = new User({
@@ -99,31 +96,20 @@ const authenticate = (req, res) => {
       if (error) throw err;
       if (isMatch) {
         const token = signToken(user);
-        // req.flash('successfully logged in');
-        // return res.json({
-        //   success: true,
-        //   token: `JWT ${token}`,
-        //   user: {
-        //     id: user._id,
-        //     name: user.name,
-        //     email: user.email,
-        //     profileName: user.profileName,
-        //   },
-        // });
-        res.cookie('access_token', token, {
-          httpOnly: true,
+        return res.json({
+          success: true,
+          token: `JWT ${token}`,
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            profileName: user.profileName,
+          },
         });
-        return res.status(200).json({ success: true });
       }
       return res.json({ success: false, msg: 'Invalid email/password' });
     });
   });
-};
-
-const signout = (req, res) => {
-  res.clearCookie('access_token');
-  console.log('I signout!');
-  res.json({ success: true });
 };
 
 const confirmEmail = async (req, res) => {
@@ -162,10 +148,7 @@ const confirmEmail = async (req, res) => {
 
 const googleAuth = (req, res) => {
   const token = `JWT ${signToken(req.user)}`;
-  res.cookie('access_token', token, {
-    httpOnly: true,
-  });
-  return res.status(200).json({ success: true });
+  res.status(200).json({ token });
 };
 
 const linkGoogle = (req, res) => {
@@ -176,12 +159,27 @@ const linkGoogle = (req, res) => {
   });
 };
 
-const getProfile = (req, res) => {
-  console.log('I managed to get here!');
-  res.json({ success: true });
+const unlinkGoogle = async (req, res) => {
+  // Delete Google sub-object
+  if (req.user.google) {
+    req.user.google = undefined;
+  }
+  // Remove 'google' from methods array
+  const googleStrPos = req.user.methods.indexOf('google');
+  if (googleStrPos >= 0) {
+    req.user.methods.splice(googleStrPos, 1);
+  }
+  await req.user.save();
+
+  // Return something?
+  res.json({
+    success: true,
+    methods: req.user.methods,
+    message: 'Successfully unlinked account from Google',
+  });
 };
 
-const checkAuth = (req, res) => {
+const getProfile = (req, res) => {
   console.log('I managed to get here!');
   res.json({ success: true });
 };
@@ -193,6 +191,5 @@ module.exports = {
   googleAuth,
   getProfile,
   linkGoogle,
-  checkAuth,
-  signout,
+  unlinkGoogle,
 };

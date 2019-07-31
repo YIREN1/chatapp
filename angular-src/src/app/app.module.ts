@@ -23,7 +23,7 @@ import { TwoFaComponent } from './components/two-fa/two-fa.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }, // canActivate:[AnonAuthGuard]},
+  { path: '', component: HomeComponent}, // canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile/:profilename', component: ProfileComponent },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes

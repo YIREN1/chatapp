@@ -15,10 +15,9 @@ const reCaptcha = require('./routes/reCaptcha');
 const email = require('./routes/email');
 const uploads = require('./routes/uploads');
 
-// CORS Middleware
+// CORS Middleware // ! origin?
 app.use(
   cors({
-    origin: process.env.BASE_URL,
     credentials: true,
   }),
 );

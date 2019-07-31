@@ -13,7 +13,8 @@
 - [] ALert
 - [x] google storage buckets
 - [] go to dashboard when loggedin
-- [] link google
+- [x] link google backend
+- [] link google frontend
 - [x] google sign in find user
 - [x] upload files per user
 - [] lazy image
@@ -22,7 +23,7 @@
 - [] app.js/index.js
 - [x] passport to another folder(policy)
 - [] refreshTokens
-- [x] Save JWT in cookies instead of localStorage
+- [x] Save JWT in cookies instead of localStorage (NOT DOING IT)
 - [x] Update everything to latest versions
 - [x] refactor
 - [] error catcher(crash server)
@@ -39,8 +40,10 @@
 - [] bucket ? folder ? per user
 - [x] send file from server to client
 - [x] internal server error when sign up with a registered email
-- [] profile
+- [] profile ui
+- [] avatar
 - [] dashboard
 - [] scripts
 - [] angularx-social-login
-- [] test
+- [x] test
+- [x] google signup no email?

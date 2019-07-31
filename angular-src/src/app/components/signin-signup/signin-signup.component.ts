@@ -93,8 +93,8 @@ export class SigninSignupComponent implements OnInit {
       'Sign out ' + googleUser.getBasicProfile().getName();
     return this.authService.googleOauth(access_token).subscribe(data => {
       // console.log(data);
-      if (data.success) {
-        this.authService.loggedIn = true;
+      if (data.token) {
+        this.authService.storeUserData(data.token, data.user);
         alert('successfully logged in');
         this.router.navigate(['dashboard']);
         this.activeModal.close();
@@ -136,7 +136,6 @@ export class SigninSignupComponent implements OnInit {
     console.log('captcha checked');
   }
 
-
   verifyCaptchaV2(): any {
     const token = grecaptcha.getResponse();
     console.log(token, 'V2');
@@ -167,7 +166,6 @@ export class SigninSignupComponent implements OnInit {
       if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         alert('successfully logged in');
-        this.authService.loggedIn = true;
         this.router.navigate(['dashboard']);
         this.activeModal.close();
         return true;
@@ -185,7 +183,6 @@ export class SigninSignupComponent implements OnInit {
       email: this.email,
       profileName: this.profileName,
       password: this.password,
-
     };
     // required fields
     if (!this.validateService.validateSignUp(user)) {
@@ -205,13 +202,9 @@ export class SigninSignupComponent implements OnInit {
       return false;
     }
 
-
-
     return this.authService.signUpUser(user).subscribe(data => {
       if (data.success) {
         alert('success');
-        this.router.navigate(['dashboard']);
-        this.activeModal.close();
         return true;
       } else {
         alert('Internal Server Error.');

@@ -47,7 +47,7 @@
     <ul class="navbar-nav mr-auto ml-auto">
       <li class="nav-item">
         <a
-          *ngIf="!authService.loggedIn"
+          *ngIf="!authService.loggedIn()"
           class="nav-link"
           href="#"
           (click)="openSignUpModal()"
@@ -58,7 +58,7 @@
       </li>
       <li class="nav-item">
         <a
-          *ngIf="authService.loggedIn"
+          *ngIf="authService.loggedIn()"
           class="nav-link"
           href="#"
           (click)="onLogoutClick()"

@@ -1,22 +1,15 @@
 const JwtStrategy = require('passport-jwt').Strategy;
+const { ExtractJwt } = require('passport-jwt');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 
 const User = require('./models/user');
 
 const jwtSecret = process.env.JWT_SECRET;
 
-const cookieExtractor = req => {
-  let token = null;
-  if (req && req.cookies) {
-    token = req.cookies.access_token;
-  }
-  return token;
-};
-
 module.exports = passport => {
   // JWT
   const opts = {
-    jwtFromRequest: cookieExtractor,
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
     secretOrKey: jwtSecret,
     passReqToCallback: true,
   };
@@ -33,7 +26,7 @@ module.exports = passport => {
             req.user = user;
             return next(null, user);
           }
-
+          console.log(11111);
           return next(null, false);
         } catch (error) {
           console.error(error);

@@ -7,7 +7,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn: any;
   authToken: any;
   user: any;
 
@@ -18,14 +17,14 @@ export class AuthService {
   signUpUser(user) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/register', user, { headers: headers })
+    return this.http.post('api/users/register', user, { headers })
       .pipe(map(res => res.json()));
   }
 
   authenticateUser(user) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/authenticate', user, { headers, withCredentials: true })
+    return this.http.post('api/users/authenticate', user, { headers })
       .pipe(map(res => res.json()));
   }
 
@@ -45,24 +44,38 @@ export class AuthService {
   }
 
   storeUserData(token, user) {
-    // localStorage.setItem('id_token', token);
-    // localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
     this.user = user;
+  }
+
+  logout() {
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
   }
 
   getProfile() {
     const headers = new Headers();
+    this.getToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.get('api/users/profile', { headers })
       .pipe(map(res => res.json()));
   }
 
-  signout() {
-    this.user = null;
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/signout', { headers })
-      .pipe(map(res => res.json()));
+  getToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
+  loggedIn() {
+    if (!localStorage.id_token) {
+      return false;
+    } else {
+      const helper = new JwtHelperService();
+      return !helper.isTokenExpired(localStorage.id_token);
+    }
   }
 }

@@ -14,7 +14,7 @@ export class UploadService {
 
   uploadImage(data) {
     const headers = new Headers();
-    // this.authService.getToken();
+    this.authService.getToken();
     headers.append('Authorization', this.authService.authToken);
     headers.append('Content-Type', 'multipart/form-data');
     return this.http.get('uploads/image', { headers })

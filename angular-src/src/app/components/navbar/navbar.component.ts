@@ -22,18 +22,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onLogoutClick() {
-    this.authService.signout().subscribe(data => {
-      if (data.success) {
-        alert('logged out');
-        this.authService.loggedIn = false;
-        this.router.navigate(['/']);
-        return true;
-      } else {
-        alert(data.msg);
-        return false;
-      }
-    });
+  onLogoutClick() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+    return false;
   }
 
   openSignUpModal() {
