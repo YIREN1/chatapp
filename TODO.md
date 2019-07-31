@@ -1,35 +1,37 @@
 - [x] image upload
-- [] 2fa
-- [] twilio
 - [x] google authentication
 - [x] email confirmation
+- [x] please confirm email and then send email'
+- [x] google storage buckets
+- [x] duplicate signup
+- [x] link google backend
+- [x] google sign in find user
+- [x] upload files per user
+- [x] Save JWT in cookies instead of localStorage (NOT DOING IT)
+- [x] Update everything to latest versions
+- [x] refactor
+- [x] concurency? serve angular and node at the same time
+- [x] /api (will be part of nginx)
+- [x] dockerize
+- [] 2fa
+- [] twilio
 - [] recaptcha fails and 2fa
 - [] reset Password
 - [] email reset password
-- [x] please confirm email and then send email'
 - [] fix email template
-- [x] duplicate signup
 - [] upload method 2
 - [] ALert
-- [x] google storage buckets
 - [] go to dashboard when loggedin
-- [x] link google backend
 - [] link google frontend
-- [x] google sign in find user
-- [x] upload files per user
 - [] lazy image
 - [x] get 2 failed image
 - [x] api folder
 - [] app.js/index.js
 - [x] passport to another folder(policy)
 - [] refreshTokens
-- [x] Save JWT in cookies instead of localStorage (NOT DOING IT)
-- [x] Update everything to latest versions
-- [x] refactor
+
 - [] error catcher(crash server)
-- [x] concurency? serve angular and node at the same time
-- [x] /api (will be part of nginx)
-- [x] dockerize
+
 - [] kubernetify
 - [x] nginx
 - [] redis/kafka messages
