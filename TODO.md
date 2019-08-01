@@ -13,6 +13,19 @@
 - [x] concurency? serve angular and node at the same time
 - [x] /api (will be part of nginx)
 - [x] dockerize
+- [x] get 2 failed image
+- [x] api folder
+- [x] nginx
+- [x] send file from server to client
+- [x] internal server error when sign up with a registered email
+- [x] test
+- [x] google signup no email?
+- [x] A route for the forgot password.
+- [x] Configure nodemailer to send email templates
+- [x] Create email template
+- [x] Method to send password confirmation
+- [x] A route to confirm password reset.
+- [x] Method to generate and token send to the user’s email.
 - [] 2fa
 - [] twilio
 - [] recaptcha fails and 2fa
@@ -24,35 +37,29 @@
 - [] go to dashboard when loggedin
 - [] link google frontend
 - [] lazy image
-- [x] get 2 failed image
-- [x] api folder
 - [] app.js/index.js
 - [x] passport to another folder(policy)
 - [] refreshTokens
 - [] error catcher(crash server)
 - [] kubernetify
-- [x] nginx
 - [] redis/kafka messages
 - [] download files
 - [] fileslist
 - [] same file name / rename ?
-- [] streaming
+- [] streaming file
 - [] bucket ? folder ? per user
-- [x] send file from server to client
-- [x] internal server error when sign up with a registered email
 - [] profile ui
 - [] avatar
 - [] dashboard
 - [] scripts
 - [] angularx-social-login
-- [x] test
-- [x] google signup no email?
-- [x] A route for the forgot password.
-- [x] Configure nodemailer to send email templates
-- [x] Create email template
-- [x] Method to send password confirmation
-- [x] A route to confirm password reset.
-- [x] Method to generate and token send to the user’s email.
 - [] deal with hard-coded urls such as email
-- [] keep the token consistent
+- [] keep the token consistent in reset and confirmation
+- [] confirm token in the first place in reset-password route
+- [] make the reset page angualr 
+- [] socket.io make a chat room
+- [] scripts in index.html in angular find better
+- [] double comma linting
+- [] get rid of useless packages
+- [] encrypt token
 - [] 

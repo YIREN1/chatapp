@@ -14,11 +14,7 @@ services:
       context: ./angular-src
     volumes:
       - ./angular-src:/app
-      - /app/node_modules
-    # ports: 
-    #   - '4200:4200' 
-    # environment: 
-    #   - CHOKIDAR_USEPOLLING=true   
+      - /app/node_modules 
   nginx:
     image: 'nginx:latest'
     restart: always
