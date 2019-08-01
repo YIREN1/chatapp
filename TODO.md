@@ -29,9 +29,7 @@
 - [] app.js/index.js
 - [x] passport to another folder(policy)
 - [] refreshTokens
-
 - [] error catcher(crash server)
-
 - [] kubernetify
 - [x] nginx
 - [] redis/kafka messages
@@ -49,3 +47,12 @@
 - [] angularx-social-login
 - [x] test
 - [x] google signup no email?
+- [x] A route for the forgot password.
+- [x] Configure nodemailer to send email templates
+- [x] Create email template
+- [x] Method to send password confirmation
+- [x] A route to confirm password reset.
+- [x] Method to generate and token send to the user’s email.
+- [] deal with hard-coded urls such as email
+- [] keep the token consistent
+- [] 

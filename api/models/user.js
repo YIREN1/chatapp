@@ -84,6 +84,20 @@ module.exports.addUser = (newUser, callback) => {
     });
   });
 };
+
+module.exports.updatePassword = (newUser, callback) => {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (error, hash) => {
+      if (error) {
+        console.log(error);
+        throw err;
+      }
+      const newUserSave = newUser;
+      newUserSave.password = hash;
+      newUserSave.save(callback);
+    });
+  });
+};
 // TODO
 module.exports.updateUser = (newUser, callback) => {
   newUser.save(callback);

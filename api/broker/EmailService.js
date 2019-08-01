@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
 const fs = require('fs');
+const path = require('path');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
@@ -15,6 +17,17 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD, // generated ethereal password
   },
 });
+
+const handlebarsOptions = {
+  viewEngine: {
+    partialsDir: path.resolve(__dirname, '../templates'),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve(__dirname, '../templates'),
+  extName: '.html',
+};
+
+transporter.use('compile', hbs(handlebarsOptions));
 
 const date = new Date();
 
@@ -43,15 +56,27 @@ const sendPlainEmail = (recipient, data, url = 'google.com') => {
   });
 };
 const sendEmail = async (recipient, url) => {
-  const path = `${__dirname}/../public/assets/template.html`;
+  const templatePath = `${__dirname}/../public/assets/template.html`;
 
-  fs.readFile(path, 'utf8', (err, data) => {
+  fs.readFile(templatePath, 'utf8', (err, data) => {
     if (err) console.error(err);
 
     try {
       sendPlainEmail(recipient, data, url);
     } catch (error) {
       console.error(error);
+    }
+  });
+};
+
+const sendEmailWithTemplate = async emailData => {
+  const mailOptions = emailData;
+  mailOptions.from = '"Fred Foo 👻" <norepltop@outlook.com>';
+  return transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`Email sent: ${info.response}`);
     }
   });
 };
@@ -74,4 +99,5 @@ const sendConfirmEmail = user => {
 
 module.exports = {
   sendConfirmEmail,
+  sendEmailWithTemplate,
 };

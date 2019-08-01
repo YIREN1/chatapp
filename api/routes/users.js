@@ -27,6 +27,13 @@ router.post(
 
 router.post('/oauth/unlink/google', passportJWT, UsersController.unlinkGoogle);
 
+router.route('/forgot-password').post(UsersController.forgotPassword);
+
+router
+  .route('/reset-password')
+  .get(UsersController.renderResetPasswordTemplate)
+  .post(passportJWT, UsersController.resetPassword);
+
 // router.get('/2fa', (req, res, next) => {
 
 // });
@@ -35,7 +42,5 @@ router.post('/oauth/unlink/google', passportJWT, UsersController.unlinkGoogle);
 
 // Profile
 router.get('/profile', passportJWT, UsersController.getProfile);
-
-// router.post('/signout', passportJWT, UsersController.signout);
 
 module.exports = router;
