@@ -29,12 +29,12 @@
 - [] 2fa
 - [] twilio
 - [] recaptcha fails and 2fa
-- [] reset Password
-- [] email reset password
+- [x] reset Password
+- [x] email reset password
 - [] fix email template
 - [] upload method 2
 - [] ALert
-- [] go to dashboard when loggedin
+- [x] go to dashboard when loggedin
 - [] link google frontend
 - [] lazy image
 - [] app.js/index.js
