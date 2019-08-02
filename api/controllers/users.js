@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const EmailService = require('../broker/EmailService');
+const AuthyService = require('../broker/AuthyService');
 const User = require('../models/user');
 
 const jwtSecret = process.env.JWT_SECRET;
@@ -96,16 +97,19 @@ const authenticate = (req, res) => {
     return User.comparePassword(password, user.password, (error, isMatch) => {
       if (error) throw err;
       if (isMatch) {
-        const token = signToken(user);
-        return res.json({
-          success: true,
-          token: `JWT ${token}`,
-          user: {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            profileName: user.profileName,
-          },
+        return AuthyService.sendApprovalRequest(user).then(authyToken => {
+          const token = signToken(user);
+          return res.json({
+            success: true,
+            token: `JWT ${token}`,
+            authyToken,
+            user: {
+              id: user._id,
+              name: user.name,
+              email: user.email,
+              profileName: user.profileName,
+            },
+          });
         });
       }
       return res.json({ success: false, msg: 'Invalid email/password' });

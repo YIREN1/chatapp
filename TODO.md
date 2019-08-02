@@ -49,7 +49,7 @@
 - [] streaming file
 - [] bucket ? folder ? per user
 - [] profile ui
-- [] avatar
+- [] display avatar
 - [] dashboard
 - [] scripts
 - [] angularx-social-login
@@ -62,4 +62,11 @@
 - [] double comma linting
 - [] get rid of useless packages
 - [] encrypt token
+- [] follower
+- [] forgot password button
+- [] sign in with your phone (model+phone, )
+- [] one route to handle send push, 
+- [] one route to handle twillio
+- [] create user authy, when register
+- [] UI keep fetch status route until we get approve
 - [] 

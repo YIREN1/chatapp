@@ -14,6 +14,7 @@ const users = require('./routes/users');
 const reCaptcha = require('./routes/reCaptcha');
 const email = require('./routes/email');
 const uploads = require('./routes/uploads');
+const authy = require('./routes/authy');
 
 // CORS Middleware // ! origin?
 app.use(
@@ -40,6 +41,7 @@ app.use('/users', users);
 app.use('/reCaptcha', reCaptcha);
 app.use('/email', email);
 app.use('/uploads', uploads);
+app.use('/authy', authy);
 
 // // Index Route
 // app.get('/', (req, res) => {
