@@ -6,6 +6,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { TwoFaComponent } from '../two-fa/two-fa.component';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 declare const grecaptcha: any;
 declare const gapi: any;
@@ -46,6 +47,10 @@ export class SigninSignupComponent implements OnInit {
 
   open2faModal() {
     this.modalService.open(TwoFaComponent);
+  }
+
+  openForgotModal() {
+    this.modalService.open(ForgotPasswordComponent);
   }
 
   rendergreCaptch = () => {

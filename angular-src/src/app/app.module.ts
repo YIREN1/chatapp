@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
 import { TwoFaComponent } from './components/two-fa/two-fa.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     Page404Component,
     FileSelectDirective,
     TwoFaComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,6 @@ const appRoutes: Routes = [
     AuthGuard,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SigninSignupComponent, TwoFaComponent],
+  entryComponents: [SigninSignupComponent, TwoFaComponent, ForgotPasswordComponent],
 })
 export class AppModule { }

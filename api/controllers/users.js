@@ -8,7 +8,9 @@ const jwtSecret = process.env.JWT_SECRET;
 const EmailSecret = process.env.EMAIL_CONFIRM_SECRET;
 
 const signToken = user => {
-  return jwt.sign(user.toJSON(), jwtSecret, {
+  const jwtUser = user;
+  jwtUser.password = undefined;
+  return jwt.sign(jwtUser.toJSON(), jwtSecret, {
     expiresIn: 604800, // 1 week in seconds
   });
 };
@@ -212,6 +214,7 @@ const forgotPassword = async (req, res) => {
     EmailService.sendEmailWithTemplate(data);
     return res.json({
       message: 'Kindly check your email for further instructions',
+      success: true,
     });
   } catch (e) {
     return res.status(500).json({ success: false });
@@ -219,7 +222,16 @@ const forgotPassword = async (req, res) => {
 };
 
 const renderResetPasswordTemplate = (req, res) => {
-  return res.sendFile(path.resolve('../views/reset-password.html'));
+  try {
+    const user = jwt.verify(req.query.token, jwtSecret);
+
+    if (user) {
+      return res.sendFile(path.resolve('../views/reset-password.html'));
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(401);
+  }
 };
 
 const resetPassword = (req, res) => {

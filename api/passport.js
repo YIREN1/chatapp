@@ -30,7 +30,7 @@ module.exports = passport => {
           return next(null, false);
         } catch (error) {
           console.error(error);
-          next(error, false);
+          return next(error, false);
         }
       });
     }),
@@ -58,6 +58,7 @@ module.exports = passport => {
               id: profile.id,
               email: profile.emails[0].value,
             };
+
             await req.user.save();
             console.log('has user');
             return next(null, req.user);

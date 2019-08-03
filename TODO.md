@@ -26,7 +26,7 @@
 - [x] Method to send password confirmation
 - [x] A route to confirm password reset.
 - [x] Method to generate and token send to the user’s email.
-- [] 2fa
+- [x] 2fa
 - [] twilio
 - [] recaptcha fails and 2fa
 - [x] reset Password
@@ -42,7 +42,7 @@
 - [] refreshTokens
 - [] error catcher(crash server)
 - [] kubernetify
-- [] redis/kafka messages
+- [] redis/kafka messages (email? authy?)
 - [] download files
 - [] fileslist
 - [] same file name / rename ?
@@ -54,19 +54,26 @@
 - [] scripts
 - [] angularx-social-login
 - [] deal with hard-coded urls such as email
-- [] keep the token consistent in reset and confirmation
-- [] confirm token in the first place in reset-password route
+- [] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
+- [x] confirm token in the first place in reset-password route
 - [] make the reset page angualr 
 - [] socket.io make a chat room
-- [] scripts in index.html in angular find better
-- [] double comma linting
-- [] get rid of useless packages
+- [] scripts in index.html in angular, find better solution
+- [x] double comma linting
+- [x] get rid of useless packages
 - [] encrypt token
 - [] follower
-- [] forgot password button
+- [x] forgot password button
 - [] sign in with your phone (model+phone, )
-- [] one route to handle send push, 
-- [] one route to handle twillio
+- [x] one route to handle send push, 
+- [x] one route to handle twillio status
 - [] create user authy, when register
+- [] when login, send push
+- [] some kind of ui to tell the user to wait 90s
+- [] (optional) get resend button for authy
+- [] keep retry and get status, pass or fail
 - [] UI keep fetch status route until we get approve
-- [] 
+- [] import { HttpClientModule } from '@angular/common/http';
+- [] contributing
+- [] license
+- [] node-jose

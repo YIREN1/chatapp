@@ -14,6 +14,13 @@ export class AuthService {
     private http: Http,
   ) { }
 
+  forgotPassword(email) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('api/users/forgot-password', { email }, { headers })
+      .pipe(map(res => res.json()));
+  }
+
   signUpUser(user) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
