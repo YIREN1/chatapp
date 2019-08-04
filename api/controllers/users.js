@@ -217,6 +217,7 @@ const forgotPassword = async (req, res) => {
       success: true,
     });
   } catch (e) {
+    console.log(e, '111111');
     return res.status(500).json({ success: false });
   }
 };

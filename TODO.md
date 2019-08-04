@@ -77,3 +77,5 @@
 - [] contributing
 - [] license
 - [] node-jose
+- [] use model.updateuser
+- [] authy status route wrong
