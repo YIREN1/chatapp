@@ -1,3 +1,5 @@
+# Todo List
+
 - [x] image upload
 - [x] google authentication
 - [x] email confirmation
@@ -27,8 +29,8 @@
 - [x] A route to confirm password reset.
 - [x] Method to generate and token send to the user’s email.
 - [x] 2fa
-- [] twilio
-- [] recaptcha fails and 2fa
+- [x] twilio
+- [] recaptcha fails and 2fa (minor)
 - [x] reset Password
 - [x] email reset password
 - [] fix email template
@@ -36,8 +38,8 @@
 - [] ALert
 - [x] go to dashboard when loggedin
 - [] link google frontend
-- [] lazy image
-- [] app.js/index.js
+- [x] lazy image
+- [x] app.js/index.js
 - [x] passport to another folder(policy)
 - [] refreshTokens
 - [] error catcher(crash server)
@@ -56,7 +58,7 @@
 - [] deal with hard-coded urls such as email
 - [] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
 - [x] confirm token in the first place in reset-password route
-- [] make the reset page angualr 
+- [] make the reset page angualr
 - [] socket.io make a chat room
 - [] scripts in index.html in angular, find better solution
 - [x] double comma linting
@@ -65,7 +67,7 @@
 - [] follower
 - [x] forgot password button
 - [] sign in with your phone (model+phone, )
-- [x] one route to handle send push, 
+- [x] one route to handle send push,
 - [x] one route to handle twillio status
 - [] create user authy, when register
 - [] when login, send push
@@ -78,4 +80,7 @@
 - [] license
 - [] node-jose
 - [] use model.updateuser
-- [] authy status route wrong
+- [x] authy status route wrong (authyToken...)
+- [] docker issue when running under another ip (try with phone)
+- [x] always login with google (clear cookie)
+- [] password reset url 5000?

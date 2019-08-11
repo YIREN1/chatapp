@@ -1,1 +1,1 @@
-docker-compose logs -f "authapp_$1_1"
+docker logs -f "authapp_$1_1"

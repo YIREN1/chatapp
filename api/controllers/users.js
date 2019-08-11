@@ -206,7 +206,7 @@ const forgotPassword = async (req, res) => {
     template: 'forgot-password-email',
     subject: 'Password help has arrived!',
     context: {
-      url: `http://localhost:5000/users/reset-password?token=${token}`,
+      url: `http://localhost:3050/api/users/reset-password?token=${token}`,
       name: reqUser.name,
     },
   };
@@ -227,8 +227,9 @@ const renderResetPasswordTemplate = (req, res) => {
     const user = jwt.verify(req.query.token, jwtSecret);
 
     if (user) {
-      return res.sendFile(path.resolve('../views/reset-password.html'));
+      return res.sendFile(path.resolve('views/reset-password.html'));
     }
+    return res.status(400).json({ message: 'invalid token' });
   } catch (error) {
     console.log(error);
     return res.status(401);
@@ -240,7 +241,7 @@ const resetPassword = (req, res) => {
   const { newPassword } = req.body;
   if (user) {
     user.password = newPassword;
-    User.updatePassword(user, err => {
+    return User.updatePassword(user, err => {
       if (err) {
         return res.status(422).send({
           message: err,
@@ -261,6 +262,7 @@ const resetPassword = (req, res) => {
           message: 'password reset',
         });
       } catch (e) {
+        console.log(e);
         return res.status(500).json({ success: false });
       }
     });

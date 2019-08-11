@@ -70,14 +70,18 @@ const sendEmail = async (recipient, url) => {
 };
 
 const sendEmailWithTemplate = async emailData => {
-  const mailOptions = emailData;
-  mailOptions.from = '"Fred Foo 👻" <norepltop@outlook.com>';
-  return transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`Email sent: ${info.response}`);
-    }
+  return new Promise((resolve, reject) => {
+    const mailOptions = emailData;
+    mailOptions.from = '"Fred Foo 👻" <norepltop@outlook.com>';
+    return transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log(`Email sent: ${info.response}`);
+        resolve();
+      }
+    });
   });
 };
 
