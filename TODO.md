@@ -43,7 +43,7 @@
 - [x] passport to another folder(policy)
 - [] refreshTokens
 - [] error catcher(crash server)
-- [] kubernetify
+- [x] kubernetify
 - [] redis/kafka messages (email? authy?)
 - [] download files
 - [] fileslist
