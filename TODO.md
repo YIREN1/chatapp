@@ -75,7 +75,7 @@
 - [] (optional) get resend button for authy
 - [] keep retry and get status, pass or fail
 - [] UI keep fetch status route until we get approve
-- [] import { HttpClientModule } from '@angular/common/http';
+- [x] import { HttpClientModule } from '@angular/common/http';
 - [] contributing
 - [] license
 - [] node-jose
@@ -84,3 +84,6 @@
 - [] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
 - [] password reset url 5000?
+- [] angular env variable
+- [] api env variables
+- [] k8s docs
