@@ -34,7 +34,7 @@
 - [x] reset Password
 - [x] email reset password
 - [] fix email template
-- [] upload method 2
+- [] upload method 2 (future)
 - [] ALert
 - [x] go to dashboard when loggedin
 - [] link google frontend
@@ -53,9 +53,9 @@
 - [] profile ui
 - [] display avatar
 - [] dashboard
-- [] scripts
+- [x] scripts
 - [] angularx-social-login
-- [] deal with hard-coded urls such as email
+- [x] deal with hard-coded urls such as email
 - [] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
 - [x] confirm token in the first place in reset-password route
 - [] make the reset page angualr
@@ -76,14 +76,17 @@
 - [] keep retry and get status, pass or fail
 - [] UI keep fetch status route until we get approve
 - [x] import { HttpClientModule } from '@angular/common/http';
-- [] contributing
-- [] license
+- [x] contributing
+- [x] license
 - [] node-jose
 - [] use model.updateuser
 - [x] authy status route wrong (authyToken...)
 - [] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
-- [] password reset url 5000?
+- [x] password reset url 5000?
 - [] angular env variable
-- [] api env variables
-- [] k8s docs
+- [x] api env variables
+- [x] k8s docs
+- [] libphonenumber (<https://github.com/google/libphonenumber)>
+- [] move forgotPassword email part to email service
+- [] spin up a mongo db container

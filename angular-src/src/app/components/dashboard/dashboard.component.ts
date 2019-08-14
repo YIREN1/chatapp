@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
       }
       this.uploadService.uploadImage(formData).subscribe(
         (success) => {
-          console.log(success._body);
+          console.log(success); // toDO success._body
         },
         (error) => console.log(error)
       );

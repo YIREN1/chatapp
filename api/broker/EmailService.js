@@ -95,7 +95,7 @@ const sendConfirmEmail = user => {
       expiresIn: '1d',
     },
     (error, emailToken) => {
-      const url = `http://localhost:3050/api/users/confirmation/${emailToken}`;
+      const url = `${process.env.BASE_URL}/users/confirmation/${emailToken}`;
       sendEmail(user, url);
     },
   );

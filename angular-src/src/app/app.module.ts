@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SigninSignupComponent } from './components/signin-signup/signin-signup.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     NgbModule,
+    HttpClientModule,
   ],
   providers: [
     ValidateService,

@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+export interface ServerResponse {
+  success: boolean;
+  msg: string;
+  token: string;
+  user: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,32 +23,32 @@ export class AuthService {
   forgotPassword(email) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/forgot-password', { email }, { headers });
+    return this.http.post<ServerResponse>('api/users/forgot-password', { email }, { headers });
   }
 
   signUpUser(user) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/register', user, { headers });
+    return this.http.post<ServerResponse>('api/users/register', user, { headers });
   }
 
   authenticateUser(user) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/authenticate', user, { headers });
+    return this.http.post<ServerResponse>('api/users/authenticate', user, { headers });
   }
 
   googleOauth(access_token) {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('api/users/oauth/google', { access_token }, { headers });
+    return this.http.post<ServerResponse>('api/users/oauth/google', { access_token }, { headers });
   }
 
   VerifyReCaptcha(token, route) {
     const headers = new HttpHeaders();
     this.authToken = token;
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`api/reCaptcha/${route}/subscribe`, { token }, { headers });
+    return this.http.post<ServerResponse>(`api/reCaptcha/${route}/subscribe`, { token }, { headers });
   }
 
   storeUserData(token, user) {
@@ -62,7 +69,7 @@ export class AuthService {
     this.getToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('api/users/profile', { headers });
+    return this.http.get<ServerResponse>('api/users/profile', { headers });
   }
 
   getToken() {
@@ -71,7 +78,7 @@ export class AuthService {
   }
 
   loggedIn() {
-    if (!localStorage.id_token) {
+    if (!localStorage.getItem('id_token')) {
       return false;
     } else {
       const helper = new JwtHelperService();

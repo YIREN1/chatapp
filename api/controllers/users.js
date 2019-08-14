@@ -206,7 +206,7 @@ const forgotPassword = async (req, res) => {
     template: 'forgot-password-email',
     subject: 'Password help has arrived!',
     context: {
-      url: `http://localhost:3050/api/users/reset-password?token=${token}`,
+      url: `${process.env.BASE_URL}/users/reset-password?token=${token}`,
       name: reqUser.name,
     },
   };
