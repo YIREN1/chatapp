@@ -19,7 +19,7 @@ const sendApprovalRequest = user => {
           reject(err);
         } else {
           const authToken = authResponse.approval_request.uuid;
-          console.log(`token: ${authToken}`);
+          // console.log(`token: ${authToken}`);
           resolve(authToken);
           // res.status(200).send({ token: authResponse.approval_request.uuid });
         }

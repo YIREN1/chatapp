@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,7 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
     private authService: AuthService,
     public activeModal: NgbActiveModal,
 
-    ) { }
+  ) { }
 
   ngOnInit() {
   }

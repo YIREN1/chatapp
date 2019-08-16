@@ -98,20 +98,27 @@ const authenticate = (req, res) => {
 
     return User.comparePassword(password, user.password, (error, isMatch) => {
       if (error) throw err;
+      const is2FaEnabled = true;
       if (isMatch) {
-        return AuthyService.sendApprovalRequest(user).then(authyToken => {
-          const token = signToken(user);
-          return res.json({
-            success: true,
-            token: `JWT ${token}`,
-            authyToken,
-            user: {
-              id: user._id,
-              name: user.name,
-              email: user.email,
-              profileName: user.profileName,
-            },
+        if (is2FaEnabled) {
+          // todo: user.settings.is2FaEnabled
+          return AuthyService.sendApprovalRequest(user).then(authyToken => {
+            return res.json({
+              success: true,
+              authyToken,
+            });
           });
+        }
+        const token = signToken(user);
+        return res.json({
+          success: true,
+          token: `JWT ${token}`,
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            profileName: user.profileName,
+          },
         });
       }
       return res.json({ success: false, msg: 'Invalid email/password' });
@@ -217,7 +224,7 @@ const forgotPassword = async (req, res) => {
       success: true,
     });
   } catch (e) {
-    console.log(e, '111111');
+    console.log(e, 'email send failed');
     return res.status(500).json({ success: false });
   }
 };

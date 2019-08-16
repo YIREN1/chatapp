@@ -22,7 +22,7 @@ const sendReqToReCaptcha = (secretKey, token, remoteAddress, res) => {
     }
 
     const bodyObj = JSON.parse(body);
-    console.log(bodyObj);
+    // console.log(bodyObj);
     if (!bodyObj.success) {
       return res.json({ success: false, msg: 'Failed reCaptcha verification' });
     }

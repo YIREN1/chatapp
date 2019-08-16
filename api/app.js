@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-require('./passport')(passport);
+require('./policies/passport')(passport);
 
 // bodyParser Middleware
 app.use(express.json());

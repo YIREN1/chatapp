@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
-import { TwoFaComponent } from '../two-fa/two-fa.component';
+import { ValidateService } from '../../services/validate.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { TwoFaComponent } from '../two-fa/two-fa.component';
 
 declare const grecaptcha: any;
 declare const gapi: any;
 
 declare global {
-  interface Window {
+  interface IWindow {
     gapi: any;
     grecaptcha: any;
   }
@@ -20,18 +21,20 @@ declare global {
 @Component({
   selector: 'app-signin-signup',
   templateUrl: './signin-signup.component.html',
-  styleUrls: ['./signin-signup.component.css']
+  styleUrls: ['./signin-signup.component.css'],
 })
 export class SigninSignupComponent implements OnInit {
   // Register
-  name: String;
-  profileName: String;
-  confirmpassword: String;
-  email: String;
-  password: String;
-  lang: String;
+  name: string;
+  profileName: string;
+  confirmpassword: string;
+  email: string;
+  password: string;
+  lang: string;
   isCaptchaSuccess: boolean;
   success: boolean;
+  authyToken: string;
+  public message: Subject<string> = new BehaviorSubject('');
 
   constructor(
     private authService: AuthService,
@@ -56,10 +59,10 @@ export class SigninSignupComponent implements OnInit {
 
   rendergreCaptch = () => {
     grecaptcha.render('example3', {
-      'sitekey': '6LcgnK4UAAAAAMIzYQ241H4rT0RJUSZ_XFB9JcpA',
-      'theme': 'dark',
+      sitekey: '6LcgnK4UAAAAAMIzYQ241H4rT0RJUSZ_XFB9JcpA',
+      theme: 'dark',
       'error-callback': this.reCaptchaErrorCB,
-      'callback': this.reCaptchaCB,
+      callback: this.reCaptchaCB,
     });
   }
 
@@ -68,11 +71,11 @@ export class SigninSignupComponent implements OnInit {
       return;
     }
     gapi.signin2.render('gSignIn', {
-      'theme': 'dark',
-      'onsuccess': this.onSignWithGoogle,
-      'onerror': (err) => {
+      theme: 'dark',
+      onsuccess: this.onSignWithGoogle,
+      onerror: err => {
         console.log(`Google signIn2.render button err: ${err}`);
-      }
+      },
     });
   }
 
@@ -81,7 +84,7 @@ export class SigninSignupComponent implements OnInit {
     auth2.signOut();
   }
 
-  onSignWithGoogle = (googleUser) => {
+  onSignWithGoogle = googleUser => {
     const profile = googleUser.getBasicProfile();
     // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     // console.log('Name: ' + profile.getName());
@@ -105,7 +108,6 @@ export class SigninSignupComponent implements OnInit {
         this.router.navigate(['dashboard']);
         this.activeModal.close();
         return true;
-
       } else {
         alert('failed on google oauth');
         return false;
@@ -124,8 +126,11 @@ export class SigninSignupComponent implements OnInit {
 
   verifyCaptchaV3() {
     grecaptcha.ready(() => {
-      grecaptcha.execute('6Lc9m64UAAAAAK124LL1AU8JY-yI51RFJphhDnuf', { action: 'homepage' })
-        .then((token) => {
+      grecaptcha
+        .execute('6Lc9m64UAAAAAK124LL1AU8JY-yI51RFJphhDnuf', {
+          action: 'homepage',
+        })
+        .then(token => {
           console.log(token, 'V3');
           this.authService.VerifyReCaptcha(token, 'v3').subscribe(data => {
             console.log(data);
@@ -166,22 +171,46 @@ export class SigninSignupComponent implements OnInit {
     // console.log('continue');
     const user = {
       email: this.email,
-      password: this.password
+      password: this.password,
     };
-    this.authService.authenticateUser(user).subscribe(data => {
-      if (data.success) {
-        this.authService.storeUserData(data.token, data.user);
-        alert('successfully logged in');
-        this.router.navigate(['dashboard']);
-        this.activeModal.close();
-        return true;
-      } else {
-        alert(data.msg);
-        return false;
-      }
-    });
+    this.authService
+      .authenticateUser(user)
+      .pipe(
+        catchError(() => {
+          this.message.next('Bad credentials.');
+          return throwError('Not logged in!');
+        }),
+      )
+      .subscribe(async data => {
+        if (data.success) {
+          const is2FaEnabled = true;
+          if (is2FaEnabled) {
+            await this.verify2fa();
+          }
+          this.postLogin(data);
+          return true;
+        } else {
+          alert(data.msg);
+          this.message.next('Request timed out or not authorized');
+          return false;
+        }
+      });
   }
 
+  postLogin(data) {
+    this.authService.storeUserData(data.token, data.user);
+    alert('successfully logged in');
+    this.router.navigate(['dashboard']);
+    this.activeModal.close();
+  }
+
+  verify2fa() {
+    return new Promise((resolve, reject) => {
+      return this.authService.verify2fa(this.authyToken).subscribe(data => {
+        resolve();
+      });
+    });
+  }
 
   onSignUp() {
     const user = {
@@ -203,7 +232,12 @@ export class SigninSignupComponent implements OnInit {
     }
 
     // comfirmpassword
-    if (!this.validateService.validateConfirmPassword(this.password, this.confirmpassword)) {
+    if (
+      !this.validateService.validateConfirmPassword(
+        this.password,
+        this.confirmpassword,
+      )
+    ) {
       alert('Passwords do not match!');
       return false;
     }

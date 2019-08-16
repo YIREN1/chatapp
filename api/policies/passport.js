@@ -2,7 +2,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
 
-const User = require('./models/user');
+const User = require('../models/user');
 
 const jwtSecret = process.env.JWT_SECRET;
 

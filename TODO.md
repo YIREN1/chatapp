@@ -30,10 +30,10 @@
 - [x] Method to generate and token send to the user’s email.
 - [x] 2fa
 - [x] twilio
-- [] recaptcha fails and 2fa (minor)
+- [] recaptcha fails and 2fa (minor, future)
 - [x] reset Password
 - [x] email reset password
-- [] fix email template
+- [] fix email template, confirmation email (could use the same template)
 - [] upload method 2 (future)
 - [] ALert
 - [x] go to dashboard when loggedin
@@ -41,18 +41,18 @@
 - [x] lazy image
 - [x] app.js/index.js
 - [x] passport to another folder(policy)
-- [] refreshTokens
+- [] refreshTokens (minor)
 - [] error catcher(crash server)
 - [x] kubernetify
-- [] redis/kafka messages (email? authy?)
+- [] redis/kafka messages (email? authy? seperate servive)
 - [] download files
 - [] fileslist
 - [] same file name / rename ?
-- [] streaming file
+- [] streaming file (minor)
 - [] bucket ? folder ? per user
 - [] profile ui
-- [] display avatar
-- [] dashboard
+- [] display avatar <https://github.com/HaithemMosbahi/ngx-avatar>
+- [x] dashboard
 - [x] scripts
 - [] angularx-social-login
 - [x] deal with hard-coded urls such as email
@@ -70,8 +70,8 @@
 - [x] one route to handle send push,
 - [x] one route to handle twillio status
 - [] create user authy, when register
-- [] when login, send push
-- [] some kind of ui to tell the user to wait 90s
+- [x] when login, send push
+- [] some kind of ui to tell the user to wait 90s (you enabled 2fa, please approve on your phone)
 - [] (optional) get resend button for authy
 - [] keep retry and get status, pass or fail
 - [] UI keep fetch status route until we get approve
@@ -84,9 +84,10 @@
 - [] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
 - [x] password reset url 5000?
-- [] angular env variable
+- [] angular env variable (prefix in environment, 'api'/'')
 - [x] api env variables
 - [x] k8s docs
 - [] libphonenumber (<https://github.com/google/libphonenumber)>
-- [] move forgotPassword email part to email service
+- [x] move forgotPassword email part to email service
 - [] spin up a mongo db container
+- [] User.settings

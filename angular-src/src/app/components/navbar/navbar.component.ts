@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Router } from '@angular/router';
 
-import { SigninSignupComponent } from '../signin-signup/signin-signup.component';
 import { AuthService } from '../../services/auth.service';
+import { SigninSignupComponent } from '../signin-signup/signin-signup.component';
 
 @Component({
   selector: 'app-navbar',
