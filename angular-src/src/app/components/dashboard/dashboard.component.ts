@@ -1,9 +1,10 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
-import { UploadService } from '../../services/upload.service';
-import { AuthService } from '../../services/auth.service';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Alert } from 'selenium-webdriver';
-const URL = `${location.origin}/api/uploads/image`;
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
+import { UploadService } from '../../services/upload.service';
+const URL = `${environment.apiUrl}/uploads/image`;
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,7 @@ export class DashboardComponent implements OnInit {
   });
 
   // This is the default title property created by the angular cli. Its responsible for the app works
-  title = 'app works in docker!';
+  dashBoardTitle = environment.dashBoardTitle;
 
   ngOnInit() {
     // override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.

@@ -44,9 +44,12 @@ export class AuthService {
     timerSubscription.unsubscribe();
   }
 
-  private secondFactor(authyToken: string): Observable<any> {
+  private secondFactor(authyToken: string, userEmail: string): Observable<any> {
     const httpOptions = {
-      headers: new HttpHeaders({ 'authyToken': authyToken })
+      headers: new HttpHeaders({
+        'authyToken': authyToken,
+        'userEmail': userEmail
+      })
     };
 
     const tick: Observable<number> = timer(1000, 1000);
@@ -59,7 +62,7 @@ export class AuthService {
             // this.redirectUrl = this.redirectUrl === undefined ? '/' : this.redirectUrl;
             // this.router.navigate([this.redirectUrl]);
 
-            this.closeSecondFactorObservables(subject, true, timerSubscription);
+            this.closeSecondFactorObservables(subject, response, timerSubscription);
           } else if (response.status === 'denied') {
             this.closeSecondFactorObservables(subject, false, timerSubscription);
           }
@@ -82,7 +85,7 @@ export class AuthService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post<ServerResponse>(`${environment.apiPrefix}/users/authenticate`, user, { headers }).pipe(
-      flatMap(response => this.secondFactor(response.authyToken))
+      flatMap(response => this.secondFactor(response.authyToken, user.email))
     );
   }
 
@@ -100,10 +103,14 @@ export class AuthService {
   }
 
   storeUserData(token, user) {
-    localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.authToken = token;
-    this.user = user;
+    if (token) {
+      localStorage.setItem('id_token', token);
+      this.authToken = token;
+    }
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      this.user = user;
+    }
   }
 
   logout() {

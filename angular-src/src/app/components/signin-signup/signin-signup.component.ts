@@ -182,18 +182,25 @@ export class SigninSignupComponent implements OnInit {
         }),
       )
       .subscribe(async data => {
-        if (data.success) {
-          const is2FaEnabled = true;
-          if (is2FaEnabled) {
-            await this.verify2fa();
-          }
-          this.postLogin(data);
-          return true;
-        } else {
-          alert(data.msg);
+        // if (data.success) {
+        //   const is2FaEnabled = true;
+        //   if (is2FaEnabled) {
+        //     await this.verify2fa();
+        //   }
+        //   this.postLogin(data);
+        //   return true;
+        // } else {
+        //   alert(data.msg);
+        //   this.message.next('Request timed out or not authorized');
+        //   return false;
+        // }
+        if (!data) {
           this.message.next('Request timed out or not authorized');
           return false;
         }
+        console.log('auth response', data);
+        this.postLogin(data);
+        return true;
       });
   }
 
