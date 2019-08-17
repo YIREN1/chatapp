@@ -72,7 +72,7 @@
 - [] create user authy, when register
 - [x] when login, send push
 - [] some kind of ui to tell the user to wait 90s (you enabled 2fa, please approve on your phone)
-- [] (optional) get resend button for authy
+- [](optional) get resend button for authy
 - [] keep retry and get status, pass or fail
 - [] UI keep fetch status route until we get approve
 - [x] import { HttpClientModule } from '@angular/common/http';
@@ -91,3 +91,5 @@
 - [x] move forgotPassword email part to email service
 - [] spin up a mongo db container
 - [] User.settings
+- [] ui in the signup modal to notify user authy failed or something
+- [] docker-compose file test is it ok to overwrite env variable
