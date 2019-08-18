@@ -93,3 +93,4 @@
 - [] User.settings
 - [] ui in the signup modal to notify user authy failed or something
 - [] docker-compose file test is it ok to overwrite env variable
+- [] migrate to gitlab
