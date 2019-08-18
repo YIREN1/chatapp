@@ -30,67 +30,66 @@
 - [x] Method to generate and token send to the user’s email.
 - [x] 2fa
 - [x] twilio
-- [] recaptcha fails and 2fa (minor, future)
+- [ ] recaptcha fails and 2fa (minor, future)
 - [x] reset Password
 - [x] email reset password
-- [] fix email template, confirmation email (could use the same template)
-- [] upload method 2 (future)
-- [] ALert
+- [ ] fix email template, confirmation email (could use the same template for all emails)
+- [ ] upload method 2 (future)
+- [ ] ALert
 - [x] go to dashboard when loggedin
-- [] link google frontend
+- [ ] link google frontend
 - [x] lazy image
 - [x] app.js/index.js
 - [x] passport to another folder(policy)
-- [] refreshTokens (minor)
-- [] error catcher(crash server)
+- [ ] refreshTokens (minor)
+- [ ] error catcher(crash server)
 - [x] kubernetify
-- [] redis/kafka messages (email? authy? seperate servive)
-- [] download files
-- [] fileslist
-- [] same file name / rename ?
-- [] streaming file (minor)
-- [] bucket ? folder ? per user
-- [] profile ui
-- [] display avatar <https://github.com/HaithemMosbahi/ngx-avatar>
+- [ ] redis/kafka messages (email? authy? seperate servive)
+- [ ] download files
+- [ ] fileslist
+- [ ] same file name / rename ?
+- [ ] streaming file (minor)
+- [ ] bucket ? folder ? per user
+- [ ] profile ui
+- [ ] display avatar <https://github.com/HaithemMosbahi/ngx-avatar>
 - [x] dashboard
 - [x] scripts
-- [] angularx-social-login
+- [ ] angularx-social-login
 - [x] deal with hard-coded urls such as email
-- [] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
+- [ ] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
 - [x] confirm token in the first place in reset-password route
-- [] make the reset page angualr
-- [] socket.io make a chat room
-- [] scripts in index.html in angular, find better solution
+- [ ] make the reset page angualr
+- [ ] socket.io make a chat room
+- [ ] scripts in index.html in angular, find better solution
 - [x] double comma linting
 - [x] get rid of useless packages
-- [] encrypt token
-- [] follower
+- [ ] encrypt token node-jose
+- [ ] follower
 - [x] forgot password button
-- [] sign in with your phone (model+phone, )
+- [ ] sign in with your phone (model+phone, )
 - [x] one route to handle send push,
 - [x] one route to handle twillio status
-- [] create user authy, when register
+- [ ] create user authy, when register
 - [x] when login, send push
-- [] some kind of ui to tell the user to wait 90s (you enabled 2fa, please approve on your phone)
-- [](optional) get resend button for authy
-- [] keep retry and get status, pass or fail
-- [] UI keep fetch status route until we get approve
+- [x] some kind of ui to tell the user to wait 90s (you enabled 2fa, please approve on your phone)
+- [ ] (optional) get resend button for authy
+- [x] keep retry and get status, pass or fail
+- [x] UI keep fetch status route until we get approve
 - [x] import { HttpClientModule } from '@angular/common/http';
 - [x] contributing
 - [x] license
-- [] node-jose
-- [] use model.updateuser
+- [ ] use model.updateuser
 - [x] authy status route wrong (authyToken...)
-- [] docker issue when running under another ip (try with phone)
+- [ ] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
 - [x] password reset url 5000?
-- [] angular env variable (prefix in environment, 'api'/'')
+- [ ] angular env variable (prefix in environment, 'api'/'')
 - [x] api env variables
 - [x] k8s docs
-- [] libphonenumber (<https://github.com/google/libphonenumber)>
+- [ ] libphonenumber (<https://github.com/google/libphonenumber)>
 - [x] move forgotPassword email part to email service
-- [] spin up a mongo db container
-- [] User.settings
-- [] ui in the signup modal to notify user authy failed or something
-- [] docker-compose file test is it ok to overwrite env variable
-- [] migrate to gitlab
+- [ ] spin up a mongo db container
+- [ ] User.settings
+- [ ] ui in the signup modal to notify user authy failed or something
+- [ ] docker-compose file test is it ok to overwrite env variable
+- [x] migrate to gitlab
