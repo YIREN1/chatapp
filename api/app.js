@@ -20,6 +20,7 @@ const authy = require('./routes/authy');
 app.use(
   cors({
     credentials: true,
+    origin: true,
   }),
 );
 

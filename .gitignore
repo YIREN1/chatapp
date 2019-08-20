@@ -8,3 +8,4 @@ public/
 client/public/uploads
 *service-account.json
 client/
+*chatbot.json
