@@ -93,3 +93,8 @@
 - [ ] ui in the signup modal to notify user authy failed or something
 - [ ] docker-compose file test is it ok to overwrite env variable
 - [x] migrate to gitlab
+- [ ] routes.js
+- [ ] cookie parser?
+- [ ]
+- [ ]
+- [ ]

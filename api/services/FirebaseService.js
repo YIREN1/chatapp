@@ -36,15 +36,15 @@ exports.dialogflowWebhook = functions.https.onRequest(
 
     const result = request.body.queryResult;
 
-    const welcome = agent => {
+    const welcome = () => {
       agent.add(`Welcome to my agent!`);
     };
 
-    const fallback = agent => {
+    const fallback = () => {
       agent.add(`Sorry, can you try again?`);
     };
 
-    const userOnboardingHandler = async agent => {
+    const userOnboardingHandler = async () => {
       const db = admin.firestore();
       const profile = db.collection('users').doc('jeffd23');
 
