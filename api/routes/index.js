@@ -13,7 +13,6 @@ const reCaptcha = require('./reCaptcha');
 const email = require('./email');
 const uploads = require('./uploads');
 const authy = require('./authy');
-const chatbot = require('./chatbot');
 
 // CORS Middleware // ! origin?
 routes.use(
@@ -42,7 +41,6 @@ routes.use('/reCaptcha', reCaptcha);
 routes.use('/email', email);
 routes.use('/uploads', uploads);
 routes.use('/authy', authy);
-routes.use('/chatbot', chatbot);
 
 // // Index Route
 // app.get('/', (req, res) => {
