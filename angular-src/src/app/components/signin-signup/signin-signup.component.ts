@@ -7,7 +7,6 @@ import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { ValidateService } from '../../services/validate.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { TwoFaComponent } from '../two-fa/two-fa.component';
 
 declare const grecaptcha: any;
 declare const gapi: any;
@@ -47,10 +46,6 @@ export class SigninSignupComponent implements OnInit {
   ngOnInit() {
     this.rendergreCaptch();
     this.renderGapi();
-  }
-
-  open2faModal() {
-    this.modalService.open(TwoFaComponent);
   }
 
   openForgotModal() {

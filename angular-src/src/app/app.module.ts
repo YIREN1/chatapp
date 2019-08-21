@@ -22,16 +22,15 @@ import { ValidateService } from './services/validate.service';
 
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { TwoFaComponent } from './components/two-fa/two-fa.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }, // canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'profile/:profilename', component: ProfileComponent },
-  { path: 'chatbot', component: ChatbotComponent },
+  { path: 'profile/:profilename', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'chatbot', component: ChatbotComponent, canActivate: [AuthGuard] },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
     SigninSignupComponent,
     Page404Component,
     FileSelectDirective,
-    TwoFaComponent,
     ForgotPasswordComponent,
     ChatbotComponent,
   ],
@@ -69,6 +67,6 @@ const appRoutes: Routes = [
     AuthGuard,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SigninSignupComponent, TwoFaComponent, ForgotPasswordComponent],
+  entryComponents: [SigninSignupComponent, ForgotPasswordComponent],
 })
 export class AppModule { }
