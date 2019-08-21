@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser');
 
 const routes = express.Router();
 
-require('dotenv').config();
-require('../services/mongoService.js');
+require('../config/bootstrap');
 
 const users = require('./users');
 const reCaptcha = require('./reCaptcha');
@@ -27,7 +26,7 @@ routes.use(
 routes.use(cookieParser());
 
 // Set static files
-routes.use(express.static(path.join(__dirname, '../public')));
+routes.use(express.static(path.join(__dirname, '../../public')));
 
 // Passport Middleware
 routes.use(passport.initialize());

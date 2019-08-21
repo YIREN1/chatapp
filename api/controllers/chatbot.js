@@ -3,21 +3,18 @@ const admin = require('firebase-admin');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { SessionsClient } = require('dialogflow');
 
-const fireBaseServiceAccount = require('../chatbot.json');
 const dialogServiceAccount = require('../chatbot-dialogflow.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(fireBaseServiceAccount),
+  credential: admin.credential.cert(dialogServiceAccount),
   databaseURL: 'https://chatbot-8b2c3.firebaseio.com',
 });
 
 const dialogflowGateway = async (request, response) => {
   const { queryInput, sessionId } = request.body;
 
-  const sessionClient = new SessionsClient({
-    credentials: dialogServiceAccount,
-  });
-  const session = sessionClient.sessionPath('chatbot-vpfxxf', sessionId); // todo
+  const sessionClient = new SessionsClient();
+  const session = sessionClient.sessionPath('chatbot-8b2c3', sessionId);
 
   const responses = await sessionClient.detectIntent({ session, queryInput });
 

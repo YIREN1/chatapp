@@ -31,6 +31,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent }, // canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile/:profilename', component: ProfileComponent },
+  { path: 'chatbot', component: ChatbotComponent },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
@@ -56,11 +57,11 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
     NbChatModule,
     NbSpinnerModule,
+    NbThemeModule.forRoot({ name: 'dark' }),
   ],
   providers: [
     ValidateService,

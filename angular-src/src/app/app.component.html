@@ -1,8 +1,16 @@
-<app-navbar></app-navbar>
+<nb-layout>
+  <nb-layout-header fixed>
+    <app-navbar></app-navbar>
+  </nb-layout-header>
 
-<div >
+  <nb-layout-column>
+    <div>
+      <!-- </div style="width:1200px; margin:0 auto;"> -->
+      <router-outlet></router-outlet>
+    </div>
+  </nb-layout-column>
 
-<!-- </div style="width:1200px; margin:0 auto;"> -->
-    <router-outlet></router-outlet>
-</div>
-
+  <nb-layout-footer fixed>
+    <!-- Insert footer here -->
+  </nb-layout-footer>
+</nb-layout>

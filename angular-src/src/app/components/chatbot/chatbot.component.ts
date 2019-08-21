@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-// todo
-const dialogflowURL = '/dialogflowGateway'; // todo senv
+import { environment } from '../../../environments/environment';
+
+const dialogflowURL = `https://us-central1-chatbot-8b2c3.cloudfunctions.net/dialogflowgateway `;
 
 @Component({
   selector: 'app-chatbot',
