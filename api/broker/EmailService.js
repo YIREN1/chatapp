@@ -7,14 +7,23 @@ const _ = require('lodash');
 
 const EmailSecret = process.env.EMAIL_CONFIRM_SECRET;
 
+// const transporter = nodemailer.createTransport({
+//   pool: true,
+//   host: 'smtp-mail.outlook.com',
+//   port: 587,
+//   secure: false, // true for 465, false for other ports
+//   auth: {
+//     user: process.env.EMAIL_ACCOUNT, // generated ethereal user
+//     pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+//   },
+// });
+
 const transporter = nodemailer.createTransport({
-  pool: true,
-  host: 'smtp-mail.outlook.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  host: 'smtp.mailtrap.io',
+  port: 2525,
   auth: {
-    user: process.env.EMAIL_ACCOUNT, // generated ethereal user
-    pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+    user: 'bf50416c67a203',
+    pass: '86199e5f4f56b3',
   },
 });
 
@@ -56,7 +65,7 @@ const sendPlainEmail = (recipient, data, url = 'google.com') => {
   });
 };
 const sendEmail = async (recipient, url) => {
-  const templatePath = `${__dirname}/../public/assets/template.html`;
+  const templatePath = `${__dirname}/../views/emailTemplate.html`;
 
   fs.readFile(templatePath, 'utf8', (err, data) => {
     if (err) console.error(err);
@@ -69,8 +78,8 @@ const sendEmail = async (recipient, url) => {
   });
 };
 
-const sendEmailWithTemplate = async emailData => {
-  return new Promise((resolve, reject) => {
+const sendEmailWithTemplate = async emailData =>
+  new Promise((resolve, reject) => {
     const mailOptions = emailData;
     mailOptions.from = '"Fred Foo 👻" <norepltop@outlook.com>';
     return transporter.sendMail(mailOptions, (err, info) => {
@@ -83,7 +92,6 @@ const sendEmailWithTemplate = async emailData => {
       }
     });
   });
-};
 
 const sendConfirmEmail = user => {
   jwt.sign(
