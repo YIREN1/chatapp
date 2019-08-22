@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbChatModule, NbLayoutModule, NbSpinnerModule, NbThemeModule } from '@nebular/theme';
+import { NbChatModule, NbLayoutModule, NbMenuModule, NbSpinnerModule, NbThemeModule, NbUserModule, } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -22,13 +22,14 @@ import { ValidateService } from './services/validate.service';
 
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { UploadComponent } from './components/upload/upload.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthGuard] },
   { path: 'profile/:profilename', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'chatbot', component: ChatbotComponent, canActivate: [AuthGuard] },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     FileSelectDirective,
     ForgotPasswordComponent,
     ChatbotComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,8 @@ const appRoutes: Routes = [
     NbChatModule,
     NbSpinnerModule,
     NbThemeModule.forRoot({ name: 'dark' }),
+    NbMenuModule,
+    NbUserModule,
   ],
   providers: [
     ValidateService,

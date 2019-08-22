@@ -95,6 +95,6 @@
 - [x] migrate to gitlab
 - [x] routes.js
 - [ ] cookie parser?
-- [ ]
-- [ ]
-- [ ]
+- [ ] es6/7/8/9/10?
+- [ ] UI for password reset
+- [ ] UI for google login
