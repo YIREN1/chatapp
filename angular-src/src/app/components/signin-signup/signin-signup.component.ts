@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 import { ValidateService } from '../../services/validate.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
@@ -173,6 +173,7 @@ export class SigninSignupComponent implements OnInit {
       .pipe(
         catchError(() => {
           this.message.next('Bad credentials.');
+          Swal.fire('Oops...', 'Something went wrong!', 'error');
           return throwError('Not logged in!');
         }),
       )
@@ -201,7 +202,11 @@ export class SigninSignupComponent implements OnInit {
 
   postLogin(data) {
     this.authService.storeUserData(data.token, data.user);
-    alert('successfully logged in');
+    Swal.fire(
+      'Good job!',
+      'You are signed in!',
+      'success'
+    );
     this.router.navigate(['dashboard']);
     this.activeModal.close();
   }
@@ -224,12 +229,24 @@ export class SigninSignupComponent implements OnInit {
     // required fields
     if (!this.validateService.validateSignUp(user)) {
       alert('Please fill out all required fields!');
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
       return false;
     }
 
     // email
     if (!this.validateService.validateEmail(user.email)) {
       alert('Please fill out email correctly!');
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
       return false;
     }
 
@@ -241,15 +258,32 @@ export class SigninSignupComponent implements OnInit {
       )
     ) {
       alert('Passwords do not match!');
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
       return false;
     }
 
     return this.authService.signUpUser(user).subscribe(data => {
       if (data.success) {
         alert('success');
+        Swal.fire(
+          'Good job!',
+          'You clicked the button!',
+          'success'
+        );
         return true;
       } else {
         alert('Internal Server Error.');
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href>Why do I have this issue?</a>'
+        });
         return false;
       }
     });

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbChatModule, NbLayoutModule, NbMenuModule, NbSpinnerModule, NbThemeModule, NbUserModule, } from '@nebular/theme';
+import { NbChatModule, NbLayoutModule, NbMenuModule, NbSpinnerModule, NbThemeModule, NbSearchModule,NbUserModule,NbTabsetModule,NbButtonModule } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { UploadComponent } from './components/upload/upload.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 const appRoutes: Routes = [
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     ChatbotComponent,
     UploadComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,9 @@ const appRoutes: Routes = [
     NbThemeModule.forRoot({ name: 'dark' }),
     NbMenuModule,
     NbUserModule,
+    NbButtonModule,
+    NbTabsetModule,
+    NbSearchModule,
   ],
   providers: [
     ValidateService,

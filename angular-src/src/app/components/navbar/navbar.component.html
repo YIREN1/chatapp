@@ -33,17 +33,7 @@
           </div>
         </li> -->
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
+    <nb-search type="rotate-layout"></nb-search>
     <ul class="navbar-nav mr-auto ml-auto">
       <li class="nav-item">
         <a
@@ -66,8 +56,14 @@
           Logout
         </a>
       </li>
-      <li>
-        <nb-user [name]="user?.name" [picture]="user?.picture"> </nb-user>
+
+      <li class="nav-item" ngbDropdown *ngIf="authService.loggedIn()">
+        <nb-user ngbDropdownToggle style="cursor: pointer" [name]="user?.name" [picture]="user?.picture"> </nb-user>
+        <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
+          <button nbButton fullWidth>Active</button>
+          <button nbButton fullWidth (click)="onLogoutClick()">logout</button>
+          <button nbButton fullWidth>Active</button>
+        </div>
       </li>
     </ul>
   </div>

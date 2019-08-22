@@ -1,7 +1,25 @@
-<br /><br /><br /><br />
+
 <h1>
   <!-- here we echo the title from the component -->
   {{ title }}
 </h1>
+<nb-tabset>
+  <nb-tab tabTitle="upload"
+          badgeText="99+"
+          badgeStatus="danger">
+          <app-upload></app-upload>
+  </nb-tab>
+  <nb-tab tabTitle="chatbot"
+          badgeText="12"
+          badgePosition="bottom right"
+          badgeStatus="warning">
+          <app-chatbot></app-chatbot>
+  </nb-tab>
+  <nb-tab tabTitle="chat"
+          badgeText="new"
+          badgePosition="top right"
+          badgeStatus="success">
+          <app-chat></app-chat>
+  </nb-tab>
+</nb-tabset>
 
-<app-upload></app-upload>

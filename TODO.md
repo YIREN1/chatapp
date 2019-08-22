@@ -35,7 +35,7 @@
 - [x] email reset password
 - [ ] fix email template, confirmation email (could use the same template for all emails)
 - [ ] upload method 2 (future)
-- [ ] ALert
+- [ ] ALert (sweetalert2)
 - [x] go to dashboard when loggedin
 - [ ] link google frontend
 - [x] lazy image
@@ -59,7 +59,7 @@
 - [ ] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
 - [x] confirm token in the first place in reset-password route
 - [ ] make the reset page angualr
-- [ ] socket.io make a chat room
+- [ ] socket.io make a chat room (redis?)
 - [ ] scripts in index.html in angular, find better solution
 - [x] double comma linting
 - [x] get rid of useless packages
