@@ -17,6 +17,7 @@ Functionalities:
 Development: fully dockerized and kubernetefied, using nginx to control request to send to frontend or backend.
 
 [Demo: heroku(0.0.1)](https://authappp.herokuapp.com/)
+
 [Demo.md](docs/Demo.md)
 
 ## Getting Started

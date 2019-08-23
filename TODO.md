@@ -98,3 +98,5 @@
 - [ ] es6/7/8/9/10?
 - [ ] UI for password reset
 - [ ] UI for google login
+- [ ] howler.js
+- [ ] scroll magic
