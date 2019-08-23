@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbChatModule, NbLayoutModule, NbMenuModule, NbSpinnerModule, NbThemeModule, NbSearchModule,NbUserModule,NbTabsetModule,NbButtonModule } from '@nebular/theme';
+import { NbButtonModule, NbChatModule, NbLayoutModule, NbMenuModule, NbSearchModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbUserModule } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -20,12 +20,12 @@ import { SigninSignupComponent } from './components/signin-signup/signin-signup.
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 
+import { ChatComponent } from './components/chat/chat.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
-import { ChatComponent } from './chat/chat.component';
 
 
 const appRoutes: Routes = [
