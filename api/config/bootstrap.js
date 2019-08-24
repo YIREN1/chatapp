@@ -1,2 +1,4 @@
 require('dotenv').config();
-require('../services/mongoService.js');
+const Mongo = require('../services/mongoService');
+
+Mongo.mongooseInit();

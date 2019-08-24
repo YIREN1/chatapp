@@ -3,7 +3,7 @@ version: "3.2"
 services:
   api:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: dev.dockerfile
       context: ./api
     volumes:
       - /app/node_modules
@@ -13,7 +13,7 @@ services:
       - PORT=3050
   client:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: dev.dockerfile
       context: ./angular-src
     volumes:
       - ./angular-src:/app
@@ -26,7 +26,7 @@ services:
     image: "nginx:latest"
     restart: always
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: dev.dockerfile
       context: ./nginx
     ports:
       - "3050:80"
