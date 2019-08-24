@@ -9,9 +9,6 @@ export class ChatComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
   messages: any[] = [
     {
       text: 'Drag & drop a file or a group of files.',
@@ -23,6 +20,9 @@ export class ChatComponent implements OnInit {
       },
     },
   ];
+
+  ngOnInit() {
+  }
 
   sendMessage(event) {
     const files = !event.files ? [] : event.files.map((file) => {
@@ -36,7 +36,7 @@ export class ChatComponent implements OnInit {
     this.messages.push({
       text: event.message,
       date: new Date(),
-      files: files,
+      files,
       type: files.length ? 'file' : 'text',
       reply: true,
       user: {

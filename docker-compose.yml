@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 
 services:
   api:
@@ -17,15 +17,19 @@ services:
       context: ./angular-src
     volumes:
       - ./angular-src:/app
-      - /app/node_modules 
+      - /app/node_modules
+    environment:
+      - apiUrl=http://localhost:3050/api
+      - apiPrefix=api
+      - dashBoardTitle=app work in docker
   nginx:
-    image: 'nginx:latest'
+    image: "nginx:latest"
     restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - '3050:80'
+      - "3050:80"
     depends_on:
-        - api
-        - client
+      - api
+      - client
