@@ -59,7 +59,7 @@
 - [ ] keep the token consistent in reset and confirmation (maybe email one is better cause longer...) (minor)
 - [x] confirm token in the first place in reset-password route
 - [ ] make the reset page angualr
-- [ ] socket.io make a chat room (redis?)
+- [x] socket.io make a chat room (redis?)
 - [ ] scripts in index.html in angular, find better solution
 - [x] double comma linting
 - [x] get rid of useless packages
@@ -101,10 +101,15 @@
 - [ ] howler.js
 - [ ] scroll magic
 - [ ] voice call
-- [ ] video call
+- [x] video call
 - [ ] separate nebular modules to another file
 - [ ] deploy
 - [ ] file transfer
 - [ ] xxx left the room
 - [ ] share screen
 - [ ] 'please enter your peer's id'
+- [ ] typed.js
+- [ ] background (particles.js)
+- [ ] drag and drop (dragula)
+- [ ] doc sharing (quilli)
+- [ ] angular code refactor

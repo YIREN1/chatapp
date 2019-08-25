@@ -20,6 +20,7 @@ import { SigninSignupComponent } from './components/signin-signup/signin-signup.
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 
+import { ChatModule } from './components/chat/chat.module';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -27,6 +28,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { VideochatComponent } from './components/videochat/videochat.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
+import { SharedModule } from './shared/shared.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -69,6 +71,8 @@ const appRoutes: Routes = [
     NbTabsetModule,
     NbSearchModule,
     NbInputModule,
+    SharedModule,
+    ChatModule,
   ],
   providers: [
     ValidateService,
