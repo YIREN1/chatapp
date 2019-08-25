@@ -1,5 +1,5 @@
 <p>chat works!</p>
-<nb-chat title="Drag & Drop chat" size="medium">
+<nb-chat title="Drag & Drop chat" size="large" scrollBottom="true">
   <nb-chat-message
     *ngFor="let msg of messages"
     [type]="msg.type"
@@ -8,6 +8,7 @@
     [sender]="msg.user.name"
     [date]="msg.date"
     [files]="msg.files"
+    [quote]="msg.quote"
     [avatar]="msg.user.avatar"
   >
   </nb-chat-message>

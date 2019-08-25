@@ -35,7 +35,7 @@
 - [x] email reset password
 - [ ] fix email template, confirmation email (could use the same template for all emails)
 - [ ] upload method 2 (future)
-- [ ] ALert (sweetalert2)
+- [x] ALert (sweetalert2)
 - [x] go to dashboard when loggedin
 - [ ] link google frontend
 - [x] lazy image
@@ -51,12 +51,12 @@
 - [ ] streaming file (minor)
 - [ ] bucket ? folder ? per user
 - [ ] profile ui
-- [ ] display avatar <https://github.com/HaithemMosbahi/ngx-avatar>
+- [x] display avatar <https://github.com/HaithemMosbahi/ngx-avatar>
 - [x] dashboard
 - [x] scripts
 - [ ] angularx-social-login
 - [x] deal with hard-coded urls such as email
-- [ ] keep the token consistent in reset and confirmation (maybe email one is better cause longer...)
+- [ ] keep the token consistent in reset and confirmation (maybe email one is better cause longer...) (minor)
 - [x] confirm token in the first place in reset-password route
 - [ ] make the reset page angualr
 - [ ] socket.io make a chat room (redis?)
@@ -95,8 +95,14 @@
 - [x] migrate to gitlab
 - [x] routes.js
 - [ ] cookie parser?
-- [ ] es6/7/8/9/10?
+- [x] es6/7/8/9/10?
 - [ ] UI for password reset
 - [ ] UI for google login
 - [ ] howler.js
 - [ ] scroll magic
+- [ ] voice call
+- [ ] video call
+- [ ] separate nebular modules to another file
+- [ ] deploy
+- [ ] file transfer
+- [ ]

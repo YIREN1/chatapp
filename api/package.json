@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "server-dev": "nodemon app.js",
-    "client-dev": "npm start --prefix angular-src"
+    "server-dev": "nodemon app.js"
   },
   "dependencies": {
     "@google-cloud/storage": "^3.1.0",
@@ -26,6 +25,7 @@
     "passport-google-plus-token": "^2.1.0",
     "passport-jwt": "*",
     "request": "^2.88.0",
+    "socket.io": "^2.2.0",
     "twilio": "^3.33.3"
   },
   "author": "yren",

@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes/index');
+const SocketService = require('./services/SocketService');
 
 const app = express();
 
@@ -10,6 +11,8 @@ app.use('/', routes);
 const port = process.env.PORT || 5000;
 
 // Start Server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+SocketService.socketServiceInit(server);

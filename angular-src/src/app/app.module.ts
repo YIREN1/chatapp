@@ -27,12 +27,9 @@ import { UploadComponent } from './components/upload/upload.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
 
-
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthGuard] },
-  { path: 'profile/:profilename', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'chatbot', component: ChatbotComponent, canActivate: [AuthGuard] },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
