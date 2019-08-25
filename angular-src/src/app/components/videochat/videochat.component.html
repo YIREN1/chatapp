@@ -1,0 +1,18 @@
+<p>videochat works!</p>
+
+<p>I am {{ myPeerId }}</p>
+<input
+  type="text"
+  nbInput
+  fullWidth
+  fieldSize="large"
+  shape="round"
+  placeholder="enter your peer's id"
+  [(ngModel)]="anotherid"
+/>
+<button nbButton (click)="connect()">Connect</button>
+<button nbButton (click)="videoconnect()">VideoChat</button>
+<br />
+<video #myvideo></video>
+<p>other:</p>
+<video #othervideo></video>

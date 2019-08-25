@@ -105,4 +105,6 @@
 - [ ] separate nebular modules to another file
 - [ ] deploy
 - [ ] file transfer
-- [ ]
+- [ ] xxx left the room
+- [ ] share screen
+- [ ] 'please enter your peer's id'

@@ -5,6 +5,7 @@ import { Message } from './shared/model/message';
 import { User } from './shared/model/user';
 import { SocketService } from './shared/service/socket.service';
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -56,6 +57,9 @@ export class ChatComponent implements OnInit {
         if (message.action === Action.JOINED) {
           message.quote = `${this.user.name} joined room`;
           message.type = 'quote';
+        } else if (message.action === Action.LEFT) {
+          message.quote = `${this.user.name} left room`;
+          message.type = 'quote';
         } else {
           message.reply = this.isReply(message);
         }
@@ -69,6 +73,7 @@ export class ChatComponent implements OnInit {
 
     this.socketService.onEvent(Event.DISCONNECT)
       .subscribe(() => {
+        this.sendNotification(null, Action.LEFT);
         console.log('disconnected');
       });
   }

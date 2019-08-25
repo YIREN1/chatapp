@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbButtonModule, NbChatModule, NbLayoutModule, NbMenuModule, NbSearchModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbUserModule } from '@nebular/theme';
+import { NbButtonModule, NbChatModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSearchModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbUserModule, } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -24,6 +24,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { VideochatComponent } from './components/videochat/videochat.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './page404/page404.component';
 
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     ChatbotComponent,
     UploadComponent,
     ChatComponent,
+    VideochatComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     NbButtonModule,
     NbTabsetModule,
     NbSearchModule,
+    NbInputModule,
   ],
   providers: [
     ValidateService,
