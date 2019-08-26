@@ -118,4 +118,5 @@
 - [ ] GSAP animation
 - [ ] direct message
 - [ ] add friends
+- [ ] icon for video
 - [ ]
