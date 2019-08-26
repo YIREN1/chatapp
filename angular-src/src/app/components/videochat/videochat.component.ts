@@ -1,29 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 declare var Peer: any;
+
 @Component({
   selector: 'app-videochat',
   templateUrl: './videochat.component.html',
   styleUrls: ['./videochat.component.css']
 })
+
 export class VideochatComponent implements OnInit {
   @ViewChild('othervideo', { static: true }) otherVideo: any;
   @ViewChild('myvideo', { static: true }) myVideo: any;
   myPeerId;
   peer;
   anotherid;
+
   constructor() { }
 
   ngOnInit() {
     this.initPeer();
-
   }
 
   private initPeer(): void {
-    const video = this.otherVideo.nativeElement;
-    this.peer = new Peer();
+    const otherVideo = this.otherVideo.nativeElement;
+    const myVideo = this.myVideo.nativeElement; this.peer = new Peer();
     this.peer.on('open', (id) => {
       this.myPeerId = this.peer.id;
-
       console.log('My peer ID is: ' + id);
     });
 
@@ -40,11 +42,18 @@ export class VideochatComponent implements OnInit {
 
     this.peer.on('call', (call) => {
 
+      n.getUserMedia({ video: { width: 128, height: 72 } }, (stream) => {
+        myVideo.srcObject = stream;
+        myVideo.play();
+      }, (err) => {
+        console.log('Failed to get stream', err);
+      });
+
       n.getUserMedia({ video: true, audio: true }, (stream) => {
         call.answer(stream);
         call.on('stream', (remotestream) => {
-          video.srcObject = remotestream;
-          video.play();
+          otherVideo.srcObject = remotestream;
+          otherVideo.play();
         });
       }, (err) => {
         console.log('Failed to get stream', err);
@@ -71,7 +80,8 @@ export class VideochatComponent implements OnInit {
     const n = navigator as any;
 
     n.getUserMedia = (n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia || n.msGetUserMedia);
-    n.getUserMedia({ video: { width: 128, height: 72 }, audio: true }, (stream) => {
+
+    n.getUserMedia({ video: { width: 128, height: 72 } }, (stream) => {
       myVideo.srcObject = stream;
       myVideo.play();
     }, (err) => {

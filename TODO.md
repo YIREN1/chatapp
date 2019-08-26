@@ -60,7 +60,7 @@
 - [x] confirm token in the first place in reset-password route
 - [ ] make the reset page angualr
 - [x] socket.io make a chat room (redis?)
-- [ ] scripts in index.html in angular, find better solution
+- [x] scripts in index.html in angular, find better solution
 - [x] double comma linting
 - [x] get rid of useless packages
 - [ ] encrypt token node-jose
@@ -90,7 +90,6 @@
 - [x] move forgotPassword email part to email service
 - [ ] spin up a mongo db container
 - [ ] User.settings
-- [ ] ui in the signup modal to notify user authy failed or something
 - [ ] docker-compose file test is it ok to overwrite env variable
 - [x] migrate to gitlab
 - [x] routes.js
@@ -113,3 +112,10 @@
 - [ ] drag and drop (dragula)
 - [ ] doc sharing (quilli)
 - [ ] angular code refactor
+- [ ] ui in the signup modal to notify user authy failed or something
+- [ ] clean up index.html
+- [ ] signup modal improve
+- [ ] GSAP animation
+- [ ] direct message
+- [ ] add friends
+- [ ]
