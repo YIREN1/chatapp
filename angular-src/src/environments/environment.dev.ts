@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000',
+  apiUrl: 'http://localhost:3050/api',
+  apiPrefix: 'api',
+  dashBoardTitle: 'app work in dev/docker'
 };
 
 /*

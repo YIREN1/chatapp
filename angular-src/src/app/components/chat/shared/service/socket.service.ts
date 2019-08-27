@@ -15,6 +15,7 @@ export class SocketService {
   private socket;
 
   public initSocket(): void {
+    // this.socket = socketIo(apiURL.replace('http', 'ws'));
     this.socket = socketIo(apiURL);
   }
 

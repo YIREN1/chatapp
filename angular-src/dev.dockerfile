@@ -26,5 +26,5 @@ EXPOSE 4200
 
 # https://help.crossbrowsertesting.com/faqs/testing/invalid-host-header-error/
 # https://github.com/angular/angular-cli/issues/8487
-CMD ng serve --host 0.0.0.0 --disable-host-check --public-host
+CMD ng serve --configuration=dev --host 0.0.0.0 --disable-host-check --public-host
 # CMD ng serve

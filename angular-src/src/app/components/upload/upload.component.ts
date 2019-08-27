@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import Swal from 'sweetalert2';
+
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 import { UploadService } from '../../services/upload.service';
@@ -22,7 +24,7 @@ export class UploadComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     url: URL,
     itemAlias: 'file',
-    authToken: this.authService.authToken,
+    authToken: this.authService.getToken(),
   });
 
   // This is the default title property created by the angular cli. Its responsible for the app works
@@ -37,10 +39,23 @@ export class UploadComponent implements OnInit {
     // able to deal with the server response.
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log('ImageUpload:uploaded:', item, status, response);
+    };
+
+    this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
       console.log(response);
+      Swal.fire('Oops...', 'Upload failed', 'error');
+    };
+
+    this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
+      console.log(response);
+      Swal.fire(
+        'Good job!',
+        'Successfully uploaded!',
+        'success'
+      );
     };
   }
-
+  // todo
   upload() {
     const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     console.log('iam+ ' + inputEl);

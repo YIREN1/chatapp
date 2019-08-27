@@ -80,7 +80,7 @@
 - [x] license
 - [ ] use model.updateuser
 - [x] authy status route wrong (authyToken...)
-- [ ] docker issue when running under another ip (try with phone)
+- [x] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
 - [x] password reset url 5000?
 - [ ] angular env variable (prefix in environment, 'api'/'')
@@ -88,9 +88,9 @@
 - [x] k8s docs
 - [ ] libphonenumber (<https://github.com/google/libphonenumber)>
 - [x] move forgotPassword email part to email service
-- [ ] spin up a mongo db container
+- [ ] spin up a mongo db container(future)
 - [ ] User.settings
-- [ ] docker-compose file test is it ok to overwrite env variable
+- [x] docker-compose file test is it ok to overwrite env variable
 - [x] migrate to gitlab
 - [x] routes.js
 - [ ] cookie parser?
@@ -120,4 +120,6 @@
 - [ ] add friends
 - [ ] icon for video
 - [ ] test in docker
-- [ ]
+- [ ] alert proper message
+- [ ] cors!
+- [ ] drop down nebular

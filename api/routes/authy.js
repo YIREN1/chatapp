@@ -37,7 +37,7 @@ router.get('/status', (req, res) => {
           const token = signToken(user);
           return res.status(200).send({
             status: 'approved',
-            token,
+            token: `JWT ${token}`,
             user: {
               id: user.id,
             },

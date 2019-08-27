@@ -10,7 +10,6 @@ services:
       - ./api:/app
     environment:
       - BASE_URL=http://localhost:3050/api
-      - PORT=3050
   client:
     build:
       dockerfile: dev.dockerfile

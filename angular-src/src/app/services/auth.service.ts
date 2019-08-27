@@ -130,6 +130,7 @@ export class AuthService {
   getToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
+    return token;
   }
 
   loggedIn() {

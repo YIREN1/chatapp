@@ -1,8 +1,16 @@
-<p>upload works!</p>
+<p>{{ dashBoardTitle }}</p>
 <!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
-<input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple />
+<input
+  nbInput
+  type="file"
+  name="photo"
+  ng2FileSelect
+  [uploader]="uploader"
+  multiple
+/>
 <!-- button to trigger the file upload when submitted -->
 <button
+  nbButton
   type="button"
   class="btn btn-success btn-s"
   (click)="uploader.uploadAll()"
@@ -12,8 +20,14 @@
 </button>
 <br />
 <!-- File input for upload without using the plugin. -->
-<input id="photo" type="file" />
+<input nbInput id="photo" type="file" />
 <!-- button to trigger the file upload when submitted -->
-<button type="button" class="btn btn-success btn-s" (click)="upload()" disabled>
+<button
+  nbButton
+  type="button"
+  class="btn btn-success btn-s"
+  (click)="upload()"
+  disabled
+>
   Upload with method 2 (coming soon)
 </button>

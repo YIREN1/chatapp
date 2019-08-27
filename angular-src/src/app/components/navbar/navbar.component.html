@@ -46,7 +46,7 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a
           *ngIf="authService.loggedIn()"
           class="nav-link"
@@ -55,14 +55,24 @@
         >
           Logout
         </a>
-      </li>
+      </li> -->
 
       <li class="nav-item" ngbDropdown *ngIf="authService.loggedIn()">
-        <nb-user ngbDropdownToggle style="cursor: pointer" [name]="user?.name" [picture]="user?.picture"> </nb-user>
-        <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
-          <button nbButton fullWidth>Active</button>
-          <button nbButton fullWidth (click)="onLogoutClick()">logout</button>
-          <button nbButton fullWidth>Active</button>
+        <nb-user
+          ngbDropdownToggle
+          style="cursor: pointer"
+          [name]="user?.name"
+          [picture]="user?.picture"
+        >
+        </nb-user>
+        <div
+          ngbDropdownMenu
+          aria-labelledby="navbarDropdown1"
+          class="dropdown-menu"
+        >
+          <button ngbDropdownItem>Profile</button>
+          <button ngbDropdownItem>Settings</button>
+          <button ngbDropdownItem (click)="onLogoutClick()">logout</button>
         </div>
       </li>
     </ul>

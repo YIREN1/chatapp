@@ -173,7 +173,7 @@ export class SigninSignupComponent implements OnInit {
       .pipe(
         catchError(() => {
           this.message.next('Bad credentials.');
-          Swal.fire('Oops...', 'Something went wrong!', 'error');
+          Swal.fire('Oops...', 'Bad credentials.', 'error');
           return throwError('Not logged in!');
         }),
       )
