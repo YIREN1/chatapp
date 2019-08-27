@@ -15,8 +15,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY package.json /app/package.json
 RUN npm install
-RUN npm install -g @angular/cli@7.3.9
-
+RUN npm install -g @angular/cli@~8.1.2
+RUN ng version
 # add app
 COPY . /app
 
@@ -27,3 +27,4 @@ EXPOSE 4200
 # https://help.crossbrowsertesting.com/faqs/testing/invalid-host-header-error/
 # https://github.com/angular/angular-cli/issues/8487
 CMD ng serve --host 0.0.0.0 --disable-host-check --public-host
+# CMD ng serve

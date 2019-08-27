@@ -15,6 +15,7 @@ services:
     build:
       dockerfile: dev.dockerfile
       context: ./angular-src
+    restart: always
     volumes:
       - ./angular-src:/app
       - /app/node_modules

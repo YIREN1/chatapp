@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbButtonModule, NbChatModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSearchModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbUserModule, } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileSelectDirective } from 'ng2-file-upload';
 
@@ -20,8 +18,21 @@ import { SigninSignupComponent } from './components/signin-signup/signin-signup.
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 
-import { ChatModule } from './components/chat/chat.module';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import {
+  NbButtonModule,
+  NbChatModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbSearchModule,
+  NbSpinnerModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbUserModule,
+} from '@nebular/theme';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatModule } from './components/chat/chat.module';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UploadComponent } from './components/upload/upload.component';
@@ -60,6 +71,8 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
+    ChatModule,
     NbLayoutModule,
     NbEvaIconsModule,
     NbChatModule,
@@ -71,8 +84,6 @@ const appRoutes: Routes = [
     NbTabsetModule,
     NbSearchModule,
     NbInputModule,
-    SharedModule,
-    ChatModule,
   ],
   providers: [
     ValidateService,
