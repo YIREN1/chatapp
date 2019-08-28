@@ -99,12 +99,16 @@ export class SigninSignupComponent implements OnInit {
       console.log(data);
       if (data.token) {
         this.authService.storeUserData(data.token, data.user);
-        alert('successfully logged in');
+        Swal.fire(
+          'Good job!',
+          'You are signed in!',
+          'success'
+        );
         this.router.navigate(['dashboard']);
         this.activeModal.close();
         return true;
       } else {
-        alert('failed on google oauth');
+        Swal.fire('Oops...', 'Failed on google oauth.', 'error');
         return false;
       }
     });
@@ -136,7 +140,8 @@ export class SigninSignupComponent implements OnInit {
 
   reCaptchaErrorCB(err) {
     console.log(err);
-    alert(err);
+    // alert(err);
+    Swal.fire('Oops...', `Failed reCaptcha: ${err}`, 'error');
   }
   reCaptchaCB(data) {
     console.log('captcha checked');
@@ -148,7 +153,8 @@ export class SigninSignupComponent implements OnInit {
     return this.authService.VerifyReCaptcha(token, 'v2').subscribe(data => {
       // console.log(data);
       if (!data.success) {
-        alert(data.msg);
+        // alert(data.msg);
+        Swal.fire('Oops...', data.msg, 'error');
         grecaptcha.reset();
         return false;
       }
@@ -157,6 +163,8 @@ export class SigninSignupComponent implements OnInit {
   }
 
   async onSignIn() {
+
+    // todo
     // this.verifyCaptchaV3();
     this.verifyCaptchaV2();
     // if (!this.isCaptchaSuccess) {
@@ -168,6 +176,17 @@ export class SigninSignupComponent implements OnInit {
       email: this.email,
       password: this.password,
     };
+
+    if (!this.validateService.validateSignIn(user)) {
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'Please fill out all required fields!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
+      return false;
+    }
+
     this.authService
       .authenticateUser(user)
       .pipe(
@@ -191,7 +210,13 @@ export class SigninSignupComponent implements OnInit {
         //   return false;
         // }
         if (!data) {
-          this.message.next('Request timed out or not authorized');
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: '2 factor auth failed!',
+            footer: '<a href>Why do I have this issue?</a>'
+          });
+          // this.message.next('Request timed out or not authorized');
           return false;
         }
         console.log('auth response', data);
@@ -228,11 +253,10 @@ export class SigninSignupComponent implements OnInit {
     };
     // required fields
     if (!this.validateService.validateSignUp(user)) {
-      alert('Please fill out all required fields!');
       Swal.fire({
         type: 'error',
         title: 'Oops...',
-        text: 'Something went wrong!',
+        text: 'Please fill out all required fields!',
         footer: '<a href>Why do I have this issue?</a>'
       });
       return false;
@@ -240,11 +264,10 @@ export class SigninSignupComponent implements OnInit {
 
     // email
     if (!this.validateService.validateEmail(user.email)) {
-      alert('Please fill out email correctly!');
       Swal.fire({
         type: 'error',
         title: 'Oops...',
-        text: 'Something went wrong!',
+        text: 'Please fill out email correctly!',
         footer: '<a href>Why do I have this issue?</a>'
       });
       return false;
@@ -257,11 +280,10 @@ export class SigninSignupComponent implements OnInit {
         this.confirmpassword,
       )
     ) {
-      alert('Passwords do not match!');
       Swal.fire({
         type: 'error',
         title: 'Oops...',
-        text: 'Something went wrong!',
+        text: 'Passwords do not match!',
         footer: '<a href>Why do I have this issue?</a>'
       });
       return false;
@@ -269,19 +291,19 @@ export class SigninSignupComponent implements OnInit {
 
     return this.authService.signUpUser(user).subscribe(data => {
       if (data.success) {
-        alert('success');
         Swal.fire(
           'Good job!',
-          'You clicked the button!',
+          'Successful signed up, please confirm your email!',
           'success'
         );
         return true;
       } else {
-        alert('Internal Server Error.');
+        // alert('Internal Server Error.');
+        console.log(data);
         Swal.fire({
           type: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: 'signup failed!',
           footer: '<a href>Why do I have this issue?</a>'
         });
         return false;

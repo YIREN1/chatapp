@@ -64,7 +64,7 @@ export class VideochatComponent implements OnInit {
   connect() {
     const conn = this.peer.connect(this.anotherid);
     conn.on('open', () => {
-      console.log('connect');
+      console.log('peer connected');
       conn.send(`message from ${this.myPeerId}`);
     });
   }

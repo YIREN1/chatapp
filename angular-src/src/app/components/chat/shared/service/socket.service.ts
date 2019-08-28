@@ -15,8 +15,10 @@ export class SocketService {
   private socket;
 
   public initSocket(): void {
-    // this.socket = socketIo(apiURL.replace('http', 'ws'));
-    this.socket = socketIo(apiURL);
+    this.socket = socketIo();
+    // default to host 'http://localhost:3050'
+    // this.socket = socketIo('http://localhost:5000');
+    // this.socket = socketIo('ws://localhost:3050');
   }
 
   public send(message: Message): void {

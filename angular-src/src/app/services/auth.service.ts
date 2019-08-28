@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { environment } from './../../environments/environment';
 
 export interface ServerResponse {

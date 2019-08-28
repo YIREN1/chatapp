@@ -68,13 +68,13 @@ export class ChatComponent implements OnInit {
 
     this.socketService.onEvent(Event.CONNECT)
       .subscribe(() => {
-        console.log('connected');
+        console.log('socket.io connected');
       });
 
     this.socketService.onEvent(Event.DISCONNECT)
       .subscribe(() => {
         this.sendNotification(null, Action.LEFT);
-        console.log('disconnected');
+        console.log('socket.io disconnected');
       });
   }
 

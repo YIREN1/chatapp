@@ -96,7 +96,7 @@
 - [ ] cookie parser?
 - [x] es6/7/8/9/10?
 - [ ] UI for password reset
-- [ ] UI for google login
+- [x] UI for google login
 - [ ] howler.js
 - [ ] scroll magic
 - [ ] voice call
@@ -106,20 +106,23 @@
 - [ ] file transfer
 - [ ] xxx left the room
 - [ ] share screen
-- [ ] 'please enter your peer's id'
-- [ ] typed.js
-- [ ] background (particles.js)
-- [ ] drag and drop (dragula)
+- [x] 'please enter your peer's id'
+- [ ] UI typed.js
+- [ ] UI background (particles.js)
+- [ ] UI drag and drop (dragula)
 - [ ] doc sharing (quilli)
 - [ ] angular code refactor
-- [ ] ui in the signup modal to notify user authy failed or something
+- [ ] UI in the signup modal to notify user authy failed or something
 - [ ] clean up index.html
 - [ ] signup modal improve
-- [ ] GSAP animation
+- [x] GSAP animation(close)
 - [ ] direct message
 - [ ] add friends
 - [ ] icon for video
 - [ ] test in docker
 - [ ] alert proper message
-- [ ] cors!
-- [ ] drop down nebular
+- [ ] cors! (reset password)
+- [x] drop down nebular
+- [ ] reset password and confirmation email template
+- [ ] angular prod env
+- [ ]
