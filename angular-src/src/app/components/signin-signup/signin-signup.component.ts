@@ -310,4 +310,7 @@ export class SigninSignupComponent implements OnInit {
       }
     });
   }
+  open2faModal() {
+
+  }
 }

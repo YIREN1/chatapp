@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +56,6 @@ const appRoutes: Routes = [
     ProfileComponent,
     SigninSignupComponent,
     Page404Component,
-    FileSelectDirective,
     ForgotPasswordComponent,
     ChatbotComponent,
     UploadComponent,
@@ -84,6 +83,7 @@ const appRoutes: Routes = [
     NbTabsetModule,
     NbSearchModule,
     NbInputModule,
+    FileUploadModule,
   ],
   providers: [
     ValidateService,

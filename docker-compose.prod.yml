@@ -1,0 +1,35 @@
+version: "3.2"
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    environment:
+      - BASE_URL=http://localhost:3050/api
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./angular-src
+    restart: always
+    volumes:
+      - ./angular-src:/app
+      - /app/node_modules
+    environment:
+      - apiUrl=http://localhost:3050/api
+      - apiPrefix=api
+      - dashBoardTitle=app work in prod
+  nginx:
+    image: "nginx:latest"
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+    depends_on:
+      - api
+      - client

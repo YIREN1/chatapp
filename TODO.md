@@ -125,4 +125,5 @@
 - [x] drop down nebular
 - [ ] reset password and confirmation email template
 - [ ] angular prod env
+- [ ] sendgrid email
 - [ ]
