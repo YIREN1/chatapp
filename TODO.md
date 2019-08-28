@@ -109,21 +109,25 @@
 - [x] 'please enter your peer's id'
 - [ ] UI typed.js
 - [ ] UI background (particles.js)
-- [ ] UI drag and drop (dragula)
+- [ ] UI drag and drop (dragula) (future)
 - [ ] doc sharing (quilli)
 - [ ] angular code refactor
-- [ ] UI in the signup modal to notify user authy failed or something
-- [ ] clean up index.html
+- [x] UI in the signup modal to notify user authy failed or something
+- [x] clean up index.html
 - [ ] signup modal improve
 - [x] GSAP animation(close)
 - [ ] direct message
 - [ ] add friends
 - [ ] icon for video
-- [ ] test in docker
-- [ ] alert proper message
-- [ ] cors! (reset password)
+- [x] test in docker
+- [x] alert proper message
+- [x] cors! (reset password)
 - [x] drop down nebular
 - [ ] reset password and confirmation email template
-- [ ] angular prod env
+- [x] angular prod env
 - [ ] sendgrid email
+- [ ] real world clone api(will seperate)
+- [ ] real world clone ui(will seperate)
+- [ ]
+- [ ]
 - [ ]
