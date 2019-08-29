@@ -116,7 +116,6 @@
 - [x] clean up index.html
 - [ ] signup modal improve
 - [x] GSAP animation(close)
-- [ ] direct message
 - [ ] add friends
 - [ ] icon for video
 - [x] test in docker
@@ -128,6 +127,47 @@
 - [ ] sendgrid email
 - [ ] real world clone api(will seperate)
 - [ ] real world clone ui(will seperate)
+- [ ] pagination of user list
+- [ ] someone is typing
+- [ ] general chat
+- [ ] post to general
+- [ ] list users
+- [ ] list channels
+- [ ] direct message
+- [ ] create channel
+- [ ] join channel
+- [ ] leave channel
+- [ ] refactor model code
+- [ ] refactor route code
+- [ ] message model
+- [ ] channel service
+- [ ] index services
+- [ ] ui for create channel
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
 - [ ]
 - [ ]
 - [ ]

@@ -48,6 +48,7 @@ const UserSchema = mongoose.Schema({
       lowercase: true,
     },
   },
+  lastVisitedChannel: { type: String },
 });
 
 const User = mongoose.model('User', UserSchema);

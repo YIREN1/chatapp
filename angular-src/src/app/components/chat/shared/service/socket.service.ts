@@ -21,6 +21,10 @@ export class SocketService {
     // this.socket = socketIo('ws://localhost:3050');
   }
 
+  public sendEvent(message, event): void {
+    this.socket.emit(event, message);
+  }
+
   public send(message: Message): void {
     this.socket.emit('message', message);
   }

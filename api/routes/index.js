@@ -6,13 +6,12 @@ const cookieParser = require('cookie-parser');
 
 const routes = express.Router();
 
-require('../config/bootstrap');
-
 const users = require('./users');
 const reCaptcha = require('./reCaptcha');
 const email = require('./email');
 const uploads = require('./uploads');
 const authy = require('./authy');
+const channels = require('./channels');
 
 // CORS Middleware // ! origin?
 routes.use(
@@ -41,18 +40,22 @@ routes.use('/reCaptcha', reCaptcha);
 routes.use('/email', email);
 routes.use('/uploads', uploads);
 routes.use('/authy', authy);
-
-// // Index Route
-// app.get('/', (req, res) => {
-//   res.send('Invalid Endpoint');
-// });
+routes.use('/', channels);
 
 routes.get('/status/health', (req, res) => {
   res.send('GOOD');
 });
 
-routes.get('*', (req, res) => {
+routes.get('/', (req, res) => {
   res.sendFile(__dirname, '../public/index.html');
+});
+
+routes.use((req, res, next) => {
+  res.status(404).end('404 not found');
+});
+
+routes.use((error, req, res, next) => {
+  res.status(error.statusCode || 500).json({ error: error.message });
 });
 
 module.exports = routes;

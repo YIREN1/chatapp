@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbSidebarService } from '@nebular/theme';
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
@@ -13,11 +14,24 @@ const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private socketService: SocketService) { }
+  constructor(
+    private socketService: SocketService,
+    private sidebarService: NbSidebarService
+  ) { }
   action = Action;
   user: User;
   messageContent: string;
   ioConnection: any;
+  channels: any;
+  directMessages: any;
+
+  users: Array<{ name: string, title: string }> = [
+    { name: 'Carla Espinosa', title: 'Nurse' },
+    { name: 'Bob Kelso', title: 'Doctor of Medicine' },
+    { name: 'Janitor', title: 'Janitor' },
+    { name: 'Perry Cox', title: 'Doctor of Medicine' },
+    { name: 'Ben Sullivan', title: 'Carpenter and photographer' },
+  ];
 
   messages: any[] = [
     {
@@ -31,10 +45,31 @@ export class ChatComponent implements OnInit {
     },
   ];
 
+  curChannel: any = {
+    name: 'general',
+    id: '111111',
+  };
+
   ngOnInit(): void {
     this.initIoConnection();
     this.initModel();
     this.sendNotification(null, Action.JOINED);
+  }
+
+  toggle() {
+    this.sidebarService.toggle(false, 'left');
+  }
+
+  toggleCompact() {
+    this.sidebarService.toggle(false, 'right');
+  }
+
+  initChannels() {
+
+  }
+
+  initDirectMessages() {
+
   }
 
   private getRandomId(): number {
@@ -80,6 +115,14 @@ export class ChatComponent implements OnInit {
 
   isReply(message) {
     return message.user.name === this.user.name;
+  }
+
+  keyPress(event) {
+    const message = {
+      user: this.user.id,
+      channelId: this.curChannel.id,
+    };
+    this.socketService.sendEvent(message, 'started-typing');
   }
 
   sendMessage(event) {

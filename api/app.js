@@ -1,4 +1,5 @@
 const express = require('express');
+require('./config/bootstrap');
 const routes = require('./routes/index');
 const SocketService = require('./services/SocketService');
 

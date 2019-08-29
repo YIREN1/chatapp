@@ -1,16 +1,43 @@
-<p>chat works!</p>
-<nb-chat title="Drag & Drop chat" size="large" scrollBottom="true">
-  <nb-chat-message
-    *ngFor="let msg of messages"
-    [type]="msg.type"
-    [message]="msg.text"
-    [reply]="msg.reply"
-    [sender]="msg.user.name"
-    [date]="msg.date"
-    [files]="msg.files"
-    [quote]="msg.quote"
-    [avatar]="msg.user.avatar"
-  >
-  </nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true"></nb-chat-form>
-</nb-chat>
+<nb-layout>
+  <nb-layout-header subheader>
+    {{ curChat.name }}
+    <button nbButton status="success" size="tiny" (click)="toggle()">
+      Toggle
+    </button>
+    <button nbButton status="info" size="tiny" (click)="toggleCompact()">
+      Toggle right
+    </button>
+  </nb-layout-header>
+
+  <nb-sidebar tag="left">
+    <nb-list>
+      <nb-list-item *ngFor="let user of users">
+        <nb-user [name]="user.name" [title]="user.title"> </nb-user>
+      </nb-list-item>
+    </nb-list>
+  </nb-sidebar>
+  <nb-sidebar right tag="right"></nb-sidebar>
+
+  <nb-layout-column class="colored-column-warning">
+    <nb-chat title="Drag & Drop chat" size="large" scrollBottom="true">
+      <nb-chat-message
+        *ngFor="let msg of messages"
+        [type]="msg.type"
+        [message]="msg.text"
+        [reply]="msg.reply"
+        [sender]="msg.user.name"
+        [date]="msg.date"
+        [files]="msg.files"
+        [quote]="msg.quote"
+        [avatar]="msg.user.avatar"
+      >
+      </nb-chat-message>
+      <nb-chat-form
+        (keypress)="keyPress($event)"
+        (keyup)="keyUp($event)"
+        (send)="sendMessage($event)"
+        [dropFiles]="true"
+      ></nb-chat-form>
+    </nb-chat>
+  </nb-layout-column>
+</nb-layout>

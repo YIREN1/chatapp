@@ -26,6 +26,7 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbSearchModule,
+  NbSidebarModule,
   NbSpinnerModule,
   NbTabsetModule,
   NbThemeModule,
@@ -44,6 +45,7 @@ import { SharedModule } from './shared/shared.module';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthGuard] },
+  { path: 'chat', component: ChatComponent },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
@@ -59,7 +61,6 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     ChatbotComponent,
     UploadComponent,
-    ChatComponent,
     VideochatComponent,
   ],
   imports: [
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
     NbEvaIconsModule,
     NbChatModule,
     NbSpinnerModule,
-    NbThemeModule.forRoot({ name: 'dark' }),
+    NbThemeModule.forRoot({ name: 'cosmic' }),
     NbMenuModule,
     NbUserModule,
     NbButtonModule,
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     NbSearchModule,
     NbInputModule,
     FileUploadModule,
+    NbSidebarModule.forRoot(),
   ],
   providers: [
     ValidateService,
