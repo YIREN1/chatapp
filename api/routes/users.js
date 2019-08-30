@@ -48,7 +48,7 @@ router
 router.get('/profile', passportJWT, UsersController.getProfile);
 
 router.get(
-  '/v1/users',
+  '/v1/all',
   passportJWT,
   catchError(async (req, res) => {
     const users = await userService.getUsersInChat();

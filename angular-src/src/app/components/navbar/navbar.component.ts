@@ -13,10 +13,7 @@ import { SigninSignupComponent } from '../signin-signup/signin-signup.component'
 })
 export class NavbarComponent implements OnInit {
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
-  user = {
-    name: 'Yi Ren',
-    picture: 'assets/images/yiren.png',
-  };
+  user;
   constructor(
     public authService: AuthService,
     private modalService: NgbModal,
@@ -24,6 +21,11 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initUser();
+  }
+  async initUser() {
+    this.user = await this.authService.getUser();
+    this.user.picture = 'assets/images/yiren.png';
   }
 
   onLogoutClick() {

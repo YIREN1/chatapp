@@ -15,7 +15,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SigninSignupComponent } from './components/signin-signup/signin-signup.component';
 
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 
@@ -23,6 +22,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbButtonModule,
   NbChatModule,
+  NbDialogModule,
   NbInputModule,
   NbLayoutModule,
   NbMenuModule,
@@ -32,6 +32,7 @@ import {
   NbTabsetModule,
   NbThemeModule,
   NbUserModule,
+  NbWindowModule,
 } from '@nebular/theme';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatModule } from './components/chat/chat.module';
@@ -46,7 +47,7 @@ import { SharedModule } from './shared/shared.module';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthGuard] },
-  { path: 'chat', component: ChatComponent },
+  { path: 'channel/:channelId', component: ChatComponent },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 
@@ -87,7 +88,8 @@ const appRoutes: Routes = [
     NbInputModule,
     FileUploadModule,
     NbSidebarModule.forRoot(),
-    SweetAlert2Module.forRoot()
+    NbWindowModule.forRoot(),
+    NbDialogModule.forRoot(),
   ],
   providers: [
     ValidateService,

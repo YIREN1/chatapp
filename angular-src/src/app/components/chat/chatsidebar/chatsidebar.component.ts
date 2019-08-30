@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+import { ChatDmModalComponent } from '../chat-dm-modal/chat-dm-modal.component';
 
 @Component({
   selector: 'app-chatsidebar',
@@ -7,20 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatsidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogService: NbDialogService) { }
 
   channels: any;
   directMessages: any;
-  users: Array<{ name: string, title: string }> = [
-    { name: 'Carla Espinosa', title: 'Nurse' },
-    { name: 'Bob Kelso', title: 'Doctor of Medicine' },
-    { name: 'Janitor', title: 'Janitor' },
-    { name: 'Perry Cox', title: 'Doctor of Medicine' },
-    { name: 'Ben Sullivan', title: 'Carpenter and photographer' },
-  ];
-  ngOnInit() {
-  }
+  users: Array<{ name: string, title: string }>;
 
+
+  ngOnInit() {
+    // const windowRef = this.windowService.open(ChatDmModalComponent, {});
+  }
+  openWindow() {
+    this.dialogService.open(
+      ChatDmModalComponent,
+      { hasScroll: true },
+    );
+  }
 
   initChannels() {
 

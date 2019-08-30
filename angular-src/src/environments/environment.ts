@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000',
-  apiPrefix: '',
+  apiPrefix: 'http://localhost:5000',
   dashBoardTitle: 'app work in local'
 };
 

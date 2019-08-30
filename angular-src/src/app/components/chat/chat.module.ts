@@ -18,12 +18,14 @@ import {
 } from '@nebular/theme';
 import { ChatComponent } from './chat.component';
 
+import { ChatDmModalComponent } from './chat-dm-modal/chat-dm-modal.component';
 import { ChatsidebarComponent } from './chatsidebar/chatsidebar.component';
 import { SocketService } from './shared/service/socket.service';
 @NgModule({
   declarations: [
     ChatComponent,
     ChatsidebarComponent,
+    ChatDmModalComponent,
   ],
   imports: [
     NbSidebarModule,
@@ -36,5 +38,6 @@ import { SocketService } from './shared/service/socket.service';
     SweetAlert2Module,
   ],
   providers: [SocketService],
+  entryComponents: [ChatDmModalComponent],
 })
 export class ChatModule { }

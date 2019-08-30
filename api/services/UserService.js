@@ -23,7 +23,7 @@ UserService.getUsers = userIdArray => {
 };
 
 UserService.getUsersInChat = () => {
-  return this.Model.find({});
+  return UserModel.find({});
 };
 
 module.exports = UserService;

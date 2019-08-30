@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from '../../../../services/auth.service';
 export interface ServerResponse {
-  success: boolean;
-  msg: string;
-  user: string;
+  id: string;
+  name: string;
+  avatar: string;
 }
 
 @Injectable({
@@ -22,6 +22,6 @@ export class UserService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', this.authService.getToken());
     headers = headers.set('Content-Type', 'application/json');
-    return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/users`, { headers });
+    return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/users/v1/all`, { headers });
   }
 }
