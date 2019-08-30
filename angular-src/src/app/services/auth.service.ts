@@ -134,6 +134,12 @@ export class AuthService {
     return token;
   }
 
+  async getUser() {
+    const user = await JSON.parse(localStorage.getItem('user'));
+    this.user = user;
+    return user;
+  }
+
   loggedIn() {
     if (!localStorage.getItem('id_token')) {
       return false;

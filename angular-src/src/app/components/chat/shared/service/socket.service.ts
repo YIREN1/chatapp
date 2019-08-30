@@ -15,10 +15,10 @@ export class SocketService {
   private socket;
 
   public initSocket(): void {
-    this.socket = socketIo();
-    // default to host 'http://localhost:3050'
-    // this.socket = socketIo('http://localhost:5000');
-    // this.socket = socketIo('ws://localhost:3050');
+    // ! change back
+    // this.socket = socketIo();
+    // default to host for example: 'http://localhost:3050'
+    this.socket = socketIo('http://localhost:5000');
   }
 
   public sendEvent(message, event): void {
@@ -37,7 +37,7 @@ export class SocketService {
 
   public onEvent(event: Event): Observable<any> {
     return new Observable<Event>(observer => {
-      this.socket.on(event, () => observer.next());
+      this.socket.on(event, (data) => observer.next(data));
     });
   }
   constructor() { }

@@ -17,7 +17,7 @@ const server = app.listen(port, () => {
 });
 
 process.on('unhandledRejection', e => {
-  console.log(e.message);
+  console.log(e);
   throw e.message;
 });
 

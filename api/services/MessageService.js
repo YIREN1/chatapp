@@ -1,38 +1,28 @@
-const Model = require('../models/message');
+const MessageModel = require('../models/message');
 const userService = require('../services/UserService');
-const MessageView = require('../util/MessageView');
+const MessageView = require('../presentations/MessageView');
 
 const MessageService = {};
 
 MessageService.deleteMessage = async (userId, messageId) => {
-  const message = await Model.findOne({ _id: messageId, userId });
+  const message = await MessageModel.findOne({ _id: messageId, userId });
   const update = await message.delete();
   const user = await userService.getUser(userId);
   return MessageView(update, user);
 };
 
 MessageService.updateMessage = async (userId, messageId, text) => {
-  const message = await Model.findOne({ _id: messageId, userId });
+  const message = await MessageModel.findOne({ _id: messageId, userId });
   message.text = text;
   const update = await message.save();
   const user = await userService.getUser(userId);
   return MessageView(update, user);
 };
 
-MessageService.createMessageView = async (
-  userId,
-  channelId,
-  createdAt,
-  text,
-) => {
-  const message = await MessageService.createMessage(
-    userId,
-    channelId,
-    createdAt,
-    text,
-  );
-  const user = await userService.getUser(userId);
-  return MessageView(message, user);
+MessageService.createMessageView = async message => {
+  const rawMessage = await MessageService.createMessage(message);
+  const user = await userService.getUser(message.userId);
+  return MessageView(rawMessage, user);
 };
 
 MessageService.getMessageViews = async channelId => {
@@ -46,8 +36,8 @@ MessageService.getMessageViews = async channelId => {
   });
 };
 
-MessageService.createMessage = (userId, channelId, createdAt, text) => {
-  return new Model({ userId, channelId, createdAt, text }).save();
+MessageService.createMessage = message => {
+  return new MessageModel(message).save();
 };
 
 MessageService.getMessageView = async messageId => {
@@ -57,11 +47,18 @@ MessageService.getMessageView = async messageId => {
 };
 
 MessageService.getMessageById = messageId => {
-  return Model.findById(messageId);
+  return MessageModel.findById(messageId);
 };
 
 MessageService.getChannelMessages = channelId => {
-  return Model.find({ channelId });
+  return MessageModel.find({ channelId });
 };
 
+MessageService.getMessage = messageId => {
+  return MessageModel.findById(messageId);
+};
+
+MessageService.getMessages = channelId => {
+  return MessageModel.find({ channelId });
+};
 module.exports = MessageService;

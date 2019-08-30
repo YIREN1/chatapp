@@ -76,8 +76,8 @@ router.post(
 //     const  userId  = req.user.id;
 //     const { channelId } = req.params;
 //     const user = await userService.setLastVisitedChannel(userId, channelId);
-//     res.json(new CurrentUserView(user));
-//   }),
+//     res.json(new Current(user));
+//   }),UserView
 // );
 
 router.put(

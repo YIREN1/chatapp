@@ -49,6 +49,7 @@ const UserSchema = mongoose.Schema({
     },
   },
   lastVisitedChannel: { type: String },
+  avatar: { type: String },
 });
 
 const User = mongoose.model('User', UserSchema);

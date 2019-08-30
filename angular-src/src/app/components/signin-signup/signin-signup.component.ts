@@ -47,7 +47,7 @@ export class SigninSignupComponent implements OnInit {
     this.rendergreCaptch();
     this.renderGapi();
   }
-
+  // todo sweetalert
   openForgotModal() {
     this.modalService.open(ForgotPasswordComponent);
   }

@@ -1,7 +1,11 @@
 const express = require('express');
 const passport = require('passport');
+const catchError = require('../util/catchError');
+
+const UserView = require('../presentations/UserView.js');
 
 const router = express.Router();
+const userService = require('../services/UserService');
 
 const UsersController = require('../controllers/users');
 
@@ -42,5 +46,14 @@ router
 
 // Profile
 router.get('/profile', passportJWT, UsersController.getProfile);
+
+router.get(
+  '/v1/users',
+  passportJWT,
+  catchError(async (req, res) => {
+    const users = await userService.getUsersInChat();
+    res.json(users.map(user => new UserView(user)));
+  }),
+);
 
 module.exports = router;

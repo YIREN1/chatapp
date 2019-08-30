@@ -24,7 +24,7 @@ router.get('/status', (req, res) => {
       res.status(400).send('Bad Request.');
     } else {
       if (authResponse.approval_request.status === 'approved') {
-        console.log('approved');
+        // console.log('approved');
         const email = req.header('userEmail');
         return User.getUserByEmail(email, (error, user) => {
           if (error) throw error;
@@ -40,6 +40,7 @@ router.get('/status', (req, res) => {
             token: `JWT ${token}`,
             user: {
               id: user.id,
+              name: user.name,
             },
           });
         });

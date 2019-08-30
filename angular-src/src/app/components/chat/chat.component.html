@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-header subheader>
-    {{ curChat.name }}
+    {{ selectedChannel.name }}
     <button nbButton status="success" size="tiny" (click)="toggle()">
       Toggle
     </button>
@@ -10,16 +10,12 @@
   </nb-layout-header>
 
   <nb-sidebar tag="left">
-    <nb-list>
-      <nb-list-item *ngFor="let user of users">
-        <nb-user [name]="user.name" [title]="user.title"> </nb-user>
-      </nb-list-item>
-    </nb-list>
+    <app-chatsidebar></app-chatsidebar>
   </nb-sidebar>
   <nb-sidebar right tag="right"></nb-sidebar>
 
   <nb-layout-column class="colored-column-warning">
-    <nb-chat title="Drag & Drop chat" size="large" scrollBottom="true">
+    <nb-chat title="Drag & Drop chat" size="giant" scrollBottom="true">
       <nb-chat-message
         *ngFor="let msg of messages"
         [type]="msg.type"

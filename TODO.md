@@ -143,7 +143,7 @@
 - [ ] channel service
 - [ ] index services
 - [ ] ui for create channel
-- [ ]
+- [ ] seperate message event
 - [ ]
 - [ ]
 - [ ]

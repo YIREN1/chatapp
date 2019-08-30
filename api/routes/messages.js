@@ -7,7 +7,7 @@ const router = express.Router();
 const messageService = require('../services/MessageService');
 
 // router.get(
-//   '/api/v1/replies/:messageId',
+//   '/v1/replies/:messageId',
 //   passportJWT,
 //   catchError(async (req, res) => {
 //     const { messageId } = req.params;
@@ -17,7 +17,7 @@ const messageService = require('../services/MessageService');
 // );
 
 router.get(
-  '/api/v1/messages/:channelId',
+  '/v1/messages/:channelId',
   passportJWT,
   catchError(async (req, res) => {
     const { channelId } = req.params;
@@ -27,7 +27,7 @@ router.get(
 );
 
 router.delete(
-  '/api/v1/messages/:messageId',
+  '/v1/messages/:messageId',
   passportJWT,
   catchError(async (req, res) => {
     const { messageId } = req.params;
@@ -38,7 +38,7 @@ router.delete(
 );
 
 router.put(
-  '/api/v1/messages/:messageId',
+  '/v1/messages/:messageId',
   passportJWT,
   catchError(async (req, res) => {
     const { messageId } = req.params;

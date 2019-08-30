@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 import {
   NbButtonModule,
   NbChatModule,
@@ -31,6 +33,7 @@ import { SocketService } from './shared/service/socket.service';
     NbLayoutModule,
     NbListModule,
     NbUserModule,
+    SweetAlert2Module,
   ],
   providers: [SocketService],
 })

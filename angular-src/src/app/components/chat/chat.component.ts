@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
+import { AuthService } from '../../services/auth.service';
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
 import { User } from './shared/model/user';
+import { MessageService } from './shared/service/message.service';
 import { SocketService } from './shared/service/socket.service';
+
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 
 @Component({
@@ -16,44 +19,33 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private socketService: SocketService,
-    private sidebarService: NbSidebarService
+    private sidebarService: NbSidebarService,
+    private authService: AuthService,
+    private messageService: MessageService,
   ) { }
   action = Action;
   user: User;
   messageContent: string;
   ioConnection: any;
-  channels: any;
-  directMessages: any;
 
-  users: Array<{ name: string, title: string }> = [
-    { name: 'Carla Espinosa', title: 'Nurse' },
-    { name: 'Bob Kelso', title: 'Doctor of Medicine' },
-    { name: 'Janitor', title: 'Janitor' },
-    { name: 'Perry Cox', title: 'Doctor of Medicine' },
-    { name: 'Ben Sullivan', title: 'Carpenter and photographer' },
-  ];
+  messages: any[] = [];
 
-  messages: any[] = [
-    {
-      text: 'Drag & drop a file or a group of files.',
-      date: new Date(),
-      reply: false,
-      user: {
-        name: 'Bot',
-        avatar: 'https://api.adorable.io/avatars/285/hfghcgh.png',
-      },
-    },
-  ];
-
-  curChannel: any = {
+  selectedChannel: any = {
     name: 'general',
-    id: '111111',
+    id: '5d67c349f6f8f916672031f4',
   };
 
   ngOnInit(): void {
     this.initIoConnection();
     this.initModel();
     this.sendNotification(null, Action.JOINED);
+    this.initHistory();
+  }
+
+  private async initHistory() {
+    this.messageService.getMessages(this.selectedChannel.id).subscribe((data) => {
+      this.messages = data;
+    });
   }
 
   toggle() {
@@ -64,24 +56,14 @@ export class ChatComponent implements OnInit {
     this.sidebarService.toggle(false, 'right');
   }
 
-  initChannels() {
-
-  }
-
-  initDirectMessages() {
-
-  }
-
   private getRandomId(): number {
     return Math.floor(Math.random() * (1000000)) + 1;
   }
 
-  private initModel(): void {
+  private async initModel(): Promise<any> {
     const randomId = this.getRandomId();
-    this.user = {
-      name: `Hi,${randomId}`,
-      avatar: `${AVATAR_URL}/${randomId}.png`
-    };
+    this.user = await this.authService.getUser();
+    this.user.avatar = `${AVATAR_URL}/${this.user.id}.png`;
   }
 
   private initIoConnection(): void {
@@ -89,6 +71,8 @@ export class ChatComponent implements OnInit {
 
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
+        console.log(message);
+        console.log('--------------------------');
         if (message.action === Action.JOINED) {
           message.quote = `${this.user.name} joined room`;
           message.type = 'quote';
@@ -111,6 +95,22 @@ export class ChatComponent implements OnInit {
         this.sendNotification(null, Action.LEFT);
         console.log('socket.io disconnected');
       });
+
+    this.socketService.onEvent(Event.START_TYPING)
+      .subscribe(() => {
+        console.log('started-typing');
+      });
+
+    this.socketService.onEvent(Event.STOP_TYPING)
+      .subscribe(() => {
+        console.log('stopped-typing');
+      });
+    this.socketService.onEvent(Event.JOINED)
+      .subscribe((message) => {
+        message.quote = `${this.user.name} joined room`;
+        message.type = 'quote';
+        // this.messages.push(message);
+      });
   }
 
   isReply(message) {
@@ -118,11 +118,16 @@ export class ChatComponent implements OnInit {
   }
 
   keyPress(event) {
+    console.log(event);
     const message = {
       user: this.user.id,
-      channelId: this.curChannel.id,
+      channelId: this.selectedChannel.id,
     };
     this.socketService.sendEvent(message, 'started-typing');
+  }
+
+  keyUp(event) {
+    console.log(event);
   }
 
   sendMessage(event) {
@@ -136,11 +141,12 @@ export class ChatComponent implements OnInit {
 
     const message = {
       text: event.message,
-      date: new Date(),
+      date: Date.now(),
       files,
       type: files.length ? 'file' : 'text',
       reply: true,
       user: this.user,
+      channelId: this.selectedChannel.id,
     };
 
     this.socketService.send(message);
@@ -148,20 +154,12 @@ export class ChatComponent implements OnInit {
   }
 
   public sendNotification(params: any, action: Action): void {
-    let message: Message;
-
     if (action === Action.JOINED) {
-      message = {
+      const message = {
         user: this.user,
         action,
       };
-    } else if (action === Action.RENAME) {
-      message = {
-        action,
-      };
+      this.socketService.sendEvent(message, 'joined');
     }
-
-    this.socketService.send(message);
   }
-
 }

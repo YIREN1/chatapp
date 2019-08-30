@@ -8,8 +8,10 @@ UserService.setLastVisitedChannel = async (userId, channelId) => {
   return user.save();
 };
 
-UserService.createUser = name => {
-  return new UserModel({ name }).save();
+UserService.setUnreadMessages = async (userId, channelId, unreadMessages) => {
+  const user = await this.getUser(userId);
+  user.unreadMessages.set(channelId, unreadMessages);
+  return user.save();
 };
 
 UserService.getUser = userId => {
@@ -18,6 +20,10 @@ UserService.getUser = userId => {
 
 UserService.getUsers = userIdArray => {
   return UserModel.find({ _id: { $in: userIdArray } });
+};
+
+UserService.getUsersInChat = () => {
+  return this.Model.find({});
 };
 
 module.exports = UserService;

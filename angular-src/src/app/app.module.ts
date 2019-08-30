@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SigninSignupComponent } from './components/signin-signup/signin-signup.component';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AuthService } from './services/auth.service';
 import { ValidateService } from './services/validate.service';
 
@@ -77,7 +78,7 @@ const appRoutes: Routes = [
     NbEvaIconsModule,
     NbChatModule,
     NbSpinnerModule,
-    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbThemeModule.forRoot({ name: 'dark' }),
     NbMenuModule,
     NbUserModule,
     NbButtonModule,
@@ -86,6 +87,7 @@ const appRoutes: Routes = [
     NbInputModule,
     FileUploadModule,
     NbSidebarModule.forRoot(),
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     ValidateService,
