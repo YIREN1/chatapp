@@ -144,8 +144,8 @@
 - [ ] index services
 - [ ] ui for create channel
 - [ ] seperate message event
-- [ ]
-- [ ]
+- [ ] setLastVisitedChannel
+- [ ] store channels in chat/make another request to get the channel
 - [ ]
 - [ ]
 - [ ]

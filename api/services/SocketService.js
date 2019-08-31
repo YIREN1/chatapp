@@ -52,7 +52,8 @@ const socketServiceInit = server => {
 
     socket.on('stopped-typing', message => {
       const { user, channelId } = message;
-      socket.to(channelId).emit('stopped-typing', { user, channelId });
+      // socket.to(channelId).emit('stopped-typing', { user, channelId });
+      io.emit('stopped-typing', { user, channelId });
     });
     socket.on('joined', msg => {
       // console.log('[server](message): %s', JSON.stringify(msg));

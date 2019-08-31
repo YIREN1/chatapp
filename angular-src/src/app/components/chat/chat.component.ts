@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NbSidebarService } from '@nebular/theme';
+import { NbChatFormComponent, NbSidebarService } from '@nebular/theme';
 
 import { AuthService } from '../../services/auth.service';
 import { Action } from './shared/model/action';
@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
   ) { }
+
   action = Action;
   user: User;
   messageContent: string;
@@ -37,6 +38,10 @@ export class ChatComponent implements OnInit {
     name: 'general',
     id: '5d67c349f6f8f916672031f4',
   };
+  isTyping = false;
+  typingTimer;                // timer identifier
+  doneTypingInterval = 5000;  // time in ms (5 seconds)
+  @ViewChild('chatForm', { static: false }) chatFormRef: NbChatFormComponent;
 
   ngOnInit(): void {
     this.initIoConnection();
@@ -109,11 +114,13 @@ export class ChatComponent implements OnInit {
     this.socketService.onEvent(Event.START_TYPING)
       .subscribe(() => {
         console.log('started-typing');
+        this.isTyping = true;
       });
 
     this.socketService.onEvent(Event.STOP_TYPING)
       .subscribe(() => {
         console.log('stopped-typing');
+        this.isTyping = false;
       });
     this.socketService.onEvent(Event.JOINED)
       .subscribe((message) => {
@@ -123,12 +130,15 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  addMessage() {
+
+  }
+
   isReply(message) {
     return message.user.name === this.user.name;
   }
 
   keyPress(event) {
-    console.log(event);
     const message = {
       user: this.user.id,
       channelId: this.selectedChannel.id,
@@ -137,7 +147,18 @@ export class ChatComponent implements OnInit {
   }
 
   keyUp(event) {
-    console.log(event);
+    clearTimeout(this.typingTimer);
+    if (this.chatFormRef.message) {
+      this.typingTimer = setTimeout(this.doneTyping.bind(this), this.doneTypingInterval);
+    }
+  }
+
+  doneTyping() {
+    const message = {
+      user: this.user.id,
+      channelId: this.selectedChannel.id,
+    };
+    this.socketService.sendEvent(message, 'stopped-typing');
   }
 
   sendMessage(event) {

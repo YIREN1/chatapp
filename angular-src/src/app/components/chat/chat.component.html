@@ -7,6 +7,7 @@
     <button nbButton status="info" size="tiny" (click)="toggleCompact()">
       Toggle right
     </button>
+    <p *ngIf="isTyping">someone is typing</p>
   </nb-layout-header>
 
   <nb-sidebar tag="left">
@@ -33,7 +34,9 @@
         (keyup)="keyUp($event)"
         (send)="sendMessage($event)"
         [dropFiles]="true"
-      ></nb-chat-form>
+        #chatForm
+      >
+      </nb-chat-form>
     </nb-chat>
   </nb-layout-column>
 </nb-layout>

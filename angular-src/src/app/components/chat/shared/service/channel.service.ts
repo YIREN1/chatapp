@@ -27,10 +27,15 @@ export class ChannelService {
     return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/channels`, { headers });
   }
 
-  createChannels() {
-    const channel = {
-      name,
-    };
+  getChannel(channelId) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.authService.getToken());
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/channels/${channelId}`, { headers });
+  }
+
+  createChannels(name, usersInChannel, type) {
+    const channel = { name, usersInChannel, type };
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', this.authService.getToken());
     headers = headers.set('Content-Type', 'application/json');
