@@ -1,13 +1,26 @@
 const socketIo = require('socket.io');
-// const channelService = require('../services/ChannelService');
+const channelService = require('../services/ChannelService');
 const messageService = require('../services/MessageService');
 
 const socketServiceInit = server => {
   const io = socketIo(server);
   console.log('init socket service');
 
-  io.on('connection', socket => {
+  io.on('connection', async socket => {
+    socket.on('init', async userId => {
+      socket.join(userId);
+      const channels = await channelService.getChannels(userId);
+
+      channels.forEach(channel => {
+        socket.join(channel.id);
+      });
+    });
     console.log('a user connected');
+
+    socket.on('first-direct-message', message => {
+      const { userId, channelId } = message;
+      socket.to(userId).emit('first-direct-message', channelId);
+    });
     // socket.on('message', msg => {
     //   // console.log('[server](message): %s', JSON.stringify(msg));
     //   io.emit('message', msg);
@@ -23,9 +36,9 @@ const socketServiceInit = server => {
       // socket.emit('message', createdMessage);
       // socket.to(channelId).send(createdMessage);
 
-      // socket.emit('message', message);
-      // socket.to(channelId).send(message);
-      io.emit('message', createdMessage);
+      socket.emit('message', createdMessage);
+      socket.to(message.channelId).send(createdMessage);
+      // io.emit('message', createdMessage);
     });
 
     socket.on('disconnect', () => {

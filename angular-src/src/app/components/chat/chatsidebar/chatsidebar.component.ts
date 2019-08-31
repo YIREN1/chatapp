@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { ChatDmModalComponent } from '../chat-dm-modal/chat-dm-modal.component';
+import { ChannelService } from '../shared/service/channel.service';
 
 @Component({
   selector: 'app-chatsidebar',
@@ -9,15 +11,19 @@ import { ChatDmModalComponent } from '../chat-dm-modal/chat-dm-modal.component';
 })
 export class ChatsidebarComponent implements OnInit {
 
-  constructor(private dialogService: NbDialogService) { }
+  constructor(
+    private dialogService: NbDialogService,
+    private channelService: ChannelService,
+    private location: Location,
+  ) { }
 
-  channels: any;
-  directMessages: any;
+  channels: any[];
+  directMessages: any[];
   users: Array<{ name: string, title: string }>;
 
 
   ngOnInit() {
-    // const windowRef = this.windowService.open(ChatDmModalComponent, {});
+    this.initChannels();
   }
   openWindow() {
     this.dialogService.open(
@@ -26,12 +32,17 @@ export class ChatsidebarComponent implements OnInit {
     );
   }
 
-  initChannels() {
+  initDirectMessages() {
 
   }
 
-  initDirectMessages() {
-
+  private async initChannels() {
+    this.channelService.getChannels().subscribe((data) => {
+      this.directMessages = data;
+      this.directMessages.forEach(user => {
+        user.title = 'CEO';
+      });
+    });
   }
 
 }

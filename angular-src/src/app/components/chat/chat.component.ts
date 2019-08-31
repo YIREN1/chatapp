@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NbSidebarService } from '@nebular/theme';
+
 import { AuthService } from '../../services/auth.service';
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
@@ -22,6 +24,7 @@ export class ChatComponent implements OnInit {
     private sidebarService: NbSidebarService,
     private authService: AuthService,
     private messageService: MessageService,
+    private route: ActivatedRoute,
   ) { }
   action = Action;
   user: User;
@@ -40,6 +43,13 @@ export class ChatComponent implements OnInit {
     this.initModel();
     this.sendNotification(null, Action.JOINED);
     this.initHistory();
+    this.setChannelId();
+  }
+
+  private async setChannelId() {
+    this.route.params.subscribe(params => {
+      this.selectedChannel.id = params['channelId'] || 'general'; // (+) converts string 'id' to a number
+    });
   }
 
   private async initHistory() {

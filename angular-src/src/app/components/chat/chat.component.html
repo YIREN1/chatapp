@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-header subheader>
-    {{ selectedChannel.name }}
+    <p>{{ selectedChannel.id }}</p>
     <button nbButton status="success" size="tiny" (click)="toggle()">
       Toggle
     </button>
@@ -14,8 +14,8 @@
   </nb-sidebar>
   <nb-sidebar right tag="right"></nb-sidebar>
 
-  <nb-layout-column class="colored-column-warning">
-    <nb-chat title="Drag & Drop chat" size="giant" scrollBottom="true">
+  <nb-layout-column>
+    <nb-chat title="start chatting" size="giant" scrollBottom="true">
       <nb-chat-message
         *ngFor="let msg of messages"
         [type]="msg.type"

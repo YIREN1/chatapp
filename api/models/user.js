@@ -48,7 +48,7 @@ const UserSchema = mongoose.Schema({
       lowercase: true,
     },
   },
-  lastVisitedChannel: { type: String },
+  lastVisitedChannelId: { type: String },
   avatar: { type: String },
 });
 
