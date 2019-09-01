@@ -1,5 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/auth.service';
 import { ChannelService } from '../shared/service/channel.service';
 import { SocketService } from '../shared/service/socket.service';
@@ -17,7 +20,10 @@ export class ChatDmModalComponent implements OnInit {
     private channelService: ChannelService,
     private socketService: SocketService,
     private authService: AuthService,
-
+    public activeModal: NgbActiveModal,
+    private router: Router,
+    private location: Location,
+    private activatedRoute: ActivatedRoute,
   ) { }
   users: any[];
   currentUser: any;
@@ -41,14 +47,22 @@ export class ChatDmModalComponent implements OnInit {
       `${this.currentUser.name},${toUserName}`,
       [this.currentUser.id, toUserId],
       'directMessage'
-    ).subscribe(data => {
-      const channel = data;
-      // console.log(channel);
-      this.socketService.sendEvent({
-        userId: toUserId,
-        channelId: channel._id,
-      }, 'first-direct-message');
-      // go to url
+    ).subscribe(channel => {
+      if (channel._id) {
+        this.socketService.sendEvent({
+          userId: toUserId,
+          channelId: channel._id,
+        }, 'first-direct-message');
+        this.router.navigate(['channel', channel._id]);
+        // {
+        //   relativeTo: this.activatedRoute,
+        //   queryParams: { channelId: channel._id },
+        //   queryParamsHandling: 'merge'
+        // });
+        this.activeModal.close();
+      } else {
+        console.log('create channel failed');
+      }
     });
   }
 

@@ -5,11 +5,11 @@ import { AuthService } from '../../../../services/auth.service';
 export interface ServerResponse {
   success: boolean;
   msg: string;
-  user: string;
   id: string;
   title;
   name;
   _id;
+  type;
 }
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,13 @@ export class ChannelService {
     headers = headers.set('Authorization', this.authService.getToken());
     headers = headers.set('Content-Type', 'application/json');
     return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/channels`, { headers });
+  }
+
+  getAllChannels() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.authService.getToken());
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/channels/all`, { headers });
   }
 
   getChannel(channelId) {

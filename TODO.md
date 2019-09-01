@@ -104,7 +104,7 @@
 - [ ] separate nebular modules to another file
 - [ ] deploy
 - [ ] file transfer
-- [ ] xxx left the room
+- [x] xxx left the room
 - [ ] share screen
 - [x] 'please enter your peer's id'
 - [ ] UI typed.js
@@ -128,22 +128,23 @@
 - [ ] real world clone api(will seperate)
 - [ ] real world clone ui(will seperate)
 - [ ] pagination of user list
-- [ ] someone is typing
-- [ ] general chat
-- [ ] post to general
-- [ ] list users
+- [ ] pagination of message list
+- [x] someone is typing
+- [x] general chat
+- [x] post to general
+- [x] list users
 - [ ] list channels
-- [ ] direct message
+- [x] direct message
 - [ ] create channel
 - [ ] join channel
 - [ ] leave channel
 - [ ] refactor model code
 - [ ] refactor route code
-- [ ] message model
-- [ ] channel service
-- [ ] index services
+- [x] message model
+- [x] channel service
+- [x] index services
 - [ ] ui for create channel
-- [ ] seperate message event
+- [x] seperate message event
 - [ ] setLastVisitedChannel
 - [ ] store channels in chat/make another request to get the channel
 - [ ] router link don't make requests
@@ -154,12 +155,12 @@
 - [ ] edit message
 - [ ] search
 - [ ] fix error on start
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [ ] first direct message
+- [ ] UI new message
+- [ ] auto join general
+- [ ] remove unused dep
+- [ ] error case check UI
+- [ ] bug on channel exist
 - [ ]
 - [ ]
 - [ ]

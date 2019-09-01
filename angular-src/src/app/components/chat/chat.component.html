@@ -1,12 +1,10 @@
 <nb-layout>
   <nb-layout-header subheader>
-    <p>{{ selectedChannel.name }}</p>
     <button nbButton status="success" size="tiny" (click)="toggle()">
       Toggle
     </button>
-    <button nbButton status="info" size="tiny" (click)="toggleCompact()">
-      Toggle right
-    </button>
+    <p style="text-align:center">{{ selectedChannel.name }}</p>
+
     <p *ngIf="isTyping">someone is typing</p>
   </nb-layout-header>
 

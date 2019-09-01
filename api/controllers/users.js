@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const EmailService = require('../broker/EmailService');
 const AuthyService = require('../broker/AuthyService');
+const channelService = require('../services/ChannelService');
+const UserService = require('../services/UserService');
+
 const User = require('../models/user');
 
 const jwtSecret = process.env.JWT_SECRET;
@@ -52,16 +55,32 @@ const register = async (req, res) => {
     password,
     confirmed: false,
     phone,
-    // confirmations: {
-    // 	tos: req.body.confirmations.tos,
-    // 	email: req.body.confirmations.email
-    // }
   });
-  return User.addUser(newUser, (err, user) => {
+
+  return User.addUser(newUser, async (err, user) => {
     if (err) {
       console.log(err);
       res.json({ success: false, msg: 'Error: failed to register' });
     } else {
+      let channel = await this.channelService.getChannelByName('general');
+
+      if (!channel) {
+        channel = await this.channelService.createChannel(
+          user.id,
+          'general',
+          'channel',
+          [user.id],
+        );
+        await UserService.setLastVisitedChannel(user.id, channel.id);
+      } else {
+        const join = channelService.joinChannel(user.id, channel.id);
+        const lastVisit = UserService.setLastVisitedChannel(
+          user.id,
+          channel.id,
+        );
+        await Promise.all([join, lastVisit]);
+      }
+
       try {
         EmailService.sendConfirmEmail(user);
       } catch (error) {
@@ -71,7 +90,6 @@ const register = async (req, res) => {
       res.json({ success: true, msg: 'Registration complete' });
     }
   });
-  // res.send('REGISTER');
 };
 
 const authenticate = (req, res) => {
@@ -142,17 +160,6 @@ const confirmEmail = async (req, res) => {
       confirmedUser.save();
       return res.send('Thank you for confirming your email');
     });
-    //   await User.update({ confirmed: true }, { where: { id } }, (err, result) => {
-    //     if (err) {
-    //         console.error(err);
-    //     } else {
-    //         console.log(result);
-    //         res.send('Thank you for confirming your email');
-    //     }
-
-    //   });
-
-    //   return res.redirect(process.env.BASE_URL);
   } catch (e) {
     console.error(e);
 

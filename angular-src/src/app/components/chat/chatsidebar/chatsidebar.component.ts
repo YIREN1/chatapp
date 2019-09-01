@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NbDialogService, NbMenuItem, NbMenuService } from '@nebular/theme';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/auth.service';
 import { ChatDmModalComponent } from '../chat-dm-modal/chat-dm-modal.component';
 import { Event } from '../shared/model/event';
@@ -14,24 +16,27 @@ import { SocketService } from '../shared/service/socket.service';
 export class ChatsidebarComponent implements OnInit {
 
   constructor(
-    private dialogService: NbDialogService,
     private channelService: ChannelService,
     private menuService: NbMenuService,
     private socketService: SocketService,
     private authService: AuthService,
+    private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute,
+
   ) { }
 
-  ioConnection: any;
   user: any;
-  channels: any[];
+  channelsAndDirectMessages: any[];
+  channels: NbMenuItem[] = [];
   directMessages: NbMenuItem[] = [];
+
   users: Array<{ name: string, title: string }>;
 
   items: NbMenuItem[] = [
     {
       title: 'channels',
       expanded: true,
-      children: [],
+      children: this.channels,
     },
     {
       title: 'direct messages',
@@ -44,6 +49,29 @@ export class ChatsidebarComponent implements OnInit {
     this.initChannels();
     this.initIoConnection();
     this.initUser();
+    // this.setChannel();
+  }
+
+  private async setChannel() {
+    this.activatedRoute.params.subscribe(params => {
+      console.log('111111111111');
+      const currentChannelId = params['channelId'];
+      if (currentChannelId) {
+        const currentChannel = this.channelsAndDirectMessages.find(channel =>
+          channel.id === currentChannelId
+        );
+
+        if (currentChannel) {
+          console.log('exist');
+          return;
+        }
+        console.log('get one');
+        this.channelService.getChannel(currentChannelId).subscribe((channel) => {
+          this.channelsAndDirectMessages.push(channel);
+          this.addChannel(channel);
+        });
+      }
+    });
   }
 
   async initUser() {
@@ -51,14 +79,7 @@ export class ChatsidebarComponent implements OnInit {
   }
 
   openWindow() {
-    this.dialogService.open(
-      ChatDmModalComponent,
-      { hasScroll: true },
-    );
-  }
-
-  initDirectMessages() {
-
+    this.modalService.open(ChatDmModalComponent);
   }
 
   private initIoConnection(): void {
@@ -87,19 +108,27 @@ export class ChatsidebarComponent implements OnInit {
   }
 
   private async initChannels() {
-    this.channelService.getChannels().subscribe((data) => {
-      data.forEach(dm => {
-        const newDirectMessage: NbMenuItem = {
-          title: this.getChannlelName(dm.name),
-          link: `/channel/${dm._id}`, // ! fixthis!
-        };
-        this.directMessages.push(newDirectMessage);
+    this.channelService.getChannels().subscribe((channels) => {
+      this.channelsAndDirectMessages = channels;
+      channels.forEach(channel => {
+        this.addChannel(channel);
       });
     });
   }
 
-  addMenuItem(item) {
-    this.menuService.addItems([item]);
+  private addChannel(channel) {
+    if (channel.type === 'directMessage') {
+      const newDirectMessage: NbMenuItem = {
+        title: this.getChannlelName(channel.name),
+        link: `/channel/${channel._id}`, // ! fixthis!
+      };
+      this.directMessages.push(newDirectMessage);
+    } else if (channel.type === 'directMessage') {
+      const newChannel: NbMenuItem = {
+        title: channel.name,
+        link: `/channel/${channel._id}`, // ! fixthis!
+      };
+      this.channels.push(newChannel);
+    }
   }
-
 }

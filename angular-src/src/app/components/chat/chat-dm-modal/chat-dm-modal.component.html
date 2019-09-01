@@ -1,11 +1,36 @@
-<input nbInput type="text" />
-<nb-list>
-  <nb-list-item *ngFor="let user of users">
-    <nb-user
-      [name]="user.name"
-      [title]="user.title"
-      (click)="sendDirectMessage(user.id, user.name)"
-    >
-    </nb-user>
-  </nb-list-item>
-</nb-list>
+<div class="modal-header">
+  <h4 class="modal-title">Direct Messages</h4>
+  <input nbInput type="text" />
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <p>One fine body&hellip;</p>
+  <nb-list>
+    <nb-list-item *ngFor="let user of users">
+      <!-- <nb-user
+          [name]="user.name"
+          [title]="user.title"
+          (click)="sendDirectMessage(user.id, user.name)"
+        >
+        </nb-user> -->
+      <button
+        nbButton
+        fullWidth
+        status="success"
+        (click)="sendDirectMessage(user.id, user.name)"
+      >
+        {{ user.name }}
+      </button>
+    </nb-list-item>
+  </nb-list>
+</div>
+
+<div class="modal-footer"></div>

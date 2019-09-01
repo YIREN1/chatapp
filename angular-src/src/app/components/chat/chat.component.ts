@@ -92,12 +92,15 @@ export class ChatComponent implements OnInit {
 
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
-        console.log(message);
-        console.log('--------------------------');
+        if (message.channelId === this.selectedChannel.id) {
+          console.log(message);
+          console.log('--------------------------');
 
-        message.reply = this.isReply(message);
+          message.reply = this.isReply(message);
 
-        this.messages.push(message);
+          this.messages.push(message);
+        }
+
       });
 
     this.socketService.onEvent(Event.CONNECT)
@@ -111,15 +114,19 @@ export class ChatComponent implements OnInit {
       });
 
     this.socketService.onEvent(Event.START_TYPING)
-      .subscribe(() => {
-        console.log('started-typing');
-        this.isTyping = true;
+      .subscribe((message) => {
+        if (message.channelId === this.selectedChannel.id) {
+          console.log('started-typing');
+          this.isTyping = true;
+        }
       });
 
     this.socketService.onEvent(Event.STOP_TYPING)
-      .subscribe(() => {
-        console.log('stopped-typing');
-        this.isTyping = false;
+      .subscribe((message) => {
+        if (message.channelId === this.selectedChannel.id) {
+          console.log('stopped-typing');
+          this.isTyping = false;
+        }
       });
     this.socketService.onEvent(Event.JOINED)
       .subscribe((message) => {

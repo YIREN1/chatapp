@@ -23,6 +23,7 @@ const socketServiceInit = server => {
 
     socket.on('first-direct-message', message => {
       const { userId, channelId } = message;
+      socket.emit('first-direct-message', channelId);
       socket.to(userId).emit('first-direct-message', channelId);
     });
 
