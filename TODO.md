@@ -146,14 +146,14 @@
 - [ ] seperate message event
 - [ ] setLastVisitedChannel
 - [ ] store channels in chat/make another request to get the channel
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [ ] router link don't make requests
+- [ ] close the modal when click to start a new chat
+- [ ] socket listen on start new chat
+- [ ] name space
+- [ ] delete message
+- [ ] edit message
+- [ ] search
+- [ ] fix error on start
 - [ ]
 - [ ]
 - [ ]

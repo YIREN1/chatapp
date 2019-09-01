@@ -1,6 +1,6 @@
 <nb-layout>
   <nb-layout-header subheader>
-    <p>{{ selectedChannel.id }}</p>
+    <p>{{ selectedChannel.name }}</p>
     <button nbButton status="success" size="tiny" (click)="toggle()">
       Toggle
     </button>
@@ -13,7 +13,6 @@
   <nb-sidebar tag="left">
     <app-chatsidebar></app-chatsidebar>
   </nb-sidebar>
-  <nb-sidebar right tag="right"></nb-sidebar>
 
   <nb-layout-column>
     <nb-chat title="start chatting" size="giant" scrollBottom="true">

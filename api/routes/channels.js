@@ -32,7 +32,7 @@ router.get(
   passportJWT,
   catchError(async (req, res) => {
     const { channelId } = req.params;
-    const channel = await channelService.getChannel(channelId);
+    const channel = await channelService.getChannelView(channelId);
     res.json(channel);
   }),
 );

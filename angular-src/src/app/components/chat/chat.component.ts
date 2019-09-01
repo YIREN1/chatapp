@@ -7,8 +7,10 @@ import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
 import { User } from './shared/model/user';
+import { ChannelService } from './shared/service/channel.service';
 import { MessageService } from './shared/service/message.service';
 import { SocketService } from './shared/service/socket.service';
+
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 
@@ -25,6 +27,7 @@ export class ChatComponent implements OnInit {
     private authService: AuthService,
     private messageService: MessageService,
     private route: ActivatedRoute,
+    private channelService: ChannelService,
   ) { }
 
   action = Action;
@@ -34,32 +37,43 @@ export class ChatComponent implements OnInit {
 
   messages: any[] = [];
 
-  selectedChannel: any = {
+  generalChannel: any = {
     name: 'general',
     id: '5d67c349f6f8f916672031f4',
   };
+
+  selectedChannel: any;
   isTyping = false;
   typingTimer;                // timer identifier
   doneTypingInterval = 5000;  // time in ms (5 seconds)
   @ViewChild('chatForm', { static: false }) chatFormRef: NbChatFormComponent;
 
   ngOnInit(): void {
-    this.initIoConnection();
     this.initModel();
-    this.sendNotification(null, Action.JOINED);
-    this.initHistory();
-    this.setChannelId();
+    this.initIoConnection();
+    // this.sendNotification(null, Action.JOINED);
+    this.setChannel();
   }
 
-  private async setChannelId() {
+  private async setChannel() {
     this.route.params.subscribe(params => {
-      this.selectedChannel.id = params['channelId'] || 'general'; // (+) converts string 'id' to a number
+
+      const channelId = params['channelId'] ? params['channelId'] : this.selectedChannel.id;
+
+      this.channelService.getChannel(channelId).subscribe((data) => {
+        this.selectedChannel = data;
+        this.setMessages(channelId);
+      });
+
     });
   }
 
-  private async initHistory() {
-    this.messageService.getMessages(this.selectedChannel.id).subscribe((data) => {
-      this.messages = data;
+  private async setMessages(channelId) {
+    this.messageService.getMessages(channelId).subscribe((messages) => {
+      messages.forEach(message => {
+        message.reply = this.isReply(message);
+      });
+      this.messages = messages;
     });
   }
 
@@ -67,18 +81,10 @@ export class ChatComponent implements OnInit {
     this.sidebarService.toggle(false, 'left');
   }
 
-  toggleCompact() {
-    this.sidebarService.toggle(false, 'right');
-  }
-
-  private getRandomId(): number {
-    return Math.floor(Math.random() * (1000000)) + 1;
-  }
-
   private async initModel(): Promise<any> {
-    const randomId = this.getRandomId();
     this.user = await this.authService.getUser();
     this.user.avatar = `${AVATAR_URL}/${this.user.id}.png`;
+    this.socketService.sendEvent(this.user.id, 'init');
   }
 
   private initIoConnection(): void {
@@ -88,15 +94,9 @@ export class ChatComponent implements OnInit {
       .subscribe((message: Message) => {
         console.log(message);
         console.log('--------------------------');
-        if (message.action === Action.JOINED) {
-          message.quote = `${this.user.name} joined room`;
-          message.type = 'quote';
-        } else if (message.action === Action.LEFT) {
-          message.quote = `${this.user.name} left room`;
-          message.type = 'quote';
-        } else {
-          message.reply = this.isReply(message);
-        }
+
+        message.reply = this.isReply(message);
+
         this.messages.push(message);
       });
 
@@ -107,7 +107,6 @@ export class ChatComponent implements OnInit {
 
     this.socketService.onEvent(Event.DISCONNECT)
       .subscribe(() => {
-        this.sendNotification(null, Action.LEFT);
         console.log('socket.io disconnected');
       });
 
@@ -130,15 +129,11 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  addMessage() {
-
-  }
-
   isReply(message) {
     return message.user.name === this.user.name;
   }
 
-  keyPress(event) {
+  keyPress() {
     const message = {
       user: this.user.id,
       channelId: this.selectedChannel.id,
@@ -146,7 +141,7 @@ export class ChatComponent implements OnInit {
     this.socketService.sendEvent(message, 'started-typing');
   }
 
-  keyUp(event) {
+  keyUp() {
     clearTimeout(this.typingTimer);
     if (this.chatFormRef.message) {
       this.typingTimer = setTimeout(this.doneTyping.bind(this), this.doneTypingInterval);

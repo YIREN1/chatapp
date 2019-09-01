@@ -1,14 +1,9 @@
 <button nbButton (click)="openWindow()">Channels</button>
-<nb-list>
+<!-- <nb-list>
   <nb-list-item *ngFor="let user of users">
     <nb-user [name]="user.name" [title]="user.title"> </nb-user>
   </nb-list-item>
-</nb-list>
+</nb-list> -->
 <button nbButton (click)="openWindow()">Direct Messages</button>
-<nb-list>
-  <nb-list-item *ngFor="let dm of directMessages">
-    <a [routerLink]="['/channel', dm._id]" routerLinkActive="active">
-      <nb-user [name]="dm.name" size="small"> </nb-user>
-    </a>
-  </nb-list-item>
-</nb-list>
+
+<nb-menu tag="menu" [items]="items"> </nb-menu>

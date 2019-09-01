@@ -38,6 +38,7 @@ import { SocketService } from './shared/service/socket.service';
     NbUserModule,
     SweetAlert2Module,
     RouterModule,
+    NbMenuModule,
   ],
   providers: [SocketService],
   entryComponents: [ChatDmModalComponent],

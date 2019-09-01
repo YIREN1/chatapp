@@ -5,4 +5,5 @@ export enum Event {
   START_TYPING = 'started-typing',
   STOP_TYPING = 'stopped-typing',
   JOINED = 'joined',
+  FIRST_DM = 'first-direct-message',
 }

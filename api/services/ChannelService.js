@@ -1,4 +1,5 @@
 const ChannelModel = require('../models/channel');
+const ChannelView = require('../presentations/ChannelView');
 
 const ChannelService = {};
 
@@ -36,6 +37,11 @@ ChannelService.createChannel = async (userId, name, type, usersInChannel) => {
 
 ChannelService.getChannel = channelId => {
   return ChannelModel.findById(channelId);
+};
+
+ChannelService.getChannelView = async channelId => {
+  const channel = await ChannelService.getChannel(channelId);
+  return new ChannelView(channel);
 };
 
 ChannelService.getChannelByName = name => {

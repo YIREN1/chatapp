@@ -7,38 +7,32 @@ const socketServiceInit = server => {
   console.log('init socket service');
 
   io.on('connection', async socket => {
+    console.log('a user connected');
+
     socket.on('init', async userId => {
-      socket.join(userId);
       const channels = await channelService.getChannels(userId);
 
       channels.forEach(channel => {
-        socket.join(channel.id);
+        socket.join(channel._id); // ! fix this
+      });
+      socket.join(userId, () => {
+        // const rooms = Object.keys(socket.rooms);
+        // console.log(rooms);
       });
     });
-    console.log('a user connected');
 
     socket.on('first-direct-message', message => {
       const { userId, channelId } = message;
       socket.to(userId).emit('first-direct-message', channelId);
     });
-    // socket.on('message', msg => {
-    //   // console.log('[server](message): %s', JSON.stringify(msg));
-    //   io.emit('message', msg);
-    // });
+
     socket.on('message', async message => {
       if (!message.userId) {
         message.userId = message.user.id;
       }
-      // const createdAt = Date.now();
       const createdMessage = await messageService.createMessageView(message);
 
-      // await searchService.saveMessage(createdMessage);
-      // socket.emit('message', createdMessage);
-      // socket.to(channelId).send(createdMessage);
-
-      socket.emit('message', createdMessage);
-      socket.to(message.channelId).send(createdMessage);
-      // io.emit('message', createdMessage);
+      io.in(message.channelId).emit('message', createdMessage);
     });
 
     socket.on('disconnect', () => {
@@ -47,16 +41,15 @@ const socketServiceInit = server => {
 
     socket.on('started-typing', message => {
       const { user, channelId } = message;
-      io.emit('started-typing', { user, channelId });
+      socket.to(channelId).emit('started-typing', { user, channelId });
     });
 
     socket.on('stopped-typing', message => {
       const { user, channelId } = message;
-      // socket.to(channelId).emit('stopped-typing', { user, channelId });
-      io.emit('stopped-typing', { user, channelId });
+      socket.to(channelId).emit('stopped-typing', { user, channelId });
     });
+
     socket.on('joined', msg => {
-      // console.log('[server](message): %s', JSON.stringify(msg));
       io.emit('joined', msg);
     });
   });

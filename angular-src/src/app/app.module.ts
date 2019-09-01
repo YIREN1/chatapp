@@ -81,7 +81,6 @@ const appRoutes: Routes = [
     NbChatModule,
     NbSpinnerModule,
     NbThemeModule.forRoot({ name: 'dark' }),
-    NbMenuModule,
     NbUserModule,
     NbButtonModule,
     NbTabsetModule,
@@ -91,6 +90,7 @@ const appRoutes: Routes = [
     NbSidebarModule.forRoot(),
     NbWindowModule.forRoot(),
     NbDialogModule.forRoot(),
+    NbMenuModule.forRoot(),
   ],
   providers: [
     ValidateService,

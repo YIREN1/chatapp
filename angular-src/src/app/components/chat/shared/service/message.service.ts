@@ -6,6 +6,7 @@ export interface ServerResponse {
   success: boolean;
   msg: string;
   user: string;
+  reply;
 }
 
 @Injectable({
