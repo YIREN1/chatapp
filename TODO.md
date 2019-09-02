@@ -161,7 +161,7 @@
 - [ ] remove unused dep
 - [ ] error case check UI
 - [ ] bug on channel exist
-- [ ]
+- [ ] set socket when join/create the room / add the message without socket
 - [ ]
 - [ ]
 - [ ]
