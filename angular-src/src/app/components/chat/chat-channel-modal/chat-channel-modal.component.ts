@@ -68,7 +68,8 @@ export class ChatChannelModalComponent implements OnInit {
           timer: 1500,
           background: '#789',
         }).then(() => {
-          this.router.navigate(['channel', channel._id]);
+          this.router.navigate(['channel', channel.id]);
+          this.activeModal.close();
         });
         this.channels.push(channel);
 
@@ -76,24 +77,26 @@ export class ChatChannelModalComponent implements OnInit {
     }
   }
 
-  async sendDirectMessage(toUserId, toUserName) {
-    const incomingChannel = await this.channelService.createChannel(
-      `${this.currentUser.name},${toUserName}`,
-      [this.currentUser.id, toUserId],
-      'directMessage'
-    ).subscribe(channel => {
-      if (channel._id) {
-        this.router.navigate(['channel', channel._id]);
-        // {
-        //   relativeTo: this.activatedRoute,
-        //   queryParams: { channelId: channel._id },
-        //   queryParamsHandling: 'merge'
-        // });
-        this.activeModal.close();
-      } else {
-        console.log('create channel failed');
+  async openChannel(channelId) {
+    await this.channelService.getChannel(channelId).subscribe(async channel => {
+      const isInChannel = channel.usersInChannel.find(
+        userId => this.currentUser.id === userId
+      );
+
+      if (!isInChannel) {
+        await this.channelService.joinChannel(channelId).subscribe(channel => {
+          Swal.fire({
+            type: 'success',
+            title: `Your have joined ${channel.name}`,
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#789',
+          }).then(() => {
+            this.router.navigate(['channel', channel.id]);
+            this.activeModal.close();
+          });
+        });
       }
     });
   }
-
 }

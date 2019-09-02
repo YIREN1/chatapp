@@ -123,7 +123,6 @@ export class ChatsidebarComponent implements OnInit {
   }
 
   addChannel(incomingChannel) {
-    console.log(this.channelsAndDirectMessages);
     const currentChannel = this.channelsAndDirectMessages.find(channel =>
       channel.id === incomingChannel.id
     );

@@ -6,14 +6,14 @@
   <button nbButton (click)="createChannel()">Create Channle</button>
   <input nbInput type="text" />
   <nb-list>
-    <nb-list-item *ngFor="let user of channels">
+    <nb-list-item *ngFor="let channel of channels">
       <button
         nbButton
         fullWidth
         status="success"
-        (click)="sendDirectMessage(user.id, user.name)"
+        (click)="openChannel(channel.id)"
       >
-        {{ user.name }}
+        {{ channel.name }}
       </button>
     </nb-list-item>
   </nb-list>

@@ -10,6 +10,7 @@ export interface ServerResponse {
   name;
   _id;
   type;
+  usersInChannel;
 }
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export class ChannelService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', this.authService.getToken());
     headers = headers.set('Content-Type', 'application/json');
-    return this.http.put<ServerResponse>(`${environment.apiPrefix}/v1/channels/${channelId}/join`, { headers });
+    return this.http.put<ServerResponse>(`${environment.apiPrefix}/v1/channels/${channelId}/join`, {}, { headers });
   }
 
   createChannel(name, usersInChannel, type) {

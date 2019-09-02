@@ -42,12 +42,12 @@ export class ChatDmModalComponent implements OnInit {
       [this.currentUser.id, toUserId],
       'directMessage'
     ).subscribe(channel => {
-      if (channel._id) {
+      if (channel.id) {
         this.socketService.sendEvent({
           userId: toUserId,
-          channelId: channel._id,
+          channelId: channel.id,
         }, 'first-direct-message');
-        this.router.navigate(['channel', channel._id]);
+        this.router.navigate(['channel', channel.id]);
         this.activeModal.close();
       } else {
         console.log('create channel failed');

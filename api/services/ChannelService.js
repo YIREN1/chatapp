@@ -28,11 +28,12 @@ ChannelService.createChannel = async (userId, name, type, usersInChannel) => {
 
   const isInChannel = channel.usersInChannel.find(id => id === userId);
 
-  if (isInChannel) return channel;
+  if (isInChannel) return new ChannelView(channel);
 
   channel.usersInChannel.push(userId);
 
-  return channel.save();
+  const savedChannel = await channel.save();
+  return new ChannelView(savedChannel);
 };
 
 ChannelService.getChannel = channelId => {
@@ -51,15 +52,16 @@ ChannelService.getChannelByName = name => {
 ChannelService.joinChannel = async (userId, channelId) => {
   const channel = await ChannelModel.findById(channelId);
   if (!userId) {
-    return channel;
+    return new ChannelView(channel);
   }
   const isInChannel = channel.usersInChannel.find(id => id === userId);
 
-  if (isInChannel) return channel;
+  if (isInChannel) return new ChannelView(channel);
 
   channel.usersInChannel.push(userId);
 
-  return channel.save();
+  const savedChannel = await channel.save();
+  return new ChannelView(savedChannel);
 };
 
 ChannelService.leaveChannel = async (userId, channelId) => {
@@ -76,8 +78,9 @@ ChannelService.getChannels = async userId => {
   return channels.map(channel => new ChannelView(channel));
 };
 
-ChannelService.getPublicChannels = () => {
-  return ChannelModel.find({ type: 'channel' });
+ChannelService.getPublicChannels = async () => {
+  const channels = await ChannelModel.find({ type: 'channel' });
+  return channels.map(channel => new ChannelView(channel));
 };
 
 module.exports = ChannelService;
