@@ -4,7 +4,9 @@
       Toggle
     </button>
     <p style="text-align:center">{{ selectedChannel.name }}</p>
-
+    <button nbButton status="danger" size="tiny" (click)="toggle()">
+      leave channel
+    </button>
     <p *ngIf="isTyping">someone is typing</p>
   </nb-layout-header>
 

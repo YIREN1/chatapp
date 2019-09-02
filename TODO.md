@@ -83,7 +83,7 @@
 - [x] docker issue when running under another ip (try with phone)
 - [x] always login with google (clear cookie)
 - [x] password reset url 5000?
-- [ ] angular env variable (prefix in environment, 'api'/'')
+- [x] angular env variable (prefix in environment, 'api'/'')
 - [x] api env variables
 - [x] k8s docs
 - [ ] libphonenumber (<https://github.com/google/libphonenumber)>
@@ -93,7 +93,7 @@
 - [x] docker-compose file test is it ok to overwrite env variable
 - [x] migrate to gitlab
 - [x] routes.js
-- [ ] cookie parser?
+- [x] cookie parser?
 - [x] es6/7/8/9/10?
 - [ ] UI for password reset
 - [x] UI for google login
@@ -111,12 +111,12 @@
 - [ ] UI background (particles.js)
 - [ ] UI drag and drop (dragula) (future)
 - [ ] doc sharing (quilli)
-- [ ] angular code refactor
+- [x] angular code refactor
 - [x] UI in the signup modal to notify user authy failed or something
 - [x] clean up index.html
 - [ ] signup modal improve
 - [x] GSAP animation(close)
-- [ ] add friends
+- [x] add friends
 - [ ] icon for video
 - [x] test in docker
 - [x] alert proper message
@@ -127,48 +127,48 @@
 - [ ] sendgrid email
 - [ ] real world clone api(will seperate)
 - [ ] real world clone ui(will seperate)
-- [ ] pagination of user list
+- [x] pagination of user list
 - [ ] pagination of message list
 - [x] someone is typing
 - [x] general chat
 - [x] post to general
 - [x] list users
-- [ ] list channels
+- [x] list channels
 - [x] direct message
-- [ ] create channel
-- [ ] join channel
+- [x] create channel
+- [x] join channel
 - [ ] leave channel
 - [ ] refactor model code
 - [ ] refactor route code
 - [x] message model
 - [x] channel service
 - [x] index services
-- [ ] ui for create channel
+- [x] ui for create channel
 - [x] seperate message event
 - [ ] setLastVisitedChannel
-- [ ] store channels in chat/make another request to get the channel
-- [ ] router link don't make requests
-- [ ] close the modal when click to start a new chat
-- [ ] socket listen on start new chat
+- [x] store channels in chat/make another request to get the channel
+- [x] router link don't make requests
+- [x] close the modal when click to start a new chat
+- [x] socket listen on start new chat
 - [ ] name space
 - [ ] delete message
 - [ ] edit message
 - [ ] search
-- [ ] fix error on start
+- [x] fix error on start
 - [ ] first direct message
 - [ ] UI new message
-- [ ] auto join general
+- [x] auto join general
 - [ ] remove unused dep
 - [ ] error case check UI
 - [ ] bug on channel exist
-- [ ] set socket when join/create the room / add the message without socket
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [x] set socket when join/create the room / add the message without socket
+- [x] use email template
+- [ ] channel page routing(default general)
+- [ ] angular icon
+- [ ] swal in service NOOO!
+- [ ] loader when loading the messages
+- [ ] delete channel function in sidebar
+- [ ] multi user group
 - [ ]
 - [ ]
 - [ ]

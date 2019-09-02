@@ -141,6 +141,14 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  leaveChannel() {
+
+  }
+
+  isGeneral() {
+    return this.selectedChannel.name === 'general';
+  }
+
   isReply(message) {
     return message.user.name === this.user.name;
   }

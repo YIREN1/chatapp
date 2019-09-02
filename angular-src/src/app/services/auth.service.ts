@@ -46,6 +46,11 @@ export class AuthService {
   }
 
   private secondFactor(authyToken: string, userEmail: string): Observable<any> {
+    Swal.fire(
+      'Good job!',
+      'You enabled 2FA, we sent a push notification to your phone, please check',
+      'success'
+    );
     const httpOptions = {
       headers: new HttpHeaders({
         'authyToken': authyToken,

@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
-const cookieParser = require('cookie-parser');
 
 const routes = express.Router();
 
@@ -21,8 +20,6 @@ routes.use(
     origin: true,
   }),
 );
-
-routes.use(cookieParser());
 
 // Set static files
 routes.use(express.static(path.join(__dirname, '../../public')));

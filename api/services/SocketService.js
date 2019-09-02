@@ -50,8 +50,12 @@ const socketServiceInit = server => {
       socket.to(channelId).emit('stopped-typing', { user, channelId });
     });
 
-    socket.on('joined', msg => {
-      io.emit('joined', msg);
+    socket.on('join', async channelId => {
+      socket.join(channelId);
+    });
+
+    socket.on('leave', async channelId => {
+      socket.leave(channelId);
     });
   });
 };

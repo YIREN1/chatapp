@@ -68,6 +68,7 @@ export class ChatChannelModalComponent implements OnInit {
           timer: 1500,
           background: '#789',
         }).then(() => {
+          this.socketService.sendEvent(channel.id, 'join');
           this.router.navigate(['channel', channel.id]);
           this.activeModal.close();
         });
@@ -92,6 +93,7 @@ export class ChatChannelModalComponent implements OnInit {
             timer: 1500,
             background: '#789',
           }).then(() => {
+            this.socketService.sendEvent(channel.id, 'join');
             this.router.navigate(['channel', channel.id]);
             this.activeModal.close();
           });

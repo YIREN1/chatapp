@@ -57,7 +57,12 @@
         </a>
       </li> -->
 
-      <li class="nav-item" ngbDropdown *ngIf="authService.loggedIn()">
+      <li
+        class="nav-item"
+        style="float: right;"
+        ngbDropdown
+        *ngIf="authService.loggedIn()"
+      >
         <nb-user
           ngbDropdownToggle
           style="cursor: pointer"

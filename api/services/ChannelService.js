@@ -3,9 +3,9 @@ const ChannelView = require('../presentations/ChannelView');
 
 const ChannelService = {};
 
-ChannelService.getChannelsUserIsIn = async userId => {
+ChannelService.getChannelIdsUserIsIn = async userId => {
   const channels = await ChannelModel.find({ usersInChannel: userId });
-  return channels.map(channel => channel.id);
+  return channels.map(channel => channel._id);
 };
 
 ChannelService.createChannel = async (userId, name, type, usersInChannel) => {
@@ -18,12 +18,13 @@ ChannelService.createChannel = async (userId, name, type, usersInChannel) => {
   const channel = await ChannelModel.findOne({ fingerprint });
 
   if (!channel) {
-    return new ChannelModel({
+    const newChannel = await new ChannelModel({
       name,
       fingerprint,
       type,
       usersInChannel,
     }).save();
+    return new ChannelView(newChannel);
   }
 
   const isInChannel = channel.usersInChannel.find(id => id === userId);
@@ -45,8 +46,9 @@ ChannelService.getChannelView = async channelId => {
   return new ChannelView(channel);
 };
 
-ChannelService.getChannelByName = name => {
-  return ChannelModel.findOne({ name });
+ChannelService.getChannelByName = async name => {
+  const channel = await ChannelModel.findOne({ name });
+  return new ChannelView(channel);
 };
 
 ChannelService.joinChannel = async (userId, channelId) => {
@@ -70,7 +72,8 @@ ChannelService.leaveChannel = async (userId, channelId) => {
 
   channel.usersInChannel = users;
 
-  return channel.save();
+  const savedChannel = await channel.save();
+  return new ChannelView(savedChannel);
 };
 
 ChannelService.getChannels = async userId => {

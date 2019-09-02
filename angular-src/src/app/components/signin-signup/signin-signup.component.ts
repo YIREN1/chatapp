@@ -23,7 +23,7 @@ declare global {
   styleUrls: ['./signin-signup.component.css'],
 })
 export class SigninSignupComponent implements OnInit {
-  // Register
+
   name: string;
   profileName: string;
   confirmpassword: string;
@@ -47,7 +47,7 @@ export class SigninSignupComponent implements OnInit {
     this.rendergreCaptch();
     this.renderGapi();
   }
-  // todo sweetalert
+
   openForgotModal() {
     this.modalService.open(ForgotPasswordComponent);
   }
@@ -114,15 +114,6 @@ export class SigninSignupComponent implements OnInit {
     });
   }
 
-  // addScript() {
-  //   const script = document.createElement('script');
-  //   const lang = this.lang ? '&hl=' + this.lang : '';
-  //   script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`;
-  //   script.async = true;
-  //   script.defer = true;
-  //   document.body.appendChild(script);
-  // }
-
   verifyCaptchaV3() {
     grecaptcha.ready(() => {
       grecaptcha
@@ -130,7 +121,6 @@ export class SigninSignupComponent implements OnInit {
           action: 'homepage',
         })
         .then(token => {
-          console.log(token, 'V3');
           this.authService.VerifyReCaptcha(token, 'v3').subscribe(data => {
             console.log(data);
           });
@@ -140,7 +130,6 @@ export class SigninSignupComponent implements OnInit {
 
   reCaptchaErrorCB(err) {
     console.log(err);
-    // alert(err);
     Swal.fire('Oops...', `Failed reCaptcha: ${err}`, 'error');
   }
   reCaptchaCB(data) {
@@ -149,11 +138,8 @@ export class SigninSignupComponent implements OnInit {
 
   verifyCaptchaV2(): any {
     const token = grecaptcha.getResponse();
-    console.log(token, 'V2');
     return this.authService.VerifyReCaptcha(token, 'v2').subscribe(data => {
-      // console.log(data);
       if (!data.success) {
-        // alert(data.msg);
         Swal.fire('Oops...', data.msg, 'error');
         grecaptcha.reset();
         return false;
@@ -191,7 +177,6 @@ export class SigninSignupComponent implements OnInit {
       .authenticateUser(user)
       .pipe(
         catchError(() => {
-          this.message.next('Bad credentials.');
           Swal.fire('Oops...', 'Bad credentials.', 'error');
           return throwError('Not logged in!');
         }),
@@ -216,10 +201,8 @@ export class SigninSignupComponent implements OnInit {
             text: '2 factor auth failed!',
             footer: '<a href>Why do I have this issue?</a>'
           });
-          // this.message.next('Request timed out or not authorized');
           return false;
         }
-        console.log('auth response', data);
         this.postLogin(data);
         return true;
       });
@@ -298,7 +281,6 @@ export class SigninSignupComponent implements OnInit {
         );
         return true;
       } else {
-        // alert('Internal Server Error.');
         console.log(data);
         Swal.fire({
           type: 'error',
@@ -309,8 +291,5 @@ export class SigninSignupComponent implements OnInit {
         return false;
       }
     });
-  }
-  open2faModal() {
-
   }
 }
