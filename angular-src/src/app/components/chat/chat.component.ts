@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NbChatFormComponent, NbSidebarService } from '@nebular/theme';
 
 import { AuthService } from '../../services/auth.service';
+import { ChatsidebarComponent } from './chatsidebar/chatsidebar.component';
 import { Action } from './shared/model/action';
 import { Event } from './shared/model/event';
 import { Message } from './shared/model/message';
@@ -29,6 +30,8 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     private channelService: ChannelService,
   ) { }
+  @ViewChild(ChatsidebarComponent, { static: false })
+  private sidebarComp: ChatsidebarComponent;
 
   action = Action;
   user: User;
@@ -42,17 +45,17 @@ export class ChatComponent implements OnInit {
     id: '5d67c349f6f8f916672031f4',
   };
 
-  selectedChannel: any;
+  selectedChannel: any = {};
   isTyping = false;
   typingTimer;                // timer identifier
   doneTypingInterval = 5000;  // time in ms (5 seconds)
   @ViewChild('chatForm', { static: false }) chatFormRef: NbChatFormComponent;
 
   ngOnInit(): void {
+    this.setChannel();
     this.initModel();
     this.initIoConnection();
     // this.sendNotification(null, Action.JOINED);
-    this.setChannel();
   }
 
   private async setChannel() {
@@ -60,9 +63,11 @@ export class ChatComponent implements OnInit {
 
       const channelId = params['channelId'] ? params['channelId'] : this.selectedChannel.id;
 
-      this.channelService.getChannel(channelId).subscribe((data) => {
-        this.selectedChannel = data;
+      this.channelService.getChannel(channelId).subscribe((incomingChannel) => {
+        this.selectedChannel = incomingChannel;
         this.setMessages(channelId);
+        console.log(this.selectedChannel, 'chat');
+        this.sidebarComp.addChannel(this.selectedChannel);
       });
 
     });

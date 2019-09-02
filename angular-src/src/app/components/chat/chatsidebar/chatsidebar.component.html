@@ -1,9 +1,5 @@
-<button nbButton (click)="openWindow()">Channels</button>
-<!-- <nb-list>
-  <nb-list-item *ngFor="let user of users">
-    <nb-user [name]="user.name" [title]="user.title"> </nb-user>
-  </nb-list-item>
-</nb-list> -->
-<button nbButton (click)="openWindow()">Direct Messages</button>
+<button nbButton (click)="openWindow('channels')">Channels</button>
+
+<button nbButton (click)="openWindow('directMessages')">Direct Messages</button>
 
 <nb-menu tag="menu" [items]="items"> </nb-menu>

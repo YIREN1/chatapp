@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import {
   NbButtonModule,
@@ -19,6 +18,7 @@ import {
 } from '@nebular/theme';
 import { ChatComponent } from './chat.component';
 
+import { ChatChannelModalComponent } from './chat-channel-modal/chat-channel-modal.component';
 import { ChatDmModalComponent } from './chat-dm-modal/chat-dm-modal.component';
 import { ChatsidebarComponent } from './chatsidebar/chatsidebar.component';
 import { SocketService } from './shared/service/socket.service';
@@ -27,6 +27,7 @@ import { SocketService } from './shared/service/socket.service';
     ChatComponent,
     ChatsidebarComponent,
     ChatDmModalComponent,
+    ChatChannelModalComponent,
   ],
   imports: [
     NbSidebarModule,
@@ -36,11 +37,10 @@ import { SocketService } from './shared/service/socket.service';
     NbLayoutModule,
     NbListModule,
     NbUserModule,
-    SweetAlert2Module,
     RouterModule,
     NbMenuModule,
   ],
   providers: [SocketService],
-  entryComponents: [ChatDmModalComponent],
+  entryComponents: [ChatDmModalComponent, ChatChannelModalComponent],
 })
 export class ChatModule { }

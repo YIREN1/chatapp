@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NbMenuItem, NbMenuService } from '@nebular/theme';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/auth.service';
+import { ChatChannelModalComponent } from '../chat-channel-modal/chat-channel-modal.component';
 import { ChatDmModalComponent } from '../chat-dm-modal/chat-dm-modal.component';
 import { Event } from '../shared/model/event';
 import { ChannelService } from '../shared/service/channel.service';
@@ -26,7 +27,7 @@ export class ChatsidebarComponent implements OnInit {
   ) { }
 
   user: any;
-  channelsAndDirectMessages: any[];
+  channelsAndDirectMessages: any[] = [];
   channels: NbMenuItem[] = [];
   directMessages: NbMenuItem[] = [];
 
@@ -78,8 +79,14 @@ export class ChatsidebarComponent implements OnInit {
     this.user = await this.authService.getUser();
   }
 
-  openWindow() {
-    this.modalService.open(ChatDmModalComponent);
+  openWindow(name) {
+    if (name === 'channels') {
+      this.modalService.open(ChatChannelModalComponent);
+
+    } else {
+      this.modalService.open(ChatDmModalComponent);
+    }
+
   }
 
   private initIoConnection(): void {
@@ -109,26 +116,36 @@ export class ChatsidebarComponent implements OnInit {
 
   private async initChannels() {
     this.channelService.getChannels().subscribe((channels) => {
-      this.channelsAndDirectMessages = channels;
       channels.forEach(channel => {
         this.addChannel(channel);
       });
     });
   }
 
-  private addChannel(channel) {
-    if (channel.type === 'directMessage') {
+  addChannel(incomingChannel) {
+    console.log(this.channelsAndDirectMessages);
+    const currentChannel = this.channelsAndDirectMessages.find(channel =>
+      channel.id === incomingChannel.id
+    );
+
+    if (currentChannel) {
+      console.log('exist');
+      return;
+    }
+
+    if (incomingChannel.type === 'directMessage') {
       const newDirectMessage: NbMenuItem = {
-        title: this.getChannlelName(channel.name),
-        link: `/channel/${channel._id}`, // ! fixthis!
+        title: this.getChannlelName(incomingChannel.name),
+        link: `/channel/${incomingChannel.id}`,
       };
       this.directMessages.push(newDirectMessage);
-    } else if (channel.type === 'directMessage') {
+    } else if (incomingChannel.type === 'channel') {
       const newChannel: NbMenuItem = {
-        title: channel.name,
-        link: `/channel/${channel._id}`, // ! fixthis!
+        title: incomingChannel.name,
+        link: `/channel/${incomingChannel.id}`,
       };
       this.channels.push(newChannel);
     }
+    this.channelsAndDirectMessages.push(incomingChannel);
   }
 }

@@ -2,7 +2,7 @@ h4 {
   text-align: center;
   color: steelblue;
 }
-input[type="text"] {
+input[type='text'] {
   display: block;
-  margin : 0 auto;
+  margin: 0 auto;
 }

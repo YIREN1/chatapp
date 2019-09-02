@@ -1,11 +1,12 @@
 <div class="modal-header">
-  <div><h4 class="modal-title">Direct Messages</h4></div>
+  <h4 class="modal-title">Channels</h4>
 </div>
 
 <div class="modal-body">
+  <button nbButton (click)="createChannel()">Create Channle</button>
   <input nbInput type="text" />
   <nb-list>
-    <nb-list-item *ngFor="let user of users">
+    <nb-list-item *ngFor="let user of channels">
       <button
         nbButton
         fullWidth

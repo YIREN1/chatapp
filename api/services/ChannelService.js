@@ -71,8 +71,9 @@ ChannelService.leaveChannel = async (userId, channelId) => {
   return channel.save();
 };
 
-ChannelService.getChannels = userId => {
-  return ChannelModel.find({ usersInChannel: userId });
+ChannelService.getChannels = async userId => {
+  const channels = await ChannelModel.find({ usersInChannel: userId });
+  return channels.map(channel => new ChannelView(channel));
 };
 
 ChannelService.getPublicChannels = () => {
