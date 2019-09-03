@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbChatFormComponent, NbSidebarService } from '@nebular/theme';
 
 import { AuthService } from '../../services/auth.service';
@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private channelService: ChannelService,
+    private router: Router,
   ) { }
   @ViewChild(ChatsidebarComponent, { static: false })
   private sidebarComp: ChatsidebarComponent;
@@ -55,7 +56,6 @@ export class ChatComponent implements OnInit {
     this.setChannel();
     this.initModel();
     this.initIoConnection();
-    // this.sendNotification(null, Action.JOINED);
   }
 
   private async setChannel() {
@@ -133,6 +133,7 @@ export class ChatComponent implements OnInit {
           this.isTyping = false;
         }
       });
+    // todo get rid of
     this.socketService.onEvent(Event.JOINED)
       .subscribe((message) => {
         message.quote = `${this.user.name} joined room`;
@@ -141,8 +142,14 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  leaveChannel() {
-
+  async leaveChannel() {
+    const channelId = this.selectedChannel.id;
+    await this.channelService.leaveChannel(channelId).subscribe();
+    const general = this.sidebarComp.channels.find(
+      channel => channel.title === 'general'
+    );
+    this.socketService.sendEvent(channelId, 'leave');
+    this.router.navigate(['channels', channelId]);
   }
 
   isGeneral() {

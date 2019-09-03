@@ -50,29 +50,6 @@ export class ChatsidebarComponent implements OnInit {
     this.initChannels();
     this.initIoConnection();
     this.initUser();
-    // this.setChannel();
-  }
-
-  private async setChannel() {
-    this.activatedRoute.params.subscribe(params => {
-      console.log('111111111111');
-      const currentChannelId = params['channelId'];
-      if (currentChannelId) {
-        const currentChannel = this.channelsAndDirectMessages.find(channel =>
-          channel.id === currentChannelId
-        );
-
-        if (currentChannel) {
-          console.log('exist');
-          return;
-        }
-        console.log('get one');
-        this.channelService.getChannel(currentChannelId).subscribe((channel) => {
-          this.channelsAndDirectMessages.push(channel);
-          this.addChannel(channel);
-        });
-      }
-    });
   }
 
   async initUser() {
@@ -82,23 +59,17 @@ export class ChatsidebarComponent implements OnInit {
   openWindow(name) {
     if (name === 'channels') {
       this.modalService.open(ChatChannelModalComponent);
-
     } else {
       this.modalService.open(ChatDmModalComponent);
     }
-
   }
 
   private initIoConnection(): void {
-
+    // todo check if the channel is already there
     this.socketService.onEvent(Event.FIRST_DM)
       .subscribe((channelId) => {
-        this.channelService.getChannel(channelId).subscribe((data) => {
-          const newDirectMessage: NbMenuItem = {
-            title: this.getChannlelName(data.name),
-            link: `/channel/${data.id}`, // ! fixthis!
-          };
-          this.directMessages.push(newDirectMessage);
+        this.channelService.getChannel(channelId).subscribe((channel) => {
+          this.addChannel(channel);
         });
         this.socketService.sendEvent(this.user.id, 'init');
       });
@@ -106,7 +77,9 @@ export class ChatsidebarComponent implements OnInit {
 
   getChannlelName(name) {
     const nameArr = name.split(',');
-
+    if (nameArr.length > 2) {
+      return name;
+    }
     const filteredArr = nameArr.filter(n => n !== this.user.name);
     if (filteredArr.length === 0) {
       return this.user.name;

@@ -3,8 +3,14 @@
     <button nbButton status="success" size="tiny" (click)="toggle()">
       Toggle
     </button>
-    <p style="text-align:center">{{ selectedChannel.name }}</p>
-    <button nbButton status="danger" size="tiny" (click)="toggle()">
+    <p style="text-align:center">{{ getChannlelName(selectedChannel.name) }}</p>
+    <button
+      nbButton
+      status="danger"
+      size="tiny"
+      *ngIf="!isGeneral()"
+      (click)="leaveChannel()"
+    >
       leave channel
     </button>
     <p *ngIf="isTyping">someone is typing</p>
