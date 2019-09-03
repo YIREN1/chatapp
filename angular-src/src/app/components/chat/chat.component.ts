@@ -133,6 +133,13 @@ export class ChatComponent implements OnInit {
           this.isTyping = false;
         }
       });
+
+    this.socketService.onEvent(Event.UPDATE_MESSAGE)
+      .subscribe((incomingMessage) => {
+        if (incomingMessage.channelId === this.selectedChannel.id) {
+          this.incomingUpdateMessage();
+        }
+      });
     // todo get rid of
     this.socketService.onEvent(Event.JOINED)
       .subscribe((message) => {
@@ -140,6 +147,10 @@ export class ChatComponent implements OnInit {
         message.type = 'quote';
         // this.messages.push(message);
       });
+  }
+
+  incomingUpdateMessage() {
+
   }
 
   async leaveChannel() {

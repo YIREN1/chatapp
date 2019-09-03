@@ -36,6 +36,13 @@ const socketServiceInit = server => {
       io.in(message.channelId).emit('message', createdMessage);
     });
 
+    socket.on('update-message', async messageId => {
+      const updatedMessage = await messageService.getMessageView(messageId);
+      socket
+        .to(updatedMessage.channelId)
+        .emit('update-message', updatedMessage);
+    });
+
     socket.on('disconnect', () => {
       console.log('Client disconnected');
     });

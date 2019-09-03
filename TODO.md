@@ -169,7 +169,7 @@
 - [ ] loader when loading the messages
 - [ ] delete channel function in sidebar
 - [ ] multi user group
-- [ ]
+- [ ] icon in user list
 - [ ]
 - [ ]
 - [ ]

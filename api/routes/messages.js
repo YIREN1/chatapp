@@ -31,7 +31,7 @@ router.delete(
   passportJWT,
   catchError(async (req, res) => {
     const { messageId } = req.params;
-    const { userId } = req.session;
+    const userId = req.user.id;
     const view = await messageService.deleteMessage(userId, messageId);
     res.json(view);
   }),
@@ -42,7 +42,7 @@ router.put(
   passportJWT,
   catchError(async (req, res) => {
     const { messageId } = req.params;
-    const { userId } = req.session;
+    const userId = req.user.id;
     const { text } = req.body;
     const view = await messageService.updateMessage(userId, messageId, text);
     res.json(view);
