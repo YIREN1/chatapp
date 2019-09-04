@@ -179,7 +179,7 @@ export class ChatComponent implements OnInit {
   }
 
   incomingDeleteMessage(messageId) {
-    // this.updateMessageView(messageId, text);
+    this.deleteMessageView(messageId);
   }
 
   async leaveChannel() {
@@ -190,6 +190,9 @@ export class ChatComponent implements OnInit {
     );
     this.socketService.sendEvent(channelId, 'leave');
     this.router.navigate(['channels', channelId]);
+  }
+  leaveChannelFake() {
+    Swal.fire('coming soon');
   }
 
   isGeneral() {
@@ -245,7 +248,34 @@ export class ChatComponent implements OnInit {
   }
 
   openDeleteMessageWindow(message) {
+    Swal.fire({
+      title: 'Are you sure you want to delete this message?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.messageService.deleteMessage(message.id).subscribe(data => {
+          console.log(data);
+        });
+        this.socketService.sendEvent(message.id, 'delete-message');
+        this.deleteMessageView(message.id);
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      }
+    });
+  }
 
+  deleteMessageView(selectedMessageId) {
+    this.messages = this.messages.filter(message =>
+      message.id !== selectedMessageId
+    );
   }
 
   updateMessageView(selectedMessageId, text) {

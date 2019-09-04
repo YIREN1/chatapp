@@ -20,6 +20,7 @@ export class MessageService {
   ) {
     // ! hacky way to expose the function...
     this.updateMessage = this.updateMessage;
+    this.deleteMessage = this.deleteMessage;
   }
 
   getMessages(channelId) {
