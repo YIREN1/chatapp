@@ -5,7 +5,7 @@ const ChannelService = {};
 
 ChannelService.getChannelIdsUserIsIn = async userId => {
   const channels = await ChannelModel.find({ usersInChannel: userId });
-  return channels.map(channel => channel._id);
+  return channels.map(channel => channel._id); // ! fix this
 };
 
 ChannelService.createChannel = async (userId, name, type, usersInChannel) => {

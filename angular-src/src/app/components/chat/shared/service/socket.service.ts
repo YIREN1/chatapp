@@ -17,6 +17,7 @@ export class SocketService {
   public initSocket(): void {
     // ! change back
     // this.socket = socketIo();
+    // this is used for docker env
     // default to host for example: 'http://localhost:3050'
     this.socket = socketIo('http://localhost:5000');
   }

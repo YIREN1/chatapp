@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbChatFormComponent, NbSidebarService } from '@nebular/theme';
 
+import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 import { ChatsidebarComponent } from './chatsidebar/chatsidebar.component';
 import { Action } from './shared/model/action';
@@ -11,7 +12,6 @@ import { User } from './shared/model/user';
 import { ChannelService } from './shared/service/channel.service';
 import { MessageService } from './shared/service/message.service';
 import { SocketService } from './shared/service/socket.service';
-
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 
@@ -56,6 +56,22 @@ export class ChatComponent implements OnInit {
     this.setChannel();
     this.initModel();
     this.initIoConnection();
+  }
+
+  getChannlelName(name) {
+    if (!name) {
+      return;
+    }
+    const nameArr = name.split(',');
+    if (nameArr.length > 2) {
+      return name;
+    }
+    const filteredArr = nameArr.filter(n => n !== this.user.name);
+    if (filteredArr.length === 0) {
+      return this.user.name;
+    }
+    return filteredArr[0];
+    // return this.sidebarComp.getChannlelName(name);
   }
 
   private async setChannel() {
@@ -137,9 +153,18 @@ export class ChatComponent implements OnInit {
     this.socketService.onEvent(Event.UPDATE_MESSAGE)
       .subscribe((incomingMessage) => {
         if (incomingMessage.channelId === this.selectedChannel.id) {
-          this.incomingUpdateMessage();
+          this.incomingUpdateMessage(incomingMessage.id, incomingMessage.text);
         }
       });
+
+    this.socketService.onEvent(Event.DELETE_MESSAGE)
+      .subscribe((deletedMessageId) => {
+        // if (incomingMessage.channelId === this.selectedChannel.id) {
+        //   this.incomingUpdateMessage(incomingMessage.id, incomingMessage.text);
+        // }
+        this.incomingDeleteMessage(deletedMessageId);
+      });
+
     // todo get rid of
     this.socketService.onEvent(Event.JOINED)
       .subscribe((message) => {
@@ -149,8 +174,12 @@ export class ChatComponent implements OnInit {
       });
   }
 
-  incomingUpdateMessage() {
+  incomingUpdateMessage(messageId, text) {
+    this.updateMessageView(messageId, text);
+  }
 
+  incomingDeleteMessage(messageId) {
+    // this.updateMessageView(messageId, text);
   }
 
   async leaveChannel() {
@@ -192,6 +221,36 @@ export class ChatComponent implements OnInit {
       channelId: this.selectedChannel.id,
     };
     this.socketService.sendEvent(message, 'stopped-typing');
+  }
+
+  async openEditMessageWindow(message) {
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputAttributes: {
+        'aria-label': 'Edit your message here'
+      },
+      inputValue: message.text,
+      confirmButtonText: 'Save',
+      showCancelButton: true
+    });
+
+    if (text) {
+      // ! fix this
+      this.messageService.updateMessage(message.id, text).subscribe((data) => {
+        console.log(data);
+        this.socketService.sendEvent(message.id, 'update-message');
+      });
+      this.updateMessageView(message.id, text);
+    }
+  }
+
+  openDeleteMessageWindow(message) {
+
+  }
+
+  updateMessageView(selectedMessageId, text) {
+    const targetMessage = this.messages.find(message => message.id === selectedMessageId);
+    targetMessage.text = text;
   }
 
   sendMessage(event) {

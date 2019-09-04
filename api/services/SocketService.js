@@ -13,7 +13,7 @@ const socketServiceInit = server => {
       const channels = await channelService.getChannels(userId);
 
       channels.forEach(channel => {
-        socket.join(channel._id); // ! fix this
+        socket.join(channel.id); // ! fix this
       });
       socket.join(userId, () => {
         // const rooms = Object.keys(socket.rooms);
@@ -32,7 +32,6 @@ const socketServiceInit = server => {
         message.userId = message.user.id;
       }
       const createdMessage = await messageService.createMessageView(message);
-
       io.in(message.channelId).emit('message', createdMessage);
     });
 
@@ -41,6 +40,10 @@ const socketServiceInit = server => {
       socket
         .to(updatedMessage.channelId)
         .emit('update-message', updatedMessage);
+    });
+
+    socket.on('delete-message', async message => {
+      socket.to(message.channelId).emit('delete-message', message.id);
     });
 
     socket.on('disconnect', () => {

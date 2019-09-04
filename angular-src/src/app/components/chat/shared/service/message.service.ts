@@ -17,7 +17,10 @@ export class MessageService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-  ) { }
+  ) {
+    // ! hacky way to expose the function...
+    this.updateMessage = this.updateMessage;
+  }
 
   getMessages(channelId) {
     let headers = new HttpHeaders();
@@ -26,10 +29,17 @@ export class MessageService {
     return this.http.get<ServerResponse[]>(`${environment.apiPrefix}/v1/messages/${channelId}`, { headers });
   }
 
-  joinChannel(messageId, text) {
+  updateMessage(messageId, text: string) {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', this.authService.getToken());
     headers = headers.set('Content-Type', 'application/json');
-    return this.http.put<ServerResponse>(`${environment.apiPrefix}/v1/messages/${messageId}/join`, { text }, { headers });
+    return this.http.put<ServerResponse>(`${environment.apiPrefix}/v1/messages/${messageId}`, { text }, { headers });
+  }
+
+  deleteMessage(messageId) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', this.authService.getToken());
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.delete<ServerResponse>(`${environment.apiPrefix}/v1/messages/${messageId}`, { headers });
   }
 }

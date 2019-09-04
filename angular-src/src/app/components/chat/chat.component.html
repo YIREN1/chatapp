@@ -32,6 +32,10 @@
         [files]="msg.files"
         [quote]="msg.quote"
         [avatar]="msg.user.avatar"
+        [nbPopover]="messageOption"
+        nbPopoverTrigger="hover"
+        nbPopoverPlacement="right"
+        [nbPopoverContext]="msg"
       >
       </nb-chat-message>
       <nb-chat-form
@@ -45,3 +49,12 @@
     </nb-chat>
   </nb-layout-column>
 </nb-layout>
+
+<ng-template #messageOption let-msg>
+  <nb-icon icon="heart-outline"></nb-icon>
+  <nb-icon icon="edit-outline" (click)="openEditMessageWindow(msg)"></nb-icon>
+  <nb-icon
+    icon="trash-2-outline"
+    (click)="openDeleteMessageWindow(msg)"
+  ></nb-icon>
+</ng-template>

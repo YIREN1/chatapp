@@ -7,4 +7,5 @@ export enum Event {
   JOINED = 'joined',
   FIRST_DM = 'first-direct-message',
   UPDATE_MESSAGE = 'update-message',
+  DELETE_MESSAGE = 'delete-message',
 }

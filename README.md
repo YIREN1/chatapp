@@ -1,4 +1,4 @@
-# Authapp
+# Chatapp
 
 MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach.
 
@@ -38,9 +38,9 @@ If you want to use docker environment, make sure you have docker and docker-comp
 
 ```bash
 
-git clone https://github.com/YIREN1/authapp.git
+git clone https://github.com/YIREN1/chatapp.git
 
-cd authapp
+cd chatapp
 
 docker-compose up
 
@@ -50,9 +50,9 @@ then project can be accessed at localhost:3050
 If you don't want to use docker for some reason,
 
 ```bash
-git clone https://github.com/YIREN1/authapp.git
+git clone https://github.com/YIREN1/chatapp.git
 
-cd authapp/angular-src
+cd chatapp/angular-src
 
 npm i && ng build
 
@@ -89,7 +89,7 @@ deployment using docker would be easiest, but there are still some things needs 
 
 ## TODO
 
-[TODO](https://github.com/YIREN1/authapp/blob/master/TODO.md)
+[TODO](https://github.com/YIREN1/chatapp/blob/master/TODO.md)
 
 ## Contributing
 

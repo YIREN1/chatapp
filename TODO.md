@@ -170,6 +170,6 @@
 - [ ] delete channel function in sidebar
 - [ ] multi user group
 - [ ] icon in user list
-- [ ]
+- [ ] can only edit own message
 - [ ]
 - [ ]
