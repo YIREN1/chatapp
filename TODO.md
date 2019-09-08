@@ -151,8 +151,8 @@
 - [x] close the modal when click to start a new chat
 - [x] socket listen on start new chat
 - [ ] name space
-- [ ] delete message
-- [ ] edit message
+- [x] delete message
+- [x] edit message
 - [ ] search
 - [x] fix error on start
 - [ ] first direct message

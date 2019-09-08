@@ -2,19 +2,25 @@
 
 MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach.
 
-Functionalities:
+## Functionality overview
 
-- auth
+- CRU\* users (no need to delete)
+- JWT token based authentication(login/logout)(also implmented cookie based)
 - email confirmation
-- google OAuth login
+- google OAuth2 login
 - link google accounts
 - reCaptcha
 - 2fa with twillio authy
 - upload files to google cloud storage
-- token based authentication(also implmented cookie based)
-- chatbot with dialogflow
+- chatbot with dialogflow and google cloud function (serverless)
+- video chat using peer.js
+- chat functionalities (mirroring slack)
+  - send direct message
+  - channel chat
+  - join channel
+  - CRUD messages
 
-Development: fully dockerized and kubernetefied, using nginx to control request to send to frontend or backend.
+Development: fully dockerized and "kubernetified", using nginx to control request to send to frontend or backend.
 
 [Demo: heroku(0.0.1)](https://authappp.herokuapp.com/)
 
@@ -30,11 +36,13 @@ If you want to use docker environment, make sure you have docker and docker-comp
 
 ### Installing
 
-#### k8s env
+#### Kubernetes env
 
-[k8s.md](docs/k8s.md)
+[Kubernetes.md](docs/k8s.md)
 
 #### docker env (recommended)
+
+- important: need to change angular-src/src/environments/environment.ts and socket io address to config docker
 
 ```bash
 
@@ -71,21 +79,21 @@ Server started on port 5000
 Connected to database
 ```
 
-, that means it worked
+that means it worked
 
 NOTICE: this won't work unless you have all the env variables
 
-### And coding style
+## Coding Style
 
-follow esline and airbnb coding styles, for instructions how to set it up, google it yourself
+Follow eslint and airbnb coding styles, for instructions how to set it up, google or duckduckgo is your best friend.
 
 ## Deployment
 
-deployment using docker would be easiest, but there are still some things needs to deal with for example: google OAuth only allow certain origin domain...
+Deployment using docker would be easiest, but there are still some things needs to deal with, for example: google OAuth only allow certain origin domain...
 
 ## Built With
 
-- MEAN(Mongodb, Express.js, Angular, Node.js)
+- MEAN(Mongodb, Express.js, Angular, Node.js), socket.io
 
 ## TODO
 
@@ -103,7 +111,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 - **YI REN** - _Initial work_
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/YIREN1/chatapp/contributors) who participated in this project.
 
 ## License
 
