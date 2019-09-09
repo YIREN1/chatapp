@@ -46,9 +46,9 @@ import { SharedModule } from './shared/shared.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent }, // , canActivate: [AuthGuard] },
-  { path: 'channel/:channelId', component: ChatComponent },
-  { path: 'channel', component: ChatComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'channel/:channelId', component: ChatComponent, canActivate: [AuthGuard] },
+  { path: 'channel', component: ChatComponent, canActivate: [AuthGuard] },
   { path: '**', component: Page404Component, pathMatch: 'full' } // All unmatched routes
 ];
 

@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000',
   apiPrefix: 'http://localhost:5000',
-  dashBoardTitle: 'app work in local'
+  dashBoardTitle: 'app work in local',
+  socketIoUrl: '',
+
 };
 
 /*

@@ -61,6 +61,14 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ]
+            },
+            "heroku-prod": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.heroku-prod.ts"
+                }
+              ]
             }
           }
         },
@@ -75,6 +83,9 @@
             },
             "dev": {
               "browserTarget": "angualr-src:build:dev"
+            },
+            "heroku-prod": {
+              "browserTarget": "angualr-src:build:heroku-prod"
             }
           }
         },

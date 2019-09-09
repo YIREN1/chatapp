@@ -3,4 +3,5 @@ export const environment = {
   apiPrefix: 'api',
   apiUrl: 'http://localhost:3050/api',
   dashBoardTitle: 'app work in production',
+  socketIoUrl: '',
 };

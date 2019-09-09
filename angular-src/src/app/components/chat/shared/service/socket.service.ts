@@ -5,6 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { Event } from '../model/event';
 import { Message } from '../model/message';
 const apiURL = `${environment.apiUrl}`;
+const socketIoUrl = environment.socketIoUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -16,10 +17,10 @@ export class SocketService {
 
   public initSocket(): void {
     // ! change back
-    // this.socket = socketIo();
+    this.socket = socketIo(socketIoUrl);
     // this is used for docker env
     // default to host for example: 'http://localhost:3050'
-    this.socket = socketIo('http://localhost:5000');
+    // this.socket = socketIo('http://localhost:5000');
   }
 
   public sendEvent(message, event): void {
