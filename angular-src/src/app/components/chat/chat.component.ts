@@ -261,7 +261,7 @@ export class ChatComponent implements OnInit {
         this.messageService.deleteMessage(message.id).subscribe(data => {
           console.log(data);
         });
-        this.socketService.sendEvent(message.id, 'delete-message');
+        this.socketService.sendEvent(message, 'delete-message');
         this.deleteMessageView(message.id);
         Swal.fire(
           'Deleted!',
