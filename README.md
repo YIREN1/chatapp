@@ -22,7 +22,7 @@ MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach.
 
 Development: fully dockerized and "kubernetified", using nginx to control request to send to frontend or backend.
 
-[Demo: heroku(0.0.1)](https://authappp.herokuapp.com/)
+[Demo(1.0.0): heroku](https://chattapp.herokuapp.com/)
 
 [Demo.md](docs/Demo.md)
 
@@ -91,21 +91,23 @@ Follow eslint and airbnb coding styles, for instructions how to set it up, googl
 
 Deployment using docker would be easiest, but there are still some things needs to deal with, for example: google OAuth only allow certain origin domain...
 
+And here's some instructions on how to [deploy to heroku](docs/Heroku-deploy.md), we could use docker or kubernetes but those are relatively expensive compared to heroku(which is free)
+
 ## Built With
 
 - MEAN(Mongodb, Express.js, Angular, Node.js), socket.io
 
 ## TODO
 
-[TODO](https://github.com/YIREN1/chatapp/blob/master/TODO.md)
+[TODO](docs/TODO.md)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](docs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/YIREN1/chatapp/tags).
 
 ## Authors
 
