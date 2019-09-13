@@ -7,6 +7,7 @@ MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach.
 - CRU\* users (no need to delete)
 - JWT token based authentication(login/logout)(also implmented cookie based)
 - email confirmation
+- password reset
 - google OAuth2 login
 - link google accounts
 - reCaptcha
