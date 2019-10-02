@@ -52,6 +52,6 @@ router.post('/image', passportJWT, upload, (req, res) => {
   });
 });
 
-router.post('/image', passportJWT, upload, (req, res) => {});
+router.get('/download', passportJWT, upload, (req, res) => {});
 
 module.exports = router;
