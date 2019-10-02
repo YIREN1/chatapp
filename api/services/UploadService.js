@@ -8,7 +8,7 @@ const UploadService = {};
 
 UploadService.processFileForOCR = file => {
   return worker
-    .recognize(file, 'eng+chi_tra', {
+    .recognize(file, 'eng+chi_tra+chi_sim', {
       tessjs_create_pdf: '1',
     })
     .progress(progress => {
@@ -16,6 +16,7 @@ UploadService.processFileForOCR = file => {
     })
     .then(result => {
       console.log('result', result.text);
+      worker.terminate();
       return result.text;
     });
 };

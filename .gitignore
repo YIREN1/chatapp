@@ -3,6 +3,8 @@ public/
 *.env*
 .eslintrc.json
 .prettierrc
+*.traineddata
+*tesseract.js-ocr-result.pdf
 
 # Created by https://www.gitignore.io/api/code
 # Edit at https://www.gitignore.io/?templates=code
