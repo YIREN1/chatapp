@@ -1,44 +1,57 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const passport = require('passport');
+const multer = require('multer');
+const fs = require('fs');
 const GSService = require('../services/GoogleStorageService');
+const UploadService = require('../services/UploadService');
 
 const passportJWT = passport.authenticate('jwt', { session: false });
 
 const router = express.Router();
 
-router.use(
-  fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 },
-    createParentPath: true,
-    useTempFiles: true,
-    tempFileDir: '/tmp/',
-    safeFileNames: /\\/g,
-    abortOnLimit: true,
-  }),
-);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const userId = req.user._id;
+    cb(null, `../client/public/uploads/${userId}`);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${file.originalname}`);
+    // cb(null, `${file.fieldname}-${Date.now()}`);
+  },
+});
+const upload = multer({ storage }).single('file');
+
 // Upload Endpoint
-router.post('/image', passportJWT, (req, res) => {
-  if (!req.files) {
-    return res.status(400).json({ msg: 'No file uploaded' });
-  }
-  const { file } = req.files;
-  const userId = req.user._id;
-  // console.log(req.files);
-  const filePath = `${__dirname}/../client/public/uploads/${userId}/${file.name}`;
-  const fileName = file.name;
-  return file.mv(filePath, err => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
+router.post('/image', passportJWT, upload, (req, res) => {
+  upload(req, res, err => {
+    if (err instanceof multer.MulterError) {
+      // A Multer error occurred when uploading.
+      console.log(err);
+    } else if (err) {
+      // An unknown error occurred when uploading.
+      console.log(err);
     }
-    console.log('upload success');
+    // Everything went fine.
+    console.log(req.file);
+    const userId = req.user._id;
+    const fileName = req.file.filename;
+    const filePath = `../client/public/uploads/${userId}/${fileName}`;
     GSService.uploadToGoogleStorage(filePath, fileName);
-    return res.json({
-      fileName: file.name,
-      // filePath: `/uploads/${file.name}`,
+
+    fs.readFile(filePath, async (error, data) => {
+      if (error) {
+        console.log(error);
+      }
+      const text = await UploadService.processFileForOCR(data);
+      // res.json({
+      //   fileName,
+      //   text,
+      // });
+      res.send(text);
     });
   });
 });
+
+router.post('/image', passportJWT, upload, (req, res) => {});
 
 module.exports = router;

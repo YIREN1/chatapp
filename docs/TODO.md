@@ -171,5 +171,13 @@
 - [ ] multi user group
 - [ ] icon in user list
 - [ ] can only edit own message
-- [ ]
+- [ ] google login in 'name' undefined
+- [ ] service account for google bucket
+- [x] OCR
+- [ ] OCR pdf folder
+- [ ] OCR download
+- [ ] OCR angular
+- [ ] file thumbnail upload
+- [ ] what should be returned from OCR
+- [ ] 
 - [ ]
