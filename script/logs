@@ -1,1 +1,3 @@
+#!/bin/bash
+
 docker logs -f "authapp_$1_1"

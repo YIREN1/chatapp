@@ -29,7 +29,7 @@ export class UploadComponent implements OnInit {
 
   // This is the default title property created by the angular cli. Its responsible for the app works
   dashBoardTitle = environment.dashBoardTitle;
-
+  ocrText = '';
   ngOnInit() {
     // override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
     this.uploader.onAfterAddingFile = (file) => {
@@ -37,8 +37,17 @@ export class UploadComponent implements OnInit {
     };
     // overide the onCompleteItem property of the uploader so we are
     // able to deal with the server response.
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+    this.uploader.onCompleteItem = async (item: any, response: any, status: any, headers: any) => {
       console.log('ImageUpload:uploaded:', item, status, response);
+      const obj = await JSON.parse(response);
+      console.log(obj);
+      console.log(obj.fileName);
+      this.ocrText = obj.text;
+      Swal.fire(
+        'Good job!',
+        'OCR running...',
+        'success'
+      );
     };
 
     this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
@@ -47,7 +56,7 @@ export class UploadComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
-      console.log(response);
+
       Swal.fire(
         'Good job!',
         'Successfully uploaded!',

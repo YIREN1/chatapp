@@ -43,11 +43,11 @@ router.post('/image', passportJWT, upload, (req, res) => {
         console.log(error);
       }
       const text = await UploadService.processFileForOCR(data);
-      // res.json({
-      //   fileName,
-      //   text,
-      // });
-      res.send(text);
+      res.json({
+        fileName,
+        text,
+      });
+      // res.send(text);
     });
   });
 });

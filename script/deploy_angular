@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+cd $DIR/../angular-src
+
+ng build
+
+cp -rf ../public/ ../../angular-gh-pages/public
+
+cd ../../angular-gh-pages
+
+npm run deploy
