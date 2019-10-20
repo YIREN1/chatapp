@@ -39,8 +39,8 @@
       >
       </nb-chat-message>
       <nb-chat-form
-        (keypress)="keyPress($event)"
-        (keyup)="keyUp($event)"
+        (keypress)="keyPress()"
+        (keyup)="keyUp()"
         (send)="sendMessage($event)"
         [dropFiles]="true"
         #chatForm
