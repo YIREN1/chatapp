@@ -27,7 +27,7 @@
     "passport-jwt": "*",
     "request": "^2.88.0",
     "socket.io": "^2.2.0",
-    "tesseract.js": "^2.0.0-alpha.16",
+    "tesseract.js": "^2.0.0-beta.1",
     "twilio": "^3.33.3"
   },
   "author": "yren",

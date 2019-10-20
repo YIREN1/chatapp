@@ -1,8 +1,8 @@
-const Tesseract = require('tesseract.js');
+const { createWorker } = require('tesseract.js');
 
-const { TesseractWorker } = Tesseract;
-
-const worker = new TesseractWorker();
+const worker = createWorker({
+  logger: m => console.log(m), // Add logger here
+});
 
 const UploadService = {};
 
