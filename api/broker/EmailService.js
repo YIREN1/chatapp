@@ -18,6 +18,7 @@ const EmailSecret = process.env.EMAIL_CONFIRM_SECRET;
 //   },
 // });
 
+// https://mailtrap.io/inboxes/679070/messages
 const transporter = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   port: 2525,
