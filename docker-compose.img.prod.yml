@@ -1,0 +1,28 @@
+version: "3.2"
+
+services:
+  api:
+    image: 'jamesren11/chat-api:latest'
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    environment:
+      - BASE_URL=http://localhost:3050/api
+  client:
+    image: 'jamesren11/chatapp:latest'
+    restart: always
+    volumes:
+      - ./angular-src:/app
+      - /app/node_modules
+    environment:
+      - apiUrl=http://localhost:3050/api
+      - apiPrefix=api
+      - dashBoardTitle=app work in prod
+  nginx:
+    image: 'jamesren11/chat-nginx:latest'
+    restart: always
+    ports:
+      - "3050:80"
+    depends_on:
+      - api
+      - client
