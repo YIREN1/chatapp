@@ -37,7 +37,7 @@
 - [ ] upload method 2 (future)
 - [x] ALert (sweetalert2)
 - [x] go to dashboard when loggedin
-- [ ] link google frontend
+- [ ] link google frontend (future)
 - [x] lazy image
 - [x] app.js/index.js
 - [x] passport to another folder(policy)
@@ -179,5 +179,5 @@
 - [ ] OCR angular
 - [ ] file thumbnail upload
 - [ ] what should be returned from OCR
-- [ ] 
+- [ ] oracle depoly url
 - [ ]
