@@ -27,7 +27,7 @@ Development: fully dockerized and "kubernetified", using nginx to control reques
 
 [Demo.md](docs/Demo.md)
 
-front-end deployed[here](chattapp.netlify.com)
+front-end deployed[here](https://chattapp.netlify.com)
 
 ## Getting Started
 
