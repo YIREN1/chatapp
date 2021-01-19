@@ -23,11 +23,11 @@ MEAN(Mongodb, Express.js, Angular, Node.js) stack app from scrach.
 
 Development: fully dockerized and "kubernetified", using nginx to control request to send to frontend or backend.
 
-[Demo(1.0.0): heroku](https://chattapp.herokuapp.com/)
+~~[Demo(1.0.0): heroku](https://chattapp.herokuapp.com/)~~
 
 [Demo.md](docs/Demo.md)
 
-front-end deployed[here](https://chattapp.netlify.com)
+front-end deployed [here](https://chattapp.netlify.com)
 
 ## Getting Started
 
